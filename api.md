@@ -1,0 +1,34 @@
+# CheckoutIntents
+
+Types:
+
+```python
+from checkout_intents.types import (
+    BaseCheckoutIntent,
+    Buyer,
+    CheckoutIntent,
+    Money,
+    Offer,
+    PaymentMethod,
+    VariantSelection,
+)
+```
+
+Methods:
+
+- <code title="post /api/v1/checkout-intents">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">create</a>(\*\*<a href="src/checkout_intents/types/checkout_intent_create_params.py">params</a>) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
+- <code title="get /api/v1/checkout-intents/{id}">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
+- <code title="post /api/v1/checkout-intents/{id}/payment">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">add_payment</a>(id, \*\*<a href="src/checkout_intents/types/checkout_intent_add_payment_params.py">params</a>) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
+- <code title="post /api/v1/checkout-intents/{id}/confirm">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">confirm</a>(id, \*\*<a href="src/checkout_intents/types/checkout_intent_confirm_params.py">params</a>) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
+
+# Brands
+
+Types:
+
+```python
+from checkout_intents.types import BrandRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /api/v1/brands/domain/{domain}">client.brands.<a href="./src/checkout_intents/resources/brands.py">retrieve</a>(domain) -> <a href="./src/checkout_intents/types/brand_retrieve_response.py">BrandRetrieveResponse</a></code>
