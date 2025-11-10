@@ -10,5 +10,13 @@ __all__ = ["VariantSelectionParam"]
 
 class VariantSelectionParam(TypedDict, total=False):
     label: Required[str]
+    """The label of the variant being selected.
+
+    Match this label with what is used on the product page.
+    """
 
     value: Required[Union[str, float]]
+    """The value of the variant being selected.
+
+    Match this value with what is used on the product page.
+    """

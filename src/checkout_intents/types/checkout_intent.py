@@ -30,8 +30,6 @@ class AwaitingConfirmationCheckoutIntent(BaseCheckoutIntent):
 
     state: Literal["awaiting_confirmation"]
 
-    payment_method: Optional[PaymentMethod] = FieldInfo(alias="paymentMethod", default=None)
-
 
 class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
     offer: Offer

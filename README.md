@@ -28,11 +28,9 @@ pip install git+ssh://git@github.com/stainless-sdks/checkout-intents-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from checkout_intents import CheckoutIntents
 
 client = CheckoutIntents(
-    api_key=os.environ.get("CHECKOUT_INTENTS_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -41,11 +39,11 @@ checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -64,12 +62,10 @@ so that your API Key is not stored in source control.
 Simply import `AsyncCheckoutIntents` instead of `CheckoutIntents` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from checkout_intents import AsyncCheckoutIntents
 
 client = AsyncCheckoutIntents(
-    api_key=os.environ.get("CHECKOUT_INTENTS_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -80,11 +76,11 @@ async def main() -> None:
         buyer={
             "address1": "123 Main St",
             "city": "New York",
-            "country": "United States",
+            "country": "US",
             "email": "john.doe@example.com",
             "first_name": "John",
             "last_name": "Doe",
-            "phone": "+1234567890",
+            "phone": "5555555555",
             "postal_code": "10001",
             "province": "NY",
         },
@@ -119,18 +115,17 @@ from checkout_intents import AsyncCheckoutIntents
 
 async def main() -> None:
     async with AsyncCheckoutIntents(
-        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         checkout_intent = await client.checkout_intents.create(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
@@ -164,16 +159,16 @@ checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
     product_url="productUrl",
-    quantity=1,
+    quantity=0,
 )
 print(checkout_intent.buyer)
 ```
@@ -198,11 +193,11 @@ try:
         buyer={
             "address1": "123 Main St",
             "city": "New York",
-            "country": "United States",
+            "country": "US",
             "email": "john.doe@example.com",
             "first_name": "John",
             "last_name": "Doe",
-            "phone": "+1234567890",
+            "phone": "5555555555",
             "postal_code": "10001",
             "province": "NY",
         },
@@ -255,11 +250,11 @@ client.with_options(max_retries=5).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -292,11 +287,11 @@ client.with_options(timeout=5.0).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -347,11 +342,11 @@ response = client.checkout_intents.with_raw_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -379,11 +374,11 @@ with client.checkout_intents.with_streaming_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "United States",
+        "country": "US",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "+1234567890",
+        "phone": "5555555555",
         "postal_code": "10001",
         "province": "NY",
     },
