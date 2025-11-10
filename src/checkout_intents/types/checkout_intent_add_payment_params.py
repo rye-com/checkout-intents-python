@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
-
-from .._utils import PropertyInfo
-from .payment_method_param import PaymentMethodParam
+from typing_extensions import Required, TypedDict
 
 __all__ = ["CheckoutIntentAddPaymentParams"]
 
 
 class CheckoutIntentAddPaymentParams(TypedDict, total=False):
-    payment_method: Required[Annotated[PaymentMethodParam, PropertyInfo(alias="paymentMethod")]]
+    body: Required[object]
+    """The request body containing the payment details"""

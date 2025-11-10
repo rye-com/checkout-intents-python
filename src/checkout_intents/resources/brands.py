@@ -53,8 +53,8 @@ class BrandsResource(SyncAPIResource):
         """
         Retrieve brand information by domain name
 
-        Look up a brand by its domain name (e.g. "aloyoga.com" or "www.amazon.com").
-        Returns brand information including the marketplace type if the lookup succeeds.
+        Look up a brand by its domain name (e.g. "aloyoga.com"). Returns brand
+        information including the marketplace type if the lookup succeeds.
 
         Args:
           domain: Represents a valid domain name string.
@@ -112,8 +112,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         """
         Retrieve brand information by domain name
 
-        Look up a brand by its domain name (e.g. "aloyoga.com" or "www.amazon.com").
-        Returns brand information including the marketplace type if the lookup succeeds.
+        Look up a brand by its domain name (e.g. "aloyoga.com"). Returns brand
+        information including the marketplace type if the lookup succeeds.
 
         Args:
           domain: Represents a valid domain name string.

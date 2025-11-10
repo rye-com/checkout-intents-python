@@ -9,5 +9,13 @@ __all__ = ["VariantSelection"]
 
 class VariantSelection(BaseModel):
     label: str
+    """The label of the variant being selected.
+
+    Match this label with what is used on the product page.
+    """
 
     value: Union[str, float]
+    """The value of the variant being selected.
+
+    Match this value with what is used on the product page.
+    """

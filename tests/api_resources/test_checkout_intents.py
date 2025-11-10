@@ -26,16 +26,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -46,17 +46,17 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
                 "address2": "Apt 1",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -73,16 +73,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         )
 
         assert response.is_closed is True
@@ -97,16 +97,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -163,22 +163,7 @@ class TestCheckoutIntents:
     def test_method_add_payment(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_add_payment_with_all_params(self, client: CheckoutIntents) -> None:
-        checkout_intent = client.checkout_intents.add_payment(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -187,10 +172,7 @@ class TestCheckoutIntents:
     def test_raw_response_add_payment(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         )
 
         assert response.is_closed is True
@@ -203,10 +185,7 @@ class TestCheckoutIntents:
     def test_streaming_response_add_payment(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -222,27 +201,12 @@ class TestCheckoutIntents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.checkout_intents.with_raw_response.add_payment(
                 id="",
-                payment_method={
-                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                    "type": "stripe_token",
-                },
+                body={},
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_confirm(self, client: CheckoutIntents) -> None:
-        checkout_intent = client.checkout_intents.confirm(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_confirm_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.confirm(
             id="id",
             payment_method={
@@ -311,16 +275,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -331,17 +295,17 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
                 "address2": "Apt 1",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -358,16 +322,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         )
 
         assert response.is_closed is True
@@ -382,16 +346,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "United States",
+                "country": "US",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "+1234567890",
+                "phone": "5555555555",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=1,
+            quantity=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -448,22 +412,7 @@ class TestAsyncCheckoutIntents:
     async def test_method_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_add_payment_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
-        checkout_intent = await async_client.checkout_intents.add_payment(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -472,10 +421,7 @@ class TestAsyncCheckoutIntents:
     async def test_raw_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         )
 
         assert response.is_closed is True
@@ -488,10 +434,7 @@ class TestAsyncCheckoutIntents:
     async def test_streaming_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.add_payment(
             id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
+            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -507,27 +450,12 @@ class TestAsyncCheckoutIntents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.checkout_intents.with_raw_response.add_payment(
                 id="",
-                payment_method={
-                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                    "type": "stripe_token",
-                },
+                body={},
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_confirm(self, async_client: AsyncCheckoutIntents) -> None:
-        checkout_intent = await async_client.checkout_intents.confirm(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_confirm_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.confirm(
             id="id",
             payment_method={
