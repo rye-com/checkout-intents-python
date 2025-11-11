@@ -52,15 +52,15 @@ def _extract_environment_from_api_key(api_key: str) -> Literal["staging", "produ
     """
     Extracts the environment from a Rye API key.
     API keys follow the format: RYE/{environment}-{key}
-    
+
     Args:
         api_key: The API key to parse
-        
+
     Returns:
         The extracted environment ('staging' or 'production'), or None if the format doesn't match
     """
     import re
-    
+
     match = re.match(r"^RYE/(staging|production)-", api_key)
     return match.group(1) if match else None  # type: ignore[return-value]
 

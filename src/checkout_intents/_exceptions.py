@@ -15,6 +15,7 @@ __all__ = [
     "UnprocessableEntityError",
     "RateLimitError",
     "InternalServerError",
+    "PollTimeoutError",
 ]
 
 
@@ -106,3 +107,36 @@ class RateLimitError(APIStatusError):
 
 class InternalServerError(APIStatusError):
     pass
+
+
+class PollTimeoutError(CheckoutIntentsError):
+    """Raised when a polling operation times out before the condition is met."""
+
+    intent_id: str
+    attempts: int
+    poll_interval: float
+    max_attempts: int
+
+    def __init__(
+        self,
+        *,
+        intent_id: str,
+        attempts: int,
+        poll_interval: float,
+        max_attempts: int,
+        message: str | None = None,
+    ) -> None:
+        self.intent_id = intent_id
+        self.attempts = attempts
+        self.poll_interval = poll_interval
+        self.max_attempts = max_attempts
+
+        if message is None:
+            total_time_s = max_attempts * poll_interval
+            message = (
+                f"Polling timeout for checkout intent '{intent_id}': "
+                f"condition not met after {attempts} attempts ({total_time_s}s). "
+                f"Consider increasing max_attempts, polling_interval_ms, or checking the intent state manually."
+            )
+
+        super().__init__(message)
