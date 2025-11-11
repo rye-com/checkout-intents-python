@@ -37,7 +37,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/checkout-intents-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/rye-com/checkout-intents-python#accessing-raw-response-data-eg-headers
         """
         return CheckoutIntentsResourceWithRawResponse(self)
 
@@ -46,7 +46,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/checkout-intents-python#with_streaming_response
+        For more information, see https://www.github.com/rye-com/checkout-intents-python#with_streaming_response
         """
         return CheckoutIntentsResourceWithStreamingResponse(self)
 
@@ -138,7 +138,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -150,8 +150,6 @@ class CheckoutIntentsResource(SyncAPIResource):
         Add payment details to a checkout intent
 
         Args:
-          body: The request body containing the payment details
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -166,7 +164,10 @@ class CheckoutIntentsResource(SyncAPIResource):
             CheckoutIntent,
             self._post(
                 f"/api/v1/checkout-intents/{id}/payment",
-                body=maybe_transform(body, checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams),
+                body=maybe_transform(
+                    {"payment_method": payment_method},
+                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -225,7 +226,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/checkout-intents-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/rye-com/checkout-intents-python#accessing-raw-response-data-eg-headers
         """
         return AsyncCheckoutIntentsResourceWithRawResponse(self)
 
@@ -234,7 +235,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/checkout-intents-python#with_streaming_response
+        For more information, see https://www.github.com/rye-com/checkout-intents-python#with_streaming_response
         """
         return AsyncCheckoutIntentsResourceWithStreamingResponse(self)
 
@@ -326,7 +327,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -338,8 +339,6 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         Add payment details to a checkout intent
 
         Args:
-          body: The request body containing the payment details
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -355,7 +354,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             await self._post(
                 f"/api/v1/checkout-intents/{id}/payment",
                 body=await async_maybe_transform(
-                    body, checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams
+                    {"payment_method": payment_method},
+                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

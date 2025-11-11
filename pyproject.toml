@@ -1,6 +1,6 @@
 [project]
-name = "checkout_intents"
-version = "0.0.1"
+name = "checkout-intents"
+version = "0.1.0"
 description = "The official Python library for the Checkout Intents API"
 dynamic = ["readme"]
 license = "MIT"
@@ -34,8 +34,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/checkout-intents-python"
-Repository = "https://github.com/stainless-sdks/checkout-intents-python"
+Homepage = "https://github.com/rye-com/checkout-intents-python"
+Repository = "https://github.com/rye-com/checkout-intents-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
@@ -123,7 +123,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/checkout-intents-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/rye-com/checkout-intents-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
