@@ -48,6 +48,23 @@ ENVIRONMENTS: Dict[str, str] = {
 }
 
 
+def _extract_environment_from_api_key(api_key: str) -> Literal["staging", "production"] | None:
+    """
+    Extracts the environment from a Rye API key.
+    API keys follow the format: RYE/{environment}-{key}
+    
+    Args:
+        api_key: The API key to parse
+        
+    Returns:
+        The extracted environment ('staging' or 'production'), or None if the format doesn't match
+    """
+    import re
+    
+    match = re.match(r"^RYE/(staging|production)-", api_key)
+    return match.group(1) if match else None  # type: ignore[return-value]
+
+
 class CheckoutIntents(SyncAPIClient):
     checkout_intents: checkout_intents.CheckoutIntentsResource
     brands: brands.BrandsResource
@@ -95,7 +112,26 @@ class CheckoutIntents(SyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
+        # Auto-infer environment from API key
+        inferred_environment = _extract_environment_from_api_key(api_key)
+
+        # Validate environment option matches API key (if both provided)
+        if is_given(environment) and inferred_environment and environment != inferred_environment:
+            raise CheckoutIntentsError(
+                f"Environment mismatch: API key is for '{inferred_environment}' environment but 'environment' option is set to '{environment}'. Please use an API key that matches your desired environment or omit the 'environment' option to auto-detect from the API key (only auto-detectable with the RYE/{{environment}}-abcdef api key format)."
+            )
+
+        # Use provided environment, or infer from API key, or default to staging
+        resolved_environment: Literal["staging", "production"]
+        if is_given(environment):
+            resolved_environment = cast(Literal["staging", "production"], environment)
+            self._environment = cast(Literal["staging", "production"], environment)
+        elif inferred_environment:
+            resolved_environment = inferred_environment
+            self._environment = inferred_environment
+        else:
+            resolved_environment = "staging"
+            self._environment = "staging"
 
         base_url_env = os.environ.get("CHECKOUT_INTENTS_BASE_URL")
         if is_given(base_url) and base_url is not None:
@@ -108,18 +144,16 @@ class CheckoutIntents(SyncAPIClient):
                 )
 
             try:
-                base_url = ENVIRONMENTS[environment]
+                base_url = ENVIRONMENTS[resolved_environment]
             except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+                raise ValueError(f"Unknown environment: {resolved_environment}") from exc
         elif base_url_env is not None:
             base_url = base_url_env
         else:
-            self._environment = environment = "staging"
-
             try:
-                base_url = ENVIRONMENTS[environment]
+                base_url = ENVIRONMENTS[resolved_environment]
             except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+                raise ValueError(f"Unknown environment: {resolved_environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -291,7 +325,26 @@ class AsyncCheckoutIntents(AsyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
+        # Auto-infer environment from API key
+        inferred_environment = _extract_environment_from_api_key(api_key)
+
+        # Validate environment option matches API key (if both provided)
+        if is_given(environment) and inferred_environment and environment != inferred_environment:
+            raise CheckoutIntentsError(
+                f"Environment mismatch: API key is for '{inferred_environment}' environment but 'environment' option is set to '{environment}'. Please use an API key that matches your desired environment or omit the 'environment' option to auto-detect from the API key (only auto-detectable with the RYE/{{environment}}-abcdef api key format)."
+            )
+
+        # Use provided environment, or infer from API key, or default to staging
+        resolved_environment: Literal["staging", "production"]
+        if is_given(environment):
+            resolved_environment = cast(Literal["staging", "production"], environment)
+            self._environment = cast(Literal["staging", "production"], environment)
+        elif inferred_environment:
+            resolved_environment = inferred_environment
+            self._environment = inferred_environment
+        else:
+            resolved_environment = "staging"
+            self._environment = "staging"
 
         base_url_env = os.environ.get("CHECKOUT_INTENTS_BASE_URL")
         if is_given(base_url) and base_url is not None:
@@ -304,18 +357,16 @@ class AsyncCheckoutIntents(AsyncAPIClient):
                 )
 
             try:
-                base_url = ENVIRONMENTS[environment]
+                base_url = ENVIRONMENTS[resolved_environment]
             except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+                raise ValueError(f"Unknown environment: {resolved_environment}") from exc
         elif base_url_env is not None:
             base_url = base_url_env
         else:
-            self._environment = environment = "staging"
-
             try:
-                base_url = ENVIRONMENTS[environment]
+                base_url = ENVIRONMENTS[resolved_environment]
             except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+                raise ValueError(f"Unknown environment: {resolved_environment}") from exc
 
         super().__init__(
             version=__version__,
