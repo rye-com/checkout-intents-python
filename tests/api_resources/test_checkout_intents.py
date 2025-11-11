@@ -163,7 +163,10 @@ class TestCheckoutIntents:
     def test_method_add_payment(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -172,7 +175,10 @@ class TestCheckoutIntents:
     def test_raw_response_add_payment(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         )
 
         assert response.is_closed is True
@@ -185,7 +191,10 @@ class TestCheckoutIntents:
     def test_streaming_response_add_payment(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -201,7 +210,10 @@ class TestCheckoutIntents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.checkout_intents.with_raw_response.add_payment(
                 id="",
-                body={},
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -412,7 +424,10 @@ class TestAsyncCheckoutIntents:
     async def test_method_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
@@ -421,7 +436,10 @@ class TestAsyncCheckoutIntents:
     async def test_raw_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         )
 
         assert response.is_closed is True
@@ -434,7 +452,10 @@ class TestAsyncCheckoutIntents:
     async def test_streaming_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.add_payment(
             id="id",
-            body={},
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -450,7 +471,10 @@ class TestAsyncCheckoutIntents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.checkout_intents.with_raw_response.add_payment(
                 id="",
-                body={},
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

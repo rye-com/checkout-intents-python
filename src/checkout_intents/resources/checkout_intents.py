@@ -138,7 +138,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -150,8 +150,6 @@ class CheckoutIntentsResource(SyncAPIResource):
         Add payment details to a checkout intent
 
         Args:
-          body: The request body containing the payment details
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -166,7 +164,10 @@ class CheckoutIntentsResource(SyncAPIResource):
             CheckoutIntent,
             self._post(
                 f"/api/v1/checkout-intents/{id}/payment",
-                body=maybe_transform(body, checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams),
+                body=maybe_transform(
+                    {"payment_method": payment_method},
+                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -326,7 +327,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -338,8 +339,6 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         Add payment details to a checkout intent
 
         Args:
-          body: The request body containing the payment details
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -355,7 +354,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             await self._post(
                 f"/api/v1/checkout-intents/{id}/payment",
                 body=await async_maybe_transform(
-                    body, checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams
+                    {"payment_method": payment_method},
+                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
