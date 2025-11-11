@@ -1,5 +1,5 @@
 [project]
-name = "checkout_intents"
+name = "checkout-intents"
 version = "0.0.1"
 description = "The official Python library for the Checkout Intents API"
 dynamic = ["readme"]

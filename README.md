@@ -1,7 +1,7 @@
 # Checkout Intents Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/checkout_intents.svg?label=pypi%20(stable))](https://pypi.org/project/checkout_intents/)
+[![PyPI version](https://img.shields.io/pypi/v/checkout-intents.svg?label=pypi%20(stable))](https://pypi.org/project/checkout-intents/)
 
 The Checkout Intents Python library provides convenient access to the Checkout Intents REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -16,12 +16,9 @@ The REST API documentation can be found on [docs.rye.com](https://docs.rye.com).
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/rye-com/checkout-intents-python.git
+# install from PyPI
+pip install checkout-intents
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install checkout_intents`
 
 ## Usage
 
@@ -101,8 +98,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'checkout_intents[aiohttp] @ git+ssh://git@github.com/rye-com/checkout-intents-python.git'
+# install from PyPI
+pip install checkout-intents[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
