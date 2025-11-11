@@ -40,10 +40,13 @@ Repository = "https://github.com/rye-com/checkout-intents-python"
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
-[tool.rye]
+[tool.uv]
 managed = true
-# version pins are in requirements-dev.lock
-dev-dependencies = [
+required-version = ">=0.5.0"
+
+[dependency-groups]
+# version pins are in uv.lock
+dev = [
     "pyright==1.1.399",
     "mypy",
     "respx",
@@ -57,35 +60,9 @@ dev-dependencies = [
     "rich>=13.7.1",
     "pytest-xdist>=3.6.1",
 ]
-
-[tool.rye.scripts]
-format = { chain = [
-  "format:ruff",
-  "format:docs",
-  "fix:ruff",
-  # run formatting again to fix any inconsistencies when imports are stripped
-  "format:ruff",
-]}
-"format:docs" = "python scripts/utils/ruffen-docs.py README.md api.md"
-"format:ruff" = "ruff format"
-
-"lint" = { chain = [
-  "check:ruff",
-  "typecheck",
-  "check:importable",
-]}
-"check:ruff" = "ruff check ."
-"fix:ruff" = "ruff check --fix ."
-
-"check:importable" = "python -c 'import checkout_intents'"
-
-typecheck = { chain = [
-  "typecheck:pyright",
-  "typecheck:mypy"
-]}
-"typecheck:pyright" = "pyright"
-"typecheck:verify-types" = "pyright --verifytypes checkout_intents --ignoreexternal"
-"typecheck:mypy" = "mypy ."
+pydantic-v1 = [
+    "pydantic>=1.9.0, <3",
+]
 
 [build-system]
 requires = ["hatchling==1.26.3", "hatch-fancy-pypi-readme"]
