@@ -251,7 +251,7 @@ class BaseModel(pydantic.BaseModel):
         # pydantic version they are currently using
 
         @override
-        def model_dump(
+        def model_dump(  # type: ignore[override]  # pyright: ignore[reportIncompatibleMethodOverride]
             self,
             *,
             mode: Literal["json", "python"] | str = "python",
@@ -311,7 +311,7 @@ class BaseModel(pydantic.BaseModel):
             return cast("dict[str, Any]", json_safe(dumped)) if mode == "json" else dumped
 
         @override
-        def model_dump_json(
+        def model_dump_json(  # type: ignore[override]  # pyright: ignore[reportIncompatibleMethodOverride]
             self,
             *,
             indent: int | None = None,
