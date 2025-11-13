@@ -54,6 +54,98 @@ we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `CHECKOUT_INTENTS_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
+### Polling Helpers
+
+This SDK includes helper methods for the asynchronous checkout flow. The recommended pattern follows Rye's two-phase checkout:
+
+```python
+from checkout_intents import CheckoutIntents
+
+client = CheckoutIntents()
+
+# Phase 1: Create and wait for offer
+intent = client.checkout_intents.create_and_poll(
+    buyer={
+        "address1": "123 Main St",
+        "city": "New York",
+        "country": "US",
+        "email": "john.doe@example.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "phone": "5555555555",
+        "postal_code": "10001",
+        "province": "NY",
+    },
+    product_url="https://example.com/product",
+    quantity=1,
+)
+
+# Handle failure during offer retrieval
+if intent.state == "failed":
+    print(f"Failed: {intent.failure_reason}")
+else:
+    # Review pricing with user
+    print(f"Total: {intent.offer.cost.total}")
+
+    # Phase 2: Confirm and wait for completion
+    completed = client.checkout_intents.confirm_and_poll(
+        intent.id,
+        payment_method={
+            "type": "stripe_token",
+            "stripe_token": "tok_visa",
+        },
+    )
+
+    print(f"Status: {completed.state}")
+```
+
+For more examples, see the [`examples/`](./examples) directory:
+
+- [`complete-checkout-intent.py`](./examples/complete-checkout-intent.py) - Recommended two-phase flow
+- [`error-handling.py`](./examples/error-handling.py) - Timeout and error handling with `PollTimeoutError`
+
+Available polling methods:
+
+- `create_and_poll()` - Create and poll until offer is ready (awaiting_confirmation or failed)
+- `confirm_and_poll()` - Confirm and poll until completion (completed or failed)
+- `poll_until_completed()` - Poll until completed or failed
+- `poll_until_awaiting_confirmation()` - Poll until offer is ready or failed
+
+All polling methods support customizable timeouts:
+
+```python
+# Configure polling behavior
+intent = client.checkout_intents.poll_until_completed(
+    intent_id,
+    poll_interval=5.0,  # Poll every 5 seconds (default)
+    max_attempts=120,  # Try up to 120 times, ~10 minutes (default)
+)
+```
+
+#### Handling Polling Timeouts
+
+When polling operations exceed `max_attempts`, a `PollTimeoutError` is raised with helpful context:
+
+```python
+from checkout_intents import CheckoutIntents, PollTimeoutError
+
+client = CheckoutIntents()
+
+try:
+    intent = client.checkout_intents.poll_until_completed(
+        intent_id,
+        poll_interval=5.0,
+        max_attempts=60,
+    )
+except PollTimeoutError as e:
+    print(f"Polling timed out for intent: {e.intent_id}")
+    print(f"Attempted {e.attempts} times over {(e.attempts * e.poll_interval) / 1000}s")
+
+    # You can retrieve the current state manually
+    current_intent = client.checkout_intents.retrieve(e.intent_id)
+    print(f"Current state: {current_intent.state}")
+```
+
 ## Async usage
 
 Simply import `AsyncCheckoutIntents` instead of `CheckoutIntents` and use `await` with each API call:
@@ -224,6 +316,26 @@ Error codes are as follows:
 | 429         | `RateLimitError`           |
 | >=500       | `InternalServerError`      |
 | N/A         | `APIConnectionError`       |
+| N/A         | `PollTimeoutError`         |
+
+### Polling Timeout Errors
+
+When using polling helper methods, if the operation exceeds the configured `max_attempts`, a `PollTimeoutError` is raised. This error includes detailed context about the timeout:
+
+```python
+from checkout_intents import CheckoutIntents, PollTimeoutError
+
+try:
+    intent = client.checkout_intents.poll_until_completed("intent_id")
+except PollTimeoutError as e:
+    # Access timeout details
+    print(f"Intent ID: {e.intent_id}")
+    print(f"Attempts: {e.attempts}")
+    print(f"Poll interval: {e.poll_interval}s")
+    print(f"Max attempts: {e.max_attempts}")
+```
+
+See the [error-handling.py example](./examples/error-handling.py) for more detailed timeout handling patterns.
 
 ### Retries
 

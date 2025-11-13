@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any, Iterable, cast
+import logging
+from typing import Any, Union, TypeVar, Callable, Iterable, cast
+from typing_extensions import TypeGuard
 
 import httpx
 
@@ -21,13 +23,23 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._exceptions import PollTimeoutError
 from .._base_client import make_request_options
 from ..types.buyer_param import BuyerParam
-from ..types.checkout_intent import CheckoutIntent
+from ..types.checkout_intent import (
+    CheckoutIntent,
+    FailedCheckoutIntent,
+    CompletedCheckoutIntent,
+    AwaitingConfirmationCheckoutIntent,
+)
 from ..types.payment_method_param import PaymentMethodParam
 from ..types.variant_selection_param import VariantSelectionParam
 
 __all__ = ["CheckoutIntentsResource", "AsyncCheckoutIntentsResource"]
+
+T = TypeVar("T", bound=CheckoutIntent)
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class CheckoutIntentsResource(SyncAPIResource):
@@ -216,6 +228,365 @@ class CheckoutIntentsResource(SyncAPIResource):
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def _poll_until(
+        self,
+        id: str,
+        condition: Callable[[CheckoutIntent], TypeGuard[T]],
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> T:
+        """
+        A helper to poll a checkout intent until a specific condition is met.
+
+        Args:
+            id: The checkout intent ID to poll
+            condition: A callable that returns True when the desired state is reached
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once the condition is met
+
+        Raises:
+            CheckoutIntentsError: If the maximum number of attempts is reached without the condition being met
+        """
+        if max_attempts < 1:
+            logger.warning(
+                "[Checkout Intents SDK] Invalid max_attempts value: %s. max_attempts must be >= 1. "
+                "Defaulting to 1 to ensure at least one polling attempt.",
+                max_attempts,
+            )
+            max_attempts = 1
+
+        attempts = 0
+
+        # Build headers for polling
+        poll_headers: dict[str, str] = {
+            "X-Stainless-Poll-Helper": "true",
+            "X-Stainless-Custom-Poll-Interval": str(int(poll_interval * 1000)),
+        }
+        if extra_headers:
+            for k, v in extra_headers.items():
+                if not isinstance(v, Omit):
+                    poll_headers[k] = v  # type: ignore[assignment]
+
+        while attempts < max_attempts:
+            # Use with_raw_response to access response headers
+            response = self.with_raw_response.retrieve(
+                id,
+                extra_headers=poll_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+            )
+
+            intent = response.parse()
+
+            # Check if condition is met
+            if condition(intent):
+                return intent
+
+            attempts += 1
+
+            # If we've reached max attempts, throw an error
+            if attempts >= max_attempts:
+                raise PollTimeoutError(
+                    intent_id=id,
+                    attempts=attempts,
+                    poll_interval=poll_interval,
+                    max_attempts=max_attempts,
+                )
+
+            # Check if server suggests a polling interval
+            sleep_interval = poll_interval
+            header_interval = response.headers.get("retry-after-ms")
+            if header_interval:
+                try:
+                    header_interval_ms = int(header_interval)
+                    sleep_interval = header_interval_ms / 1000.0
+                except ValueError:
+                    pass  # Ignore invalid header values
+
+            # Sleep before next poll
+            self._sleep(sleep_interval)
+
+        # This should never be reached due to the throw above, but TypeScript needs it
+        raise PollTimeoutError(
+            intent_id=id,
+            attempts=attempts,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+        )
+
+    def poll_until_completed(
+        self,
+        id: str,
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[CompletedCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to poll a checkout intent until it reaches a completed state
+        (completed or failed).
+
+        Args:
+            id: The checkout intent ID to poll
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches completed or failed state
+
+        Example:
+            ```python
+            checkout_intent = client.checkout_intents.poll_until_completed("id")
+            if checkout_intent.state == "completed":
+                print("Order placed successfully!")
+            elif checkout_intent.state == "failed":
+                print("Order failed:", checkout_intent.failure_reason)
+            ```
+        """
+
+        def is_completed(
+            intent: CheckoutIntent,
+        ) -> TypeGuard[Union[CompletedCheckoutIntent, FailedCheckoutIntent]]:
+            return intent.state in ("completed", "failed")
+
+        return self._poll_until(
+            id,
+            is_completed,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    def poll_until_awaiting_confirmation(
+        self,
+        id: str,
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to poll a checkout intent until it's ready for confirmation
+        (awaiting_confirmation state) or has failed. This is typically used after
+        creating a checkout intent to wait for the offer to be retrieved from the merchant.
+
+        The intent can reach awaiting_confirmation (success - ready to confirm) or failed
+        (offer retrieval failed). Always check the state after polling.
+
+        Args:
+            id: The checkout intent ID to poll
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches awaiting_confirmation or failed state
+
+        Example:
+            ```python
+            intent = client.checkout_intents.poll_until_awaiting_confirmation("id")
+
+            if intent.state == "awaiting_confirmation":
+                # Review the offer before confirming
+                print("Total:", intent.offer.cost.total)
+            elif intent.state == "failed":
+                # Handle failure (e.g., offer retrieval failed, product out of stock)
+                print("Failed:", intent.failure_reason)
+            ```
+        """
+
+        def is_awaiting_confirmation(
+            intent: CheckoutIntent,
+        ) -> TypeGuard[Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]]:
+            return intent.state in ("awaiting_confirmation", "failed")
+
+        return self._poll_until(
+            id,
+            is_awaiting_confirmation,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    def create_and_poll(
+        self,
+        *,
+        buyer: BuyerParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to create a checkout intent and poll until it's ready for confirmation.
+        This follows the Rye documented flow: create → poll until awaiting_confirmation.
+
+        After this method completes, you should review the offer (pricing, shipping, taxes)
+        with the user before calling confirm().
+
+        Args:
+            buyer: Buyer information
+            product_url: URL of the product to purchase
+            quantity: Quantity of the product
+            variant_selections: Product variant selections (optional)
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches awaiting_confirmation or failed state
+
+        Example:
+            ```python
+            # Phase 1: Create and wait for offer
+            intent = client.checkout_intents.create_and_poll(
+                buyer={
+                    "address1": "123 Main St",
+                    "city": "New York",
+                    "country": "United States",
+                    "email": "john.doe@example.com",
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "phone": "+1234567890",
+                    "postal_code": "10001",
+                    "province": "NY",
+                },
+                product_url="https://example.com/product",
+                quantity=1,
+            )
+
+            # Review the offer with the user
+            print("Total:", intent.offer.cost.total)
+
+            # Phase 2: Confirm with payment
+            completed = client.checkout_intents.confirm_and_poll(
+                intent.id, payment_method={"type": "stripe_token", "stripe_token": "tok_visa"}
+            )
+            ```
+        """
+        intent = self.create(
+            buyer=buyer,
+            product_url=product_url,
+            quantity=quantity,
+            variant_selections=variant_selections,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        return self.poll_until_awaiting_confirmation(
+            intent.id,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    def confirm_and_poll(
+        self,
+        id: str,
+        *,
+        payment_method: PaymentMethodParam,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[CompletedCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to confirm a checkout intent and poll until it reaches a completed state
+        (completed or failed).
+
+        Args:
+            id: The checkout intent ID to confirm
+            payment_method: Payment method information
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches completed or failed state
+
+        Example:
+            ```python
+            checkout_intent = client.checkout_intents.confirm_and_poll(
+                "id",
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
+                },
+            )
+
+            if checkout_intent.state == "completed":
+                print("Order placed successfully!")
+            elif checkout_intent.state == "failed":
+                print("Order failed:", checkout_intent.failure_reason)
+            ```
+        """
+        intent = self.confirm(
+            id,
+            payment_method=payment_method,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        return self.poll_until_completed(
+            intent.id,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
         )
 
 
@@ -407,6 +778,365 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             ),
         )
 
+    async def _poll_until(
+        self,
+        id: str,
+        condition: Callable[[CheckoutIntent], TypeGuard[T]],
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> T:
+        """
+        A helper to poll a checkout intent until a specific condition is met.
+
+        Args:
+            id: The checkout intent ID to poll
+            condition: A callable that returns True when the desired state is reached
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once the condition is met
+
+        Raises:
+            CheckoutIntentsError: If the maximum number of attempts is reached without the condition being met
+        """
+        if max_attempts < 1:
+            logger.warning(
+                "[Checkout Intents SDK] Invalid max_attempts value: %s. max_attempts must be >= 1. "
+                "Defaulting to 1 to ensure at least one polling attempt.",
+                max_attempts,
+            )
+            max_attempts = 1
+
+        attempts = 0
+
+        # Build headers for polling
+        poll_headers: dict[str, str] = {
+            "X-Stainless-Poll-Helper": "true",
+            "X-Stainless-Custom-Poll-Interval": str(int(poll_interval * 1000)),
+        }
+        if extra_headers:
+            for k, v in extra_headers.items():
+                if not isinstance(v, Omit):
+                    poll_headers[k] = v  # type: ignore[assignment]
+
+        while attempts < max_attempts:
+            # Use with_raw_response to access response headers
+            response = await self.with_raw_response.retrieve(
+                id,
+                extra_headers=poll_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+            )
+
+            intent = await response.parse()
+
+            # Check if condition is met
+            if condition(intent):
+                return intent
+
+            attempts += 1
+
+            # If we've reached max attempts, throw an error
+            if attempts >= max_attempts:
+                raise PollTimeoutError(
+                    intent_id=id,
+                    attempts=attempts,
+                    poll_interval=poll_interval,
+                    max_attempts=max_attempts,
+                )
+
+            # Check if server suggests a polling interval
+            sleep_interval = poll_interval
+            header_interval = response.headers.get("retry-after-ms")
+            if header_interval:
+                try:
+                    header_interval_ms = int(header_interval)
+                    sleep_interval = header_interval_ms / 1000.0
+                except ValueError:
+                    pass  # Ignore invalid header values
+
+            # Sleep before next poll
+            await self._sleep(sleep_interval)
+
+        # This should never be reached due to the throw above, but TypeScript needs it
+        raise PollTimeoutError(
+            intent_id=id,
+            attempts=attempts,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+        )
+
+    async def poll_until_completed(
+        self,
+        id: str,
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[CompletedCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to poll a checkout intent until it reaches a completed state
+        (completed or failed).
+
+        Args:
+            id: The checkout intent ID to poll
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches completed or failed state
+
+        Example:
+            ```python
+            checkout_intent = await client.checkout_intents.poll_until_completed("id")
+            if checkout_intent.state == "completed":
+                print("Order placed successfully!")
+            elif checkout_intent.state == "failed":
+                print("Order failed:", checkout_intent.failure_reason)
+            ```
+        """
+
+        def is_completed(
+            intent: CheckoutIntent,
+        ) -> TypeGuard[Union[CompletedCheckoutIntent, FailedCheckoutIntent]]:
+            return intent.state in ("completed", "failed")
+
+        return await self._poll_until(
+            id,
+            is_completed,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    async def poll_until_awaiting_confirmation(
+        self,
+        id: str,
+        *,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to poll a checkout intent until it's ready for confirmation
+        (awaiting_confirmation state) or has failed. This is typically used after
+        creating a checkout intent to wait for the offer to be retrieved from the merchant.
+
+        The intent can reach awaiting_confirmation (success - ready to confirm) or failed
+        (offer retrieval failed). Always check the state after polling.
+
+        Args:
+            id: The checkout intent ID to poll
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches awaiting_confirmation or failed state
+
+        Example:
+            ```python
+            intent = await client.checkout_intents.poll_until_awaiting_confirmation("id")
+
+            if intent.state == "awaiting_confirmation":
+                # Review the offer before confirming
+                print("Total:", intent.offer.cost.total)
+            elif intent.state == "failed":
+                # Handle failure (e.g., offer retrieval failed, product out of stock)
+                print("Failed:", intent.failure_reason)
+            ```
+        """
+
+        def is_awaiting_confirmation(
+            intent: CheckoutIntent,
+        ) -> TypeGuard[Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]]:
+            return intent.state in ("awaiting_confirmation", "failed")
+
+        return await self._poll_until(
+            id,
+            is_awaiting_confirmation,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    async def create_and_poll(
+        self,
+        *,
+        buyer: BuyerParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to create a checkout intent and poll until it's ready for confirmation.
+        This follows the Rye documented flow: create → poll until awaiting_confirmation.
+
+        After this method completes, you should review the offer (pricing, shipping, taxes)
+        with the user before calling confirm().
+
+        Args:
+            buyer: Buyer information
+            product_url: URL of the product to purchase
+            quantity: Quantity of the product
+            variant_selections: Product variant selections (optional)
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches awaiting_confirmation or failed state
+
+        Example:
+            ```python
+            # Phase 1: Create and wait for offer
+            intent = await client.checkout_intents.create_and_poll(
+                buyer={
+                    "address1": "123 Main St",
+                    "city": "New York",
+                    "country": "United States",
+                    "email": "john.doe@example.com",
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "phone": "+1234567890",
+                    "postal_code": "10001",
+                    "province": "NY",
+                },
+                product_url="https://example.com/product",
+                quantity=1,
+            )
+
+            # Review the offer with the user
+            print("Total:", intent.offer.cost.total)
+
+            # Phase 2: Confirm with payment
+            completed = await client.checkout_intents.confirm_and_poll(
+                intent.id, payment_method={"type": "stripe_token", "stripe_token": "tok_visa"}
+            )
+            ```
+        """
+        intent = await self.create(
+            buyer=buyer,
+            product_url=product_url,
+            quantity=quantity,
+            variant_selections=variant_selections,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        return await self.poll_until_awaiting_confirmation(
+            intent.id,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
+    async def confirm_and_poll(
+        self,
+        id: str,
+        *,
+        payment_method: PaymentMethodParam,
+        poll_interval: float = 5.0,
+        max_attempts: int = 120,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Union[CompletedCheckoutIntent, FailedCheckoutIntent]:
+        """
+        A helper to confirm a checkout intent and poll until it reaches a completed state
+        (completed or failed).
+
+        Args:
+            id: The checkout intent ID to confirm
+            payment_method: Payment method information
+            poll_interval: The interval in seconds between polling attempts (default: 5.0)
+            max_attempts: The maximum number of polling attempts before timing out (default: 120)
+            extra_headers: Send extra headers
+            extra_query: Add additional query parameters to the request
+            extra_body: Add additional JSON properties to the request
+            timeout: Override the client-level default timeout for this request, in seconds
+
+        Returns:
+            The checkout intent once it reaches completed or failed state
+
+        Example:
+            ```python
+            checkout_intent = await client.checkout_intents.confirm_and_poll(
+                "id",
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
+                },
+            )
+
+            if checkout_intent.state == "completed":
+                print("Order placed successfully!")
+            elif checkout_intent.state == "failed":
+                print("Order failed:", checkout_intent.failure_reason)
+            ```
+        """
+        intent = await self.confirm(
+            id,
+            payment_method=payment_method,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        return await self.poll_until_completed(
+            intent.id,
+            poll_interval=poll_interval,
+            max_attempts=max_attempts,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+
 
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
@@ -423,6 +1153,18 @@ class CheckoutIntentsResourceWithRawResponse:
         )
         self.confirm = to_raw_response_wrapper(
             checkout_intents.confirm,
+        )
+        self.poll_until_completed = to_raw_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = to_raw_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = to_raw_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = to_raw_response_wrapper(
+            checkout_intents.confirm_and_poll,
         )
 
 
@@ -442,6 +1184,18 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.confirm = async_to_raw_response_wrapper(
             checkout_intents.confirm,
         )
+        self.poll_until_completed = async_to_raw_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = async_to_raw_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = async_to_raw_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = async_to_raw_response_wrapper(
+            checkout_intents.confirm_and_poll,
+        )
 
 
 class CheckoutIntentsResourceWithStreamingResponse:
@@ -460,6 +1214,18 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.confirm = to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
+        self.poll_until_completed = to_streamed_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = to_streamed_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = to_streamed_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = to_streamed_response_wrapper(
+            checkout_intents.confirm_and_poll,
+        )
 
 
 class AsyncCheckoutIntentsResourceWithStreamingResponse:
@@ -477,4 +1243,16 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.confirm = async_to_streamed_response_wrapper(
             checkout_intents.confirm,
+        )
+        self.poll_until_completed = async_to_streamed_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = async_to_streamed_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = async_to_streamed_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = async_to_streamed_response_wrapper(
+            checkout_intents.confirm_and_poll,
         )
