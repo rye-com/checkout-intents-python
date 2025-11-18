@@ -30,6 +30,8 @@ class AwaitingConfirmationCheckoutIntent(BaseCheckoutIntent):
 
     state: Literal["awaiting_confirmation"]
 
+    payment_method: Optional[PaymentMethod] = FieldInfo(alias="paymentMethod", default=None)
+
 
 class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
     offer: Offer
@@ -41,6 +43,8 @@ class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
 
 class CompletedCheckoutIntent(BaseCheckoutIntent):
     offer: Offer
+
+    order_id: Optional[str] = FieldInfo(alias="orderId", default=None)
 
     payment_method: PaymentMethod = FieldInfo(alias="paymentMethod")
 
@@ -58,6 +62,7 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "developer_not_found",
         "missing_shipping_method",
         "unsupported_currency",
+        "invalid_input",
         "unsupported_store_no_guest_checkout",
     ]
 

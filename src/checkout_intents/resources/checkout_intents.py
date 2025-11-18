@@ -3,17 +3,19 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Union, TypeVar, Callable, Iterable, cast
+from typing import Any, Union, TypeVar, Callable, List, Iterable, cast
 from typing_extensions import TypeGuard
+from typing_extensions import Literal
 
 import httpx
 
 from ..types import (
+    checkout_intent_list_params,
     checkout_intent_create_params,
     checkout_intent_confirm_params,
     checkout_intent_add_payment_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -24,7 +26,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._exceptions import PollTimeoutError
-from .._base_client import make_request_options
+from ..pagination import SyncCursorPagination, AsyncCursorPagination
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.buyer_param import BuyerParam
 from ..types.checkout_intent import (
     CheckoutIntent,
@@ -144,6 +147,59 @@ class CheckoutIntentsResource(SyncAPIResource):
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def list(
+        self,
+        *,
+        id: SequenceNotStr[str] | Omit = omit,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        limit: float | Omit = omit,
+        state: List[Literal["retrieving_offer", "awaiting_confirmation", "placing_order", "completed", "failed"]]
+        | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursorPagination[CheckoutIntent]:
+        """
+        Retrieve a paginated list of checkout intents
+
+        Enables developers to query checkout intents associated with their account, with
+        filters and cursor-based pagination.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/api/v1/checkout-intents",
+            page=SyncCursorPagination[CheckoutIntent],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "id": id,
+                        "after": after,
+                        "before": before,
+                        "limit": limit,
+                        "state": state,
+                    },
+                    checkout_intent_list_params.CheckoutIntentListParams,
+                ),
+            ),
+            model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
         )
 
     def add_payment(
@@ -694,6 +750,59 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             ),
         )
 
+    def list(
+        self,
+        *,
+        id: SequenceNotStr[str] | Omit = omit,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        limit: float | Omit = omit,
+        state: List[Literal["retrieving_offer", "awaiting_confirmation", "placing_order", "completed", "failed"]]
+        | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[CheckoutIntent, AsyncCursorPagination[CheckoutIntent]]:
+        """
+        Retrieve a paginated list of checkout intents
+
+        Enables developers to query checkout intents associated with their account, with
+        filters and cursor-based pagination.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/api/v1/checkout-intents",
+            page=AsyncCursorPagination[CheckoutIntent],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "id": id,
+                        "after": after,
+                        "before": before,
+                        "limit": limit,
+                        "state": state,
+                    },
+                    checkout_intent_list_params.CheckoutIntentListParams,
+                ),
+            ),
+            model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
+        )
+
     async def add_payment(
         self,
         id: str,
@@ -1148,6 +1257,9 @@ class CheckoutIntentsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             checkout_intents.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            checkout_intents.list,
+        )
         self.add_payment = to_raw_response_wrapper(
             checkout_intents.add_payment,
         )
@@ -1177,6 +1289,9 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             checkout_intents.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            checkout_intents.list,
         )
         self.add_payment = async_to_raw_response_wrapper(
             checkout_intents.add_payment,
@@ -1208,6 +1323,9 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             checkout_intents.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            checkout_intents.list,
+        )
         self.add_payment = to_streamed_response_wrapper(
             checkout_intents.add_payment,
         )
@@ -1237,6 +1355,9 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             checkout_intents.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            checkout_intents.list,
         )
         self.add_payment = async_to_streamed_response_wrapper(
             checkout_intents.add_payment,

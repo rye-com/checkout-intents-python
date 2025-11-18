@@ -25,9 +25,11 @@ pip install checkout-intents
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from checkout_intents import CheckoutIntents
 
 client = CheckoutIntents(
+    api_key=os.environ.get("CHECKOUT_INTENTS_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -36,11 +38,11 @@ checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -151,10 +153,12 @@ except PollTimeoutError as e:
 Simply import `AsyncCheckoutIntents` instead of `CheckoutIntents` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from checkout_intents import AsyncCheckoutIntents
 
 client = AsyncCheckoutIntents(
+    api_key=os.environ.get("CHECKOUT_INTENTS_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -165,11 +169,11 @@ async def main() -> None:
         buyer={
             "address1": "123 Main St",
             "city": "New York",
-            "country": "US",
+            "country": "United States",
             "email": "john.doe@example.com",
             "first_name": "John",
             "last_name": "Doe",
-            "phone": "5555555555",
+            "phone": "+1234567890",
             "postal_code": "10001",
             "province": "NY",
         },
@@ -204,17 +208,18 @@ from checkout_intents import AsyncCheckoutIntents
 
 async def main() -> None:
     async with AsyncCheckoutIntents(
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         checkout_intent = await client.checkout_intents.create(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
@@ -235,6 +240,77 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods in the Checkout Intents API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from checkout_intents import CheckoutIntents
+
+client = CheckoutIntents()
+
+all_checkout_intents = []
+# Automatically fetches more pages as needed.
+for checkout_intent in client.checkout_intents.list(
+    limit=20,
+):
+    # Do something with checkout_intent here
+    all_checkout_intents.append(checkout_intent)
+print(all_checkout_intents)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from checkout_intents import AsyncCheckoutIntents
+
+client = AsyncCheckoutIntents()
+
+
+async def main() -> None:
+    all_checkout_intents = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for checkout_intent in client.checkout_intents.list(
+        limit=20,
+    ):
+        all_checkout_intents.append(checkout_intent)
+    print(all_checkout_intents)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.checkout_intents.list(
+    limit=20,
+)
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.data)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.checkout_intents.list(
+    limit=20,
+)
+
+print(f"next page cursor: {first_page.page_info.end_cursor}")  # => "next page cursor: ..."
+for checkout_intent in first_page.data:
+    print(checkout_intent)
+
+# Remove `await` for non-async usage.
+```
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -248,16 +324,16 @@ checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
     product_url="productUrl",
-    quantity=0,
+    quantity=1,
 )
 print(checkout_intent.buyer)
 ```
@@ -282,11 +358,11 @@ try:
         buyer={
             "address1": "123 Main St",
             "city": "New York",
-            "country": "US",
+            "country": "United States",
             "email": "john.doe@example.com",
             "first_name": "John",
             "last_name": "Doe",
-            "phone": "5555555555",
+            "phone": "+1234567890",
             "postal_code": "10001",
             "province": "NY",
         },
@@ -359,11 +435,11 @@ client.with_options(max_retries=5).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -396,11 +472,11 @@ client.with_options(timeout=5.0).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -451,11 +527,11 @@ response = client.checkout_intents.with_raw_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
@@ -483,11 +559,11 @@ with client.checkout_intents.with_streaming_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
-        "country": "US",
+        "country": "United States",
         "email": "john.doe@example.com",
         "first_name": "John",
         "last_name": "Doe",
-        "phone": "5555555555",
+        "phone": "+1234567890",
         "postal_code": "10001",
         "province": "NY",
     },
