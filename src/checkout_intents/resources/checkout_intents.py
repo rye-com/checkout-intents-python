@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Union, TypeVar, Callable, List, Iterable, cast
-from typing_extensions import TypeGuard
-from typing_extensions import Literal
+from typing import Any, List, Union, TypeVar, Callable, Iterable, cast
+from typing_extensions import Literal, TypeGuard
 
 import httpx
 
@@ -25,8 +24,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._exceptions import PollTimeoutError
 from ..pagination import SyncCursorPagination, AsyncCursorPagination
+from .._exceptions import PollTimeoutError
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.buyer_param import BuyerParam
 from ..types.checkout_intent import (
