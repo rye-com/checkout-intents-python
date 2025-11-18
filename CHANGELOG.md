@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 (2025-11-18)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/rye-com/checkout-intents-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* Add python sdk target to stainless config ([eea256f](https://github.com/rye-com/checkout-intents-python/commit/eea256fef46bb35554488dba5a0818345096a66a))
+
+
+### Bug Fixes
+
+* **docs:** supply valid buyer details ([12d25b1](https://github.com/rye-com/checkout-intents-python/commit/12d25b12808a05aaedcf48fc97384b5da40ca7e4))
+
+
+### Chores
+
+* **internal:** format code ([445dea0](https://github.com/rye-com/checkout-intents-python/commit/445dea070ddcc8574d0304001e79bd25ca2f9de7))
+
 ## 0.2.0 (2025-11-13)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/rye-com/checkout-intents-python/compare/v0.1.0...v0.2.0)
