@@ -770,16 +770,16 @@ class TestCheckoutIntents:
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
-                    "country": "US",
+                    "country": "United States",
                     "email": "john.doe@example.com",
                     "first_name": "John",
                     "last_name": "Doe",
-                    "phone": "5555555555",
+                    "phone": "+1234567890",
                     "postal_code": "10001",
                     "province": "NY",
                 },
                 product_url="productUrl",
-                quantity=0,
+                quantity=1,
             ).__enter__()
 
         assert _get_open_connections(client) == 0
@@ -794,16 +794,16 @@ class TestCheckoutIntents:
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
-                    "country": "US",
+                    "country": "United States",
                     "email": "john.doe@example.com",
                     "first_name": "John",
                     "last_name": "Doe",
-                    "phone": "5555555555",
+                    "phone": "+1234567890",
                     "postal_code": "10001",
                     "province": "NY",
                 },
                 product_url="productUrl",
-                quantity=0,
+                quantity=1,
             ).__enter__()
         assert _get_open_connections(client) == 0
 
@@ -837,16 +837,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
         )
 
         assert response.retries_taken == failures_before_success
@@ -875,16 +875,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -913,16 +913,16 @@ class TestCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1692,16 +1692,16 @@ class TestAsyncCheckoutIntents:
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
-                    "country": "US",
+                    "country": "United States",
                     "email": "john.doe@example.com",
                     "first_name": "John",
                     "last_name": "Doe",
-                    "phone": "5555555555",
+                    "phone": "+1234567890",
                     "postal_code": "10001",
                     "province": "NY",
                 },
                 product_url="productUrl",
-                quantity=0,
+                quantity=1,
             ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
@@ -1718,16 +1718,16 @@ class TestAsyncCheckoutIntents:
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
-                    "country": "US",
+                    "country": "United States",
                     "email": "john.doe@example.com",
                     "first_name": "John",
                     "last_name": "Doe",
-                    "phone": "5555555555",
+                    "phone": "+1234567890",
                     "postal_code": "10001",
                     "province": "NY",
                 },
                 product_url="productUrl",
-                quantity=0,
+                quantity=1,
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
@@ -1761,16 +1761,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
         )
 
         assert response.retries_taken == failures_before_success
@@ -1799,16 +1799,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1837,16 +1837,16 @@ class TestAsyncCheckoutIntents:
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
-                "country": "US",
+                "country": "United States",
                 "email": "john.doe@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
-                "phone": "5555555555",
+                "phone": "+1234567890",
                 "postal_code": "10001",
                 "province": "NY",
             },
             product_url="productUrl",
-            quantity=0,
+            quantity=1,
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
