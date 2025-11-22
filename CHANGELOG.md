@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2025-11-22)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/rye-com/checkout-intents-python/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* add Python 3.14 classifier and testing ([c5e5f48](https://github.com/rye-com/checkout-intents-python/commit/c5e5f4878211b638fad6db325ee1ea2971571c1e))
+
 ## 0.3.0 (2025-11-18)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/rye-com/checkout-intents-python/compare/v0.2.0...v0.3.0)
