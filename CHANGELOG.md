@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.2 (2025-11-28)
+
+Full Changelog: [v0.3.1...v0.3.2](https://github.com/rye-com/checkout-intents-python/compare/v0.3.1...v0.3.2)
+
+### Bug Fixes
+
+* ensure streams are always closed ([33adf1a](https://github.com/rye-com/checkout-intents-python/commit/33adf1a16c46c3ec7463a1af36351efb76479b1f))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([61385ca](https://github.com/rye-com/checkout-intents-python/commit/61385ca14394f826160467cb3d50168b652263c9))
+
 ## 0.3.1 (2025-11-22)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/rye-com/checkout-intents-python/compare/v0.3.0...v0.3.1)
