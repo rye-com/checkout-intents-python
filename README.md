@@ -201,6 +201,7 @@ pip install checkout-intents[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from checkout_intents import DefaultAioHttpClient
 from checkout_intents import AsyncCheckoutIntents
@@ -208,7 +209,9 @@ from checkout_intents import AsyncCheckoutIntents
 
 async def main() -> None:
     async with AsyncCheckoutIntents(
-        api_key="My API Key",
+        api_key=os.environ.get(
+            "CHECKOUT_INTENTS_API_KEY"
+        ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         checkout_intent = await client.checkout_intents.create(
