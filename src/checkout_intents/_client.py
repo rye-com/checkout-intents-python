@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import brands, checkout_intents
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, CheckoutIntentsError
 from ._base_client import (
@@ -29,6 +29,11 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+
+if TYPE_CHECKING:
+    from .resources import brands, checkout_intents
+    from .resources.brands import BrandsResource, AsyncBrandsResource
+    from .resources.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -49,11 +54,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class CheckoutIntents(SyncAPIClient):
-    checkout_intents: checkout_intents.CheckoutIntentsResource
-    brands: brands.BrandsResource
-    with_raw_response: CheckoutIntentsWithRawResponse
-    with_streaming_response: CheckoutIntentsWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -132,10 +132,25 @@ class CheckoutIntents(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.checkout_intents = checkout_intents.CheckoutIntentsResource(self)
-        self.brands = brands.BrandsResource(self)
-        self.with_raw_response = CheckoutIntentsWithRawResponse(self)
-        self.with_streaming_response = CheckoutIntentsWithStreamedResponse(self)
+    @cached_property
+    def checkout_intents(self) -> CheckoutIntentsResource:
+        from .resources.checkout_intents import CheckoutIntentsResource
+
+        return CheckoutIntentsResource(self)
+
+    @cached_property
+    def brands(self) -> BrandsResource:
+        from .resources.brands import BrandsResource
+
+        return BrandsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> CheckoutIntentsWithRawResponse:
+        return CheckoutIntentsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> CheckoutIntentsWithStreamedResponse:
+        return CheckoutIntentsWithStreamedResponse(self)
 
     @property
     @override
@@ -245,11 +260,6 @@ class CheckoutIntents(SyncAPIClient):
 
 
 class AsyncCheckoutIntents(AsyncAPIClient):
-    checkout_intents: checkout_intents.AsyncCheckoutIntentsResource
-    brands: brands.AsyncBrandsResource
-    with_raw_response: AsyncCheckoutIntentsWithRawResponse
-    with_streaming_response: AsyncCheckoutIntentsWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -328,10 +338,25 @@ class AsyncCheckoutIntents(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.checkout_intents = checkout_intents.AsyncCheckoutIntentsResource(self)
-        self.brands = brands.AsyncBrandsResource(self)
-        self.with_raw_response = AsyncCheckoutIntentsWithRawResponse(self)
-        self.with_streaming_response = AsyncCheckoutIntentsWithStreamedResponse(self)
+    @cached_property
+    def checkout_intents(self) -> AsyncCheckoutIntentsResource:
+        from .resources.checkout_intents import AsyncCheckoutIntentsResource
+
+        return AsyncCheckoutIntentsResource(self)
+
+    @cached_property
+    def brands(self) -> AsyncBrandsResource:
+        from .resources.brands import AsyncBrandsResource
+
+        return AsyncBrandsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncCheckoutIntentsWithRawResponse:
+        return AsyncCheckoutIntentsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncCheckoutIntentsWithStreamedResponse:
+        return AsyncCheckoutIntentsWithStreamedResponse(self)
 
     @property
     @override
@@ -441,29 +466,79 @@ class AsyncCheckoutIntents(AsyncAPIClient):
 
 
 class CheckoutIntentsWithRawResponse:
+    _client: CheckoutIntents
+
     def __init__(self, client: CheckoutIntents) -> None:
-        self.checkout_intents = checkout_intents.CheckoutIntentsResourceWithRawResponse(client.checkout_intents)
-        self.brands = brands.BrandsResourceWithRawResponse(client.brands)
+        self._client = client
+
+    @cached_property
+    def checkout_intents(self) -> checkout_intents.CheckoutIntentsResourceWithRawResponse:
+        from .resources.checkout_intents import CheckoutIntentsResourceWithRawResponse
+
+        return CheckoutIntentsResourceWithRawResponse(self._client.checkout_intents)
+
+    @cached_property
+    def brands(self) -> brands.BrandsResourceWithRawResponse:
+        from .resources.brands import BrandsResourceWithRawResponse
+
+        return BrandsResourceWithRawResponse(self._client.brands)
 
 
 class AsyncCheckoutIntentsWithRawResponse:
+    _client: AsyncCheckoutIntents
+
     def __init__(self, client: AsyncCheckoutIntents) -> None:
-        self.checkout_intents = checkout_intents.AsyncCheckoutIntentsResourceWithRawResponse(client.checkout_intents)
-        self.brands = brands.AsyncBrandsResourceWithRawResponse(client.brands)
+        self._client = client
+
+    @cached_property
+    def checkout_intents(self) -> checkout_intents.AsyncCheckoutIntentsResourceWithRawResponse:
+        from .resources.checkout_intents import AsyncCheckoutIntentsResourceWithRawResponse
+
+        return AsyncCheckoutIntentsResourceWithRawResponse(self._client.checkout_intents)
+
+    @cached_property
+    def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
+        from .resources.brands import AsyncBrandsResourceWithRawResponse
+
+        return AsyncBrandsResourceWithRawResponse(self._client.brands)
 
 
 class CheckoutIntentsWithStreamedResponse:
+    _client: CheckoutIntents
+
     def __init__(self, client: CheckoutIntents) -> None:
-        self.checkout_intents = checkout_intents.CheckoutIntentsResourceWithStreamingResponse(client.checkout_intents)
-        self.brands = brands.BrandsResourceWithStreamingResponse(client.brands)
+        self._client = client
+
+    @cached_property
+    def checkout_intents(self) -> checkout_intents.CheckoutIntentsResourceWithStreamingResponse:
+        from .resources.checkout_intents import CheckoutIntentsResourceWithStreamingResponse
+
+        return CheckoutIntentsResourceWithStreamingResponse(self._client.checkout_intents)
+
+    @cached_property
+    def brands(self) -> brands.BrandsResourceWithStreamingResponse:
+        from .resources.brands import BrandsResourceWithStreamingResponse
+
+        return BrandsResourceWithStreamingResponse(self._client.brands)
 
 
 class AsyncCheckoutIntentsWithStreamedResponse:
+    _client: AsyncCheckoutIntents
+
     def __init__(self, client: AsyncCheckoutIntents) -> None:
-        self.checkout_intents = checkout_intents.AsyncCheckoutIntentsResourceWithStreamingResponse(
-            client.checkout_intents
-        )
-        self.brands = brands.AsyncBrandsResourceWithStreamingResponse(client.brands)
+        self._client = client
+
+    @cached_property
+    def checkout_intents(self) -> checkout_intents.AsyncCheckoutIntentsResourceWithStreamingResponse:
+        from .resources.checkout_intents import AsyncCheckoutIntentsResourceWithStreamingResponse
+
+        return AsyncCheckoutIntentsResourceWithStreamingResponse(self._client.checkout_intents)
+
+    @cached_property
+    def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:
+        from .resources.brands import AsyncBrandsResourceWithStreamingResponse
+
+        return AsyncBrandsResourceWithStreamingResponse(self._client.brands)
 
 
 Client = CheckoutIntents
