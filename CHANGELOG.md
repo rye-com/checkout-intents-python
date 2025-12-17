@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.3 (2025-12-17)
+
+Full Changelog: [v0.3.2...v0.3.3](https://github.com/rye-com/checkout-intents-python/compare/v0.3.2...v0.3.3)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([1567425](https://github.com/rye-com/checkout-intents-python/commit/156742587303ed71cd6bd48cac88b289aa7b066a))
+
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([1786fcf](https://github.com/rye-com/checkout-intents-python/commit/1786fcf0791f227d91a07e3aad06a302d16aa8e0))
+* **internal:** add missing files argument to base client ([3af52aa](https://github.com/rye-com/checkout-intents-python/commit/3af52aa804ed204b5aeab65b996956448a2f0225))
+* update lockfile ([3695089](https://github.com/rye-com/checkout-intents-python/commit/3695089432c17c48ebd52580651c023e75c44b8d))
+
 ## 0.3.2 (2025-11-28)
 
 Full Changelog: [v0.3.1...v0.3.2](https://github.com/rye-com/checkout-intents-python/compare/v0.3.1...v0.3.2)
