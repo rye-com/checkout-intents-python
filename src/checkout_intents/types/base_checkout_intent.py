@@ -23,4 +23,6 @@ class BaseCheckoutIntent(BaseModel):
 
     quantity: float
 
+    promo_codes: Optional[List[str]] = FieldInfo(alias="promoCodes", default=None)
+
     variant_selections: Optional[List[VariantSelection]] = FieldInfo(alias="variantSelections", default=None)
