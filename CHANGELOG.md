@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 (2025-12-18)
+
+Full Changelog: [v0.3.3...v0.4.0](https://github.com/rye-com/checkout-intents-python/compare/v0.3.3...v0.4.0)
+
+### Features
+
+* Add durable purchase workflow and supporting infrastructure ([9db3309](https://github.com/rye-com/checkout-intents-python/commit/9db33093a5825e56e0c900cde20c74c22fb3f932))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([66f7a30](https://github.com/rye-com/checkout-intents-python/commit/66f7a30af6fcadd97c651ec3d911d74f4699360f))
+
 ## 0.3.3 (2025-12-17)
 
 Full Changelog: [v0.3.2...v0.3.3](https://github.com/rye-com/checkout-intents-python/compare/v0.3.2...v0.3.3)
