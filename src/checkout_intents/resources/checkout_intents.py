@@ -70,6 +70,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         buyer: BuyerParam,
         product_url: str,
         quantity: float,
+        promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -99,6 +100,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "buyer": buyer,
                         "product_url": product_url,
                         "quantity": quantity,
+                        "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
@@ -671,6 +673,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         buyer: BuyerParam,
         product_url: str,
         quantity: float,
+        promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -700,6 +703,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "buyer": buyer,
                         "product_url": product_url,
                         "quantity": quantity,
+                        "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
