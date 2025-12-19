@@ -11,7 +11,7 @@ class BrandRetrieveResponse(BaseModel):
     id: str
     """A unique identifier for the brand."""
 
-    marketplace: Literal["AMAZON", "SHOPIFY", "UNKNOWN"]
+    marketplace: Literal["AMAZON", "SHOPIFY", "BESTBUY", "UNKNOWN"]
     """Indicates what ecommerce platform the brand uses."""
 
     supported: bool

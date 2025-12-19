@@ -19,6 +19,8 @@ class Cost(BaseModel):
 
     shipping: Optional[Money] = None
 
+    surcharge: Optional[Money] = None
+
     tax: Optional[Money] = None
 
 
@@ -26,6 +28,8 @@ class ShippingAvailableOption(BaseModel):
     id: str
 
     cost: Money
+
+    discount: Optional[Money] = None
 
 
 class Shipping(BaseModel):

@@ -63,8 +63,17 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "missing_shipping_method",
         "unsupported_currency",
         "invalid_input",
+        "incorrect_cost_breakdown",
         "unsupported_store_no_guest_checkout",
+        "workflow_invocation_failed",
+        "variant_selections_invalid",
+        "variant_selections_required",
+        "form_validation_error",
+        "captcha_blocked",
+        "bot_protection_blocked",
+        "unknown",
     ]
+    """Type derived from runtime array - always in sync"""
 
     message: str
 

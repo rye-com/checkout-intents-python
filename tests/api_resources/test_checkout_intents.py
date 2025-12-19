@@ -58,6 +58,7 @@ class TestCheckoutIntents:
             },
             product_url="productUrl",
             quantity=1,
+            promo_codes=["string"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -383,6 +384,7 @@ class TestAsyncCheckoutIntents:
             },
             product_url="productUrl",
             quantity=1,
+            promo_codes=["string"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
