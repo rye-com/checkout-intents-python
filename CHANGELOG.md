@@ -6,8 +6,8 @@ Full Changelog: [v0.3.3...v0.4.0](https://github.com/rye-com/checkout-intents-py
 
 ### Features
 
+* Adds support for promo codes
 * Add durable purchase workflow and supporting infrastructure ([9db3309](https://github.com/rye-com/checkout-intents-python/commit/9db33093a5825e56e0c900cde20c74c22fb3f932))
-
 
 ### Bug Fixes
 
