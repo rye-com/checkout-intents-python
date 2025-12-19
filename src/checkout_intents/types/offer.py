@@ -42,3 +42,5 @@ class Offer(BaseModel):
     cost: Cost
 
     shipping: Shipping
+
+    applied_promo_codes: Optional[List[str]] = FieldInfo(alias="appliedPromoCodes", default=None)
