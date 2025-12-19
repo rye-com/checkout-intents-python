@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2025-12-19)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/rye-com/checkout-intents-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** add applied promo codes to offer ([abb5a98](https://github.com/rye-com/checkout-intents-python/commit/abb5a9815890e283050dff4a9760e76aa50af0ce))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([6a2fb37](https://github.com/rye-com/checkout-intents-python/commit/6a2fb37ee2d09820fd364e601616b1631f84bdb1))
+
 ## 0.4.0 (2025-12-18)
 
 Full Changelog: [v0.3.3...v0.4.0](https://github.com/rye-com/checkout-intents-python/compare/v0.3.3...v0.4.0)
