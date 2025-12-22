@@ -11,6 +11,7 @@ from ..types import (
     checkout_intent_list_params,
     checkout_intent_create_params,
     checkout_intent_confirm_params,
+    checkout_intent_purchase_params,
     checkout_intent_add_payment_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
@@ -276,6 +277,58 @@ class CheckoutIntentsResource(SyncAPIResource):
             ),
         )
 
+    def purchase(
+        self,
+        *,
+        buyer: BuyerParam,
+        payment_method: PaymentMethodParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CheckoutIntent:
+        """
+        Create a checkout intent and immediately trigger the purchase workflow.
+
+        This is a "fire-and-forget" endpoint that combines create + confirm in one step.
+        The workflow handles offer retrieval, payment authorization, and order placement
+        asynchronously. Poll the GET endpoint to check status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return cast(
+            CheckoutIntent,
+            self._post(
+                "/api/v1/checkout-intents/purchase",
+                body=maybe_transform(
+                    {
+                        "buyer": buyer,
+                        "payment_method": payment_method,
+                        "product_url": product_url,
+                        "quantity": quantity,
+                        "variant_selections": variant_selections,
+                    },
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
 
 class AsyncCheckoutIntentsResource(AsyncAPIResource):
     @cached_property
@@ -520,6 +573,58 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             ),
         )
 
+    async def purchase(
+        self,
+        *,
+        buyer: BuyerParam,
+        payment_method: PaymentMethodParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CheckoutIntent:
+        """
+        Create a checkout intent and immediately trigger the purchase workflow.
+
+        This is a "fire-and-forget" endpoint that combines create + confirm in one step.
+        The workflow handles offer retrieval, payment authorization, and order placement
+        asynchronously. Poll the GET endpoint to check status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return cast(
+            CheckoutIntent,
+            await self._post(
+                "/api/v1/checkout-intents/purchase",
+                body=await async_maybe_transform(
+                    {
+                        "buyer": buyer,
+                        "payment_method": payment_method,
+                        "product_url": product_url,
+                        "quantity": quantity,
+                        "variant_selections": variant_selections,
+                    },
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
 
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
@@ -539,6 +644,9 @@ class CheckoutIntentsResourceWithRawResponse:
         )
         self.confirm = to_raw_response_wrapper(
             checkout_intents.confirm,
+        )
+        self.purchase = to_raw_response_wrapper(
+            checkout_intents.purchase,
         )
 
 
@@ -561,6 +669,9 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.confirm = async_to_raw_response_wrapper(
             checkout_intents.confirm,
         )
+        self.purchase = async_to_raw_response_wrapper(
+            checkout_intents.purchase,
+        )
 
 
 class CheckoutIntentsResourceWithStreamingResponse:
@@ -582,6 +693,9 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.confirm = to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
+        self.purchase = to_streamed_response_wrapper(
+            checkout_intents.purchase,
+        )
 
 
 class AsyncCheckoutIntentsResourceWithStreamingResponse:
@@ -602,4 +716,7 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.confirm = async_to_streamed_response_wrapper(
             checkout_intents.confirm,
+        )
+        self.purchase = async_to_streamed_response_wrapper(
+            checkout_intents.purchase,
         )
