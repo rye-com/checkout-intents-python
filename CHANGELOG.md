@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2025-12-22)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/rye-com/checkout-intents-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* Include `/purchase` endpoint in our SDKs + docs ([7744f80](https://github.com/rye-com/checkout-intents-python/commit/7744f80e20bc5399d9b29e0bfb11d6b8f9997e38))
+
+
+### Chores
+
+* include polling helpers in raw resp classes ([67b0e3c](https://github.com/rye-com/checkout-intents-python/commit/67b0e3c1899a3d5415b126466fd5f525f61f2529))
+
 ## 0.5.0 (2025-12-19)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/rye-com/checkout-intents-python/compare/v0.4.0...v0.5.0)
