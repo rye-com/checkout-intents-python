@@ -12,6 +12,7 @@ from ..types import (
     checkout_intent_list_params,
     checkout_intent_create_params,
     checkout_intent_confirm_params,
+    checkout_intent_purchase_params,
     checkout_intent_add_payment_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
@@ -279,6 +280,58 @@ class CheckoutIntentsResource(SyncAPIResource):
                 f"/api/v1/checkout-intents/{id}/confirm",
                 body=maybe_transform(
                     {"payment_method": payment_method}, checkout_intent_confirm_params.CheckoutIntentConfirmParams
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
+    def purchase(
+        self,
+        *,
+        buyer: BuyerParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        payment_method: PaymentMethodParam,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CheckoutIntent:
+        """
+        Create a checkout intent and immediately trigger the purchase workflow.
+   
+        This is a "fire-and-forget" endpoint that combines create + confirm in one step.
+        The workflow handles offer retrieval, payment authorization, and order placement
+        asynchronously. Poll the GET endpoint to check status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return cast(
+            CheckoutIntent,
+            self._post(
+                f"/api/v1/checkout-intents/purchase",
+                body=maybe_transform(
+                    {
+                        "buyer": buyer,
+                        "payment_method": payment_method,
+                        "product_url": product_url,
+                        "quantity": quantity,
+                        "variant_selections": variant_selections,
+                    },
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -890,6 +943,58 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             ),
         )
 
+    async def purchase(
+        self,
+        *,
+        buyer: BuyerParam,
+        product_url: str,
+        quantity: float,
+        variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
+        payment_method: PaymentMethodParam,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CheckoutIntent:
+        """
+        Create a checkout intent and immediately trigger the purchase workflow.
+   
+        This is a "fire-and-forget" endpoint that combines create + confirm in one step.
+        The workflow handles offer retrieval, payment authorization, and order placement
+        asynchronously. Poll the GET endpoint to check status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return cast(
+            CheckoutIntent,
+            await self._post(
+                f"/api/v1/checkout-intents/purchase",
+                body=await async_maybe_transform(
+                    {
+                        "buyer": buyer,
+                        "payment_method": payment_method,
+                        "product_url": product_url,
+                        "quantity": quantity,
+                        "variant_selections": variant_selections,
+                    },
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def _poll_until(
         self,
         id: str,
@@ -1250,6 +1355,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         )
 
 
+
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
         self._checkout_intents = checkout_intents
@@ -1269,18 +1375,10 @@ class CheckoutIntentsResourceWithRawResponse:
         self.confirm = to_raw_response_wrapper(
             checkout_intents.confirm,
         )
-        self.poll_until_completed = to_raw_response_wrapper(
-            checkout_intents.poll_until_completed,
+        self.purchase = to_raw_response_wrapper(
+            checkout_intents.purchase,
         )
-        self.poll_until_awaiting_confirmation = to_raw_response_wrapper(
-            checkout_intents.poll_until_awaiting_confirmation,
-        )
-        self.create_and_poll = to_raw_response_wrapper(
-            checkout_intents.create_and_poll,
-        )
-        self.confirm_and_poll = to_raw_response_wrapper(
-            checkout_intents.confirm_and_poll,
-        )
+
 
 
 class AsyncCheckoutIntentsResourceWithRawResponse:
@@ -1302,18 +1400,10 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.confirm = async_to_raw_response_wrapper(
             checkout_intents.confirm,
         )
-        self.poll_until_completed = async_to_raw_response_wrapper(
-            checkout_intents.poll_until_completed,
+        self.purchase = async_to_raw_response_wrapper(
+            checkout_intents.purchase,
         )
-        self.poll_until_awaiting_confirmation = async_to_raw_response_wrapper(
-            checkout_intents.poll_until_awaiting_confirmation,
-        )
-        self.create_and_poll = async_to_raw_response_wrapper(
-            checkout_intents.create_and_poll,
-        )
-        self.confirm_and_poll = async_to_raw_response_wrapper(
-            checkout_intents.confirm_and_poll,
-        )
+
 
 
 class CheckoutIntentsResourceWithStreamingResponse:
@@ -1335,18 +1425,10 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.confirm = to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
-        self.poll_until_completed = to_streamed_response_wrapper(
-            checkout_intents.poll_until_completed,
+        self.purchase = to_streamed_response_wrapper(
+            checkout_intents.purchase,
         )
-        self.poll_until_awaiting_confirmation = to_streamed_response_wrapper(
-            checkout_intents.poll_until_awaiting_confirmation,
-        )
-        self.create_and_poll = to_streamed_response_wrapper(
-            checkout_intents.create_and_poll,
-        )
-        self.confirm_and_poll = to_streamed_response_wrapper(
-            checkout_intents.confirm_and_poll,
-        )
+
 
 
 class AsyncCheckoutIntentsResourceWithStreamingResponse:
@@ -1368,15 +1450,6 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         self.confirm = async_to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
-        self.poll_until_completed = async_to_streamed_response_wrapper(
-            checkout_intents.poll_until_completed,
-        )
-        self.poll_until_awaiting_confirmation = async_to_streamed_response_wrapper(
-            checkout_intents.poll_until_awaiting_confirmation,
-        )
-        self.create_and_poll = async_to_streamed_response_wrapper(
-            checkout_intents.create_and_poll,
-        )
-        self.confirm_and_poll = async_to_streamed_response_wrapper(
-            checkout_intents.confirm_and_poll,
+        self.purchase = async_to_streamed_response_wrapper(
+            checkout_intents.purchase,
         )
