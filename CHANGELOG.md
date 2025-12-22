@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 (2025-12-22)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/rye-com/checkout-intents-python/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** support promo codes in purchase endpoint ([db9b7ca](https://github.com/rye-com/checkout-intents-python/commit/db9b7caa613c20a0d516930551f89932be8f14d9))
+
 ## 0.6.0 (2025-12-22)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/rye-com/checkout-intents-python/compare/v0.5.0...v0.6.0)
