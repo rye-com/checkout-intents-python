@@ -1378,6 +1378,18 @@ class CheckoutIntentsResourceWithRawResponse:
         self.purchase = to_raw_response_wrapper(
             checkout_intents.purchase,
         )
+        self.poll_until_completed = to_raw_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = to_raw_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = to_raw_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = to_raw_response_wrapper(
+            checkout_intents.confirm_and_poll,
+        )
 
 
 
@@ -1402,6 +1414,18 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         )
         self.purchase = async_to_raw_response_wrapper(
             checkout_intents.purchase,
+        )
+        self.poll_until_completed = async_to_raw_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = async_to_raw_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = async_to_raw_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = async_to_raw_response_wrapper(
+            checkout_intents.confirm_and_poll,
         )
 
 
@@ -1428,6 +1452,18 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.purchase = to_streamed_response_wrapper(
             checkout_intents.purchase,
         )
+        self.poll_until_completed = to_streamed_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = to_streamed_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = to_streamed_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = to_streamed_response_wrapper(
+            checkout_intents.confirm_and_poll,
+        )
 
 
 
@@ -1452,4 +1488,16 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.purchase = async_to_streamed_response_wrapper(
             checkout_intents.purchase,
+        )
+        self.poll_until_completed = async_to_streamed_response_wrapper(
+            checkout_intents.poll_until_completed,
+        )
+        self.poll_until_awaiting_confirmation = async_to_streamed_response_wrapper(
+            checkout_intents.poll_until_awaiting_confirmation,
+        )
+        self.create_and_poll = async_to_streamed_response_wrapper(
+            checkout_intents.create_and_poll,
+        )
+        self.confirm_and_poll = async_to_streamed_response_wrapper(
+            checkout_intents.confirm_and_poll,
         )
