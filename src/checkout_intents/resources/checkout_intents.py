@@ -294,6 +294,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         buyer: BuyerParam,
         product_url: str,
         quantity: float,
+        promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -329,6 +330,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "payment_method": payment_method,
                         "product_url": product_url,
                         "quantity": quantity,
+                        "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams
@@ -949,6 +951,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         buyer: BuyerParam,
         product_url: str,
         quantity: float,
+        promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -984,6 +987,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "payment_method": payment_method,
                         "product_url": product_url,
                         "quantity": quantity,
+                        "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams

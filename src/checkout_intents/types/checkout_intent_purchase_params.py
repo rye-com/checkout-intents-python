@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .buyer_param import BuyerParam
 from .payment_method_param import PaymentMethodParam
@@ -21,5 +22,7 @@ class CheckoutIntentPurchaseParams(TypedDict, total=False):
     product_url: Required[Annotated[str, PropertyInfo(alias="productUrl")]]
 
     quantity: Required[float]
+
+    promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
