@@ -71,6 +71,8 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "form_validation_error",
         "captcha_blocked",
         "bot_protection_blocked",
+        "constraint_total_price_exceeded",
+        "constraint_shipping_cost_exceeded",
         "unknown",
     ]
     """Type derived from runtime array - always in sync"""

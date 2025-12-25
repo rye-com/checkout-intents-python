@@ -11,7 +11,7 @@ from .buyer_param import BuyerParam
 from .payment_method_param import PaymentMethodParam
 from .variant_selection_param import VariantSelectionParam
 
-__all__ = ["CheckoutIntentPurchaseParams"]
+__all__ = ["CheckoutIntentPurchaseParams", "Constraints"]
 
 
 class CheckoutIntentPurchaseParams(TypedDict, total=False):
@@ -23,6 +23,14 @@ class CheckoutIntentPurchaseParams(TypedDict, total=False):
 
     quantity: Required[float]
 
+    constraints: Constraints
+
     promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
+
+
+class Constraints(TypedDict, total=False):
+    max_shipping_price: Annotated[int, PropertyInfo(alias="maxShippingPrice")]
+
+    max_total_price: Annotated[int, PropertyInfo(alias="maxTotalPrice")]
