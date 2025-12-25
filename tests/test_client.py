@@ -763,10 +763,12 @@ class TestCheckoutIntents:
     @mock.patch("checkout_intents._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: CheckoutIntents) -> None:
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            client.checkout_intents.with_streaming_response.create(
+            client.checkout_intents.with_streaming_response.purchase(
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
@@ -778,6 +780,10 @@ class TestCheckoutIntents:
                     "postal_code": "10001",
                     "province": "NY",
                 },
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
+                },
                 product_url="productUrl",
                 quantity=1,
             ).__enter__()
@@ -787,10 +793,10 @@ class TestCheckoutIntents:
     @mock.patch("checkout_intents._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: CheckoutIntents) -> None:
-        respx_mock.post("/api/v1/checkout-intents").mock(return_value=httpx.Response(500))
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.checkout_intents.with_streaming_response.create(
+            client.checkout_intents.with_streaming_response.purchase(
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
@@ -801,6 +807,10 @@ class TestCheckoutIntents:
                     "phone": "1234567890",
                     "postal_code": "10001",
                     "province": "NY",
+                },
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
                 },
                 product_url="productUrl",
                 quantity=1,
@@ -831,9 +841,9 @@ class TestCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = client.checkout_intents.with_raw_response.create(
+        response = client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -844,6 +854,10 @@ class TestCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
@@ -869,9 +883,9 @@ class TestCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = client.checkout_intents.with_raw_response.create(
+        response = client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -882,6 +896,10 @@ class TestCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
@@ -907,9 +925,9 @@ class TestCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = client.checkout_intents.with_raw_response.create(
+        response = client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -920,6 +938,10 @@ class TestCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
@@ -1685,10 +1707,12 @@ class TestAsyncCheckoutIntents:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncCheckoutIntents
     ) -> None:
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            await async_client.checkout_intents.with_streaming_response.create(
+            await async_client.checkout_intents.with_streaming_response.purchase(
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
@@ -1699,6 +1723,10 @@ class TestAsyncCheckoutIntents:
                     "phone": "1234567890",
                     "postal_code": "10001",
                     "province": "NY",
+                },
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
                 },
                 product_url="productUrl",
                 quantity=1,
@@ -1711,10 +1739,10 @@ class TestAsyncCheckoutIntents:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncCheckoutIntents
     ) -> None:
-        respx_mock.post("/api/v1/checkout-intents").mock(return_value=httpx.Response(500))
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.checkout_intents.with_streaming_response.create(
+            await async_client.checkout_intents.with_streaming_response.purchase(
                 buyer={
                     "address1": "123 Main St",
                     "city": "New York",
@@ -1725,6 +1753,10 @@ class TestAsyncCheckoutIntents:
                     "phone": "1234567890",
                     "postal_code": "10001",
                     "province": "NY",
+                },
+                payment_method={
+                    "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                    "type": "stripe_token",
                 },
                 product_url="productUrl",
                 quantity=1,
@@ -1755,9 +1787,9 @@ class TestAsyncCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = await client.checkout_intents.with_raw_response.create(
+        response = await client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -1768,6 +1800,10 @@ class TestAsyncCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
@@ -1793,9 +1829,9 @@ class TestAsyncCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = await client.checkout_intents.with_raw_response.create(
+        response = await client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -1806,6 +1842,10 @@ class TestAsyncCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
@@ -1831,9 +1871,9 @@ class TestAsyncCheckoutIntents:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/checkout-intents").mock(side_effect=retry_handler)
+        respx_mock.post("/api/v1/checkout-intents/purchase").mock(side_effect=retry_handler)
 
-        response = await client.checkout_intents.with_raw_response.create(
+        response = await client.checkout_intents.with_raw_response.purchase(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -1844,6 +1884,10 @@ class TestAsyncCheckoutIntents:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
+            },
+            payment_method={
+                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "type": "stripe_token",
             },
             product_url="productUrl",
             quantity=1,
