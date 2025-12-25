@@ -47,7 +47,7 @@ checkout_intent = client.checkout_intents.purchase(
         "province": "NY",
     },
     payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+        "stripe_token": "tok_visa",
         "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -182,7 +182,7 @@ async def main() -> None:
             "province": "NY",
         },
         payment_method={
-            "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+            "stripe_token": "tok_visa",
             "type": "stripe_token",
         },
         product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -235,7 +235,7 @@ async def main() -> None:
                 "province": "NY",
             },
             payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+                "stripe_token": "tok_visa",
                 "type": "stripe_token",
             },
             product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -386,7 +386,7 @@ try:
             "province": "NY",
         },
         payment_method={
-            "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+            "stripe_token": "tok_visa",
             "type": "stripe_token",
         },
         product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -467,7 +467,7 @@ client.with_options(max_retries=5).checkout_intents.purchase(
         "province": "NY",
     },
     payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+        "stripe_token": "tok_visa",
         "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -508,7 +508,7 @@ client.with_options(timeout=5.0).checkout_intents.purchase(
         "province": "NY",
     },
     payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+        "stripe_token": "tok_visa",
         "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -567,7 +567,7 @@ response = client.checkout_intents.with_raw_response.purchase(
         "province": "NY",
     },
     payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+        "stripe_token": "tok_visa",
         "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
@@ -603,7 +603,7 @@ with client.checkout_intents.with_streaming_response.purchase(
         "province": "NY",
     },
     payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
+        "stripe_token": "tok_visa",
         "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
