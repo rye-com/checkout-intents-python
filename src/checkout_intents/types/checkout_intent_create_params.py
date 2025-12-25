@@ -10,7 +10,7 @@ from .._utils import PropertyInfo
 from .buyer_param import BuyerParam
 from .variant_selection_param import VariantSelectionParam
 
-__all__ = ["CheckoutIntentCreateParams"]
+__all__ = ["CheckoutIntentCreateParams", "Constraints"]
 
 
 class CheckoutIntentCreateParams(TypedDict, total=False):
@@ -20,6 +20,14 @@ class CheckoutIntentCreateParams(TypedDict, total=False):
 
     quantity: Required[float]
 
+    constraints: Constraints
+
     promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
+
+
+class Constraints(TypedDict, total=False):
+    max_shipping_price: Annotated[int, PropertyInfo(alias="maxShippingPrice")]
+
+    max_total_price: Annotated[int, PropertyInfo(alias="maxTotalPrice")]
