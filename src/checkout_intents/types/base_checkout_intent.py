@@ -9,7 +9,13 @@ from .buyer import Buyer
 from .._models import BaseModel
 from .variant_selection import VariantSelection
 
-__all__ = ["BaseCheckoutIntent"]
+__all__ = ["BaseCheckoutIntent", "Constraints"]
+
+
+class Constraints(BaseModel):
+    max_shipping_price: Optional[int] = FieldInfo(alias="maxShippingPrice", default=None)
+
+    max_total_price: Optional[int] = FieldInfo(alias="maxTotalPrice", default=None)
 
 
 class BaseCheckoutIntent(BaseModel):
@@ -22,6 +28,8 @@ class BaseCheckoutIntent(BaseModel):
     product_url: str = FieldInfo(alias="productUrl")
 
     quantity: float
+
+    constraints: Optional[Constraints] = None
 
     promo_codes: Optional[List[str]] = FieldInfo(alias="promoCodes", default=None)
 
