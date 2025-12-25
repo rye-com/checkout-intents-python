@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 (2025-12-25)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/rye-com/checkout-intents-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** manual updates ([dc735cc](https://github.com/rye-com/checkout-intents-python/commit/dc735ccb8a0eaf4c46ffe8dd984fa4efb111e5d4))
+* **api:** swap featured request ([c42f14b](https://github.com/rye-com/checkout-intents-python/commit/c42f14b1bed4bf417bb2c289e8ba62962086271b))
+
 ## 0.8.0 (2025-12-25)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/rye-com/checkout-intents-python/compare/v0.7.0...v0.8.0)
