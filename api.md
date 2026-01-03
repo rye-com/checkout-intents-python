@@ -23,14 +23,16 @@ Methods:
 - <code title="post /api/v1/checkout-intents/{id}/confirm">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">confirm</a>(id, \*\*<a href="src/checkout_intents/types/checkout_intent_confirm_params.py">params</a>) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
 - <code title="post /api/v1/checkout-intents/purchase">client.checkout_intents.<a href="./src/checkout_intents/resources/checkout_intents.py">purchase</a>(\*\*<a href="src/checkout_intents/types/checkout_intent_purchase_params.py">params</a>) -> <a href="./src/checkout_intents/types/checkout_intent.py">CheckoutIntent</a></code>
 
-# Brands
+# Betas
+
+## CheckoutSessions
 
 Types:
 
 ```python
-from checkout_intents.types import BrandRetrieveResponse
+from checkout_intents.types.betas import CheckoutSessionCreateResponse
 ```
 
 Methods:
 
-- <code title="get /api/v1/brands/domain/{domain}">client.brands.<a href="./src/checkout_intents/resources/brands.py">retrieve</a>(domain) -> <a href="./src/checkout_intents/types/brand_retrieve_response.py">BrandRetrieveResponse</a></code>
+- <code title="post /api/v1/betas/checkout-sessions">client.betas.checkout_sessions.<a href="./src/checkout_intents/resources/betas/checkout_sessions.py">create</a>(\*\*<a href="src/checkout_intents/types/betas/checkout_session_create_params.py">params</a>) -> <a href="./src/checkout_intents/types/betas/checkout_session_create_response.py">CheckoutSessionCreateResponse</a></code>

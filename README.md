@@ -34,7 +34,7 @@ client = CheckoutIntents(
     environment="production",
 )
 
-checkout_intent = client.checkout_intents.purchase(
+checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -45,10 +45,6 @@ checkout_intent = client.checkout_intents.purchase(
         "phone": "1234567890",
         "postal_code": "10001",
         "province": "NY",
-    },
-    payment_method={
-        "stripe_token": "tok_visa",
-        "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
     quantity=1,
@@ -169,7 +165,7 @@ client = AsyncCheckoutIntents(
 
 
 async def main() -> None:
-    checkout_intent = await client.checkout_intents.purchase(
+    checkout_intent = await client.checkout_intents.create(
         buyer={
             "address1": "123 Main St",
             "city": "New York",
@@ -180,10 +176,6 @@ async def main() -> None:
             "phone": "1234567890",
             "postal_code": "10001",
             "province": "NY",
-        },
-        payment_method={
-            "stripe_token": "tok_visa",
-            "type": "stripe_token",
         },
         product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
         quantity=1,
@@ -222,7 +214,7 @@ async def main() -> None:
         ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        checkout_intent = await client.checkout_intents.purchase(
+        checkout_intent = await client.checkout_intents.create(
             buyer={
                 "address1": "123 Main St",
                 "city": "New York",
@@ -233,10 +225,6 @@ async def main() -> None:
                 "phone": "1234567890",
                 "postal_code": "10001",
                 "province": "NY",
-            },
-            payment_method={
-                "stripe_token": "tok_visa",
-                "type": "stripe_token",
             },
             product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
             quantity=1,
@@ -335,7 +323,7 @@ from checkout_intents import CheckoutIntents
 
 client = CheckoutIntents()
 
-checkout_intent = client.checkout_intents.purchase(
+checkout_intent = client.checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -346,10 +334,6 @@ checkout_intent = client.checkout_intents.purchase(
         "phone": "1234567890",
         "postal_code": "10001",
         "province": "NY",
-    },
-    payment_method={
-        "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-        "type": "stripe_token",
     },
     product_url="productUrl",
     quantity=1,
@@ -373,7 +357,7 @@ from checkout_intents import CheckoutIntents
 client = CheckoutIntents()
 
 try:
-    client.checkout_intents.purchase(
+    client.checkout_intents.create(
         buyer={
             "address1": "123 Main St",
             "city": "New York",
@@ -384,10 +368,6 @@ try:
             "phone": "1234567890",
             "postal_code": "10001",
             "province": "NY",
-        },
-        payment_method={
-            "stripe_token": "tok_visa",
-            "type": "stripe_token",
         },
         product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
         quantity=1,
@@ -454,7 +434,7 @@ client = CheckoutIntents(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).checkout_intents.purchase(
+client.with_options(max_retries=5).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -465,10 +445,6 @@ client.with_options(max_retries=5).checkout_intents.purchase(
         "phone": "1234567890",
         "postal_code": "10001",
         "province": "NY",
-    },
-    payment_method={
-        "stripe_token": "tok_visa",
-        "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
     quantity=1,
@@ -495,7 +471,7 @@ client = CheckoutIntents(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).checkout_intents.purchase(
+client.with_options(timeout=5.0).checkout_intents.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -506,10 +482,6 @@ client.with_options(timeout=5.0).checkout_intents.purchase(
         "phone": "1234567890",
         "postal_code": "10001",
         "province": "NY",
-    },
-    payment_method={
-        "stripe_token": "tok_visa",
-        "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
     quantity=1,
@@ -554,7 +526,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from checkout_intents import CheckoutIntents
 
 client = CheckoutIntents()
-response = client.checkout_intents.with_raw_response.purchase(
+response = client.checkout_intents.with_raw_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -566,16 +538,12 @@ response = client.checkout_intents.with_raw_response.purchase(
         "postal_code": "10001",
         "province": "NY",
     },
-    payment_method={
-        "stripe_token": "tok_visa",
-        "type": "stripe_token",
-    },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
     quantity=1,
 )
 print(response.headers.get('X-My-Header'))
 
-checkout_intent = response.parse()  # get the object that `checkout_intents.purchase()` would have returned
+checkout_intent = response.parse()  # get the object that `checkout_intents.create()` would have returned
 print(checkout_intent)
 ```
 
@@ -590,7 +558,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.checkout_intents.with_streaming_response.purchase(
+with client.checkout_intents.with_streaming_response.create(
     buyer={
         "address1": "123 Main St",
         "city": "New York",
@@ -601,10 +569,6 @@ with client.checkout_intents.with_streaming_response.purchase(
         "phone": "1234567890",
         "postal_code": "10001",
         "province": "NY",
-    },
-    payment_method={
-        "stripe_token": "tok_visa",
-        "type": "stripe_token",
     },
     product_url="https://rye-protocol.myshopify.com/products/rye-sticker",
     quantity=1,
