@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .brands import (
-    BrandsResource,
-    AsyncBrandsResource,
-    BrandsResourceWithRawResponse,
-    AsyncBrandsResourceWithRawResponse,
-    BrandsResourceWithStreamingResponse,
-    AsyncBrandsResourceWithStreamingResponse,
+from .betas import (
+    BetasResource,
+    AsyncBetasResource,
+    BetasResourceWithRawResponse,
+    AsyncBetasResourceWithRawResponse,
+    BetasResourceWithStreamingResponse,
+    AsyncBetasResourceWithStreamingResponse,
 )
 from .checkout_intents import (
     CheckoutIntentsResource,
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncCheckoutIntentsResourceWithRawResponse",
     "CheckoutIntentsResourceWithStreamingResponse",
     "AsyncCheckoutIntentsResourceWithStreamingResponse",
-    "BrandsResource",
-    "AsyncBrandsResource",
-    "BrandsResourceWithRawResponse",
-    "AsyncBrandsResourceWithRawResponse",
-    "BrandsResourceWithStreamingResponse",
-    "AsyncBrandsResourceWithStreamingResponse",
+    "BetasResource",
+    "AsyncBetasResource",
+    "BetasResourceWithRawResponse",
+    "AsyncBetasResourceWithRawResponse",
+    "BetasResourceWithStreamingResponse",
+    "AsyncBetasResourceWithStreamingResponse",
 ]

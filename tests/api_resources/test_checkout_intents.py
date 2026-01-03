@@ -62,7 +62,7 @@ class TestCheckoutIntents:
                 "max_shipping_price": 500,
                 "max_total_price": 100000,
             },
-            promo_codes=["string"],
+            promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -394,7 +394,7 @@ class TestCheckoutIntents:
                 "max_shipping_price": 500,
                 "max_total_price": 100000,
             },
-            promo_codes=["string"],
+            promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -510,7 +510,7 @@ class TestAsyncCheckoutIntents:
                 "max_shipping_price": 500,
                 "max_total_price": 100000,
             },
-            promo_codes=["string"],
+            promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -842,7 +842,7 @@ class TestAsyncCheckoutIntents:
                 "max_shipping_price": 500,
                 "max_total_price": 100000,
             },
-            promo_codes=["string"],
+            promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
