@@ -11,6 +11,7 @@ from .checkout_intent import CheckoutIntent as CheckoutIntent
 from .variant_selection import VariantSelection as VariantSelection
 from .base_checkout_intent import BaseCheckoutIntent as BaseCheckoutIntent
 from .payment_method_param import PaymentMethodParam as PaymentMethodParam
+from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveResponse
 from .variant_selection_param import VariantSelectionParam as VariantSelectionParam
 from .checkout_intent_list_params import CheckoutIntentListParams as CheckoutIntentListParams
 from .checkout_intent_create_params import CheckoutIntentCreateParams as CheckoutIntentCreateParams
