@@ -31,8 +31,9 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import brands, checkout_intents
+    from .resources import betas, brands, checkout_intents
     from .resources.brands import BrandsResource, AsyncBrandsResource
+    from .resources.betas.betas import BetasResource, AsyncBetasResource
     from .resources.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
@@ -137,6 +138,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.checkout_intents import CheckoutIntentsResource
 
         return CheckoutIntentsResource(self)
+
+    @cached_property
+    def betas(self) -> BetasResource:
+        from .resources.betas import BetasResource
+
+        return BetasResource(self)
 
     @cached_property
     def brands(self) -> BrandsResource:
@@ -345,6 +352,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncCheckoutIntentsResource(self)
 
     @cached_property
+    def betas(self) -> AsyncBetasResource:
+        from .resources.betas import AsyncBetasResource
+
+        return AsyncBetasResource(self)
+
+    @cached_property
     def brands(self) -> AsyncBrandsResource:
         from .resources.brands import AsyncBrandsResource
 
@@ -478,6 +491,12 @@ class CheckoutIntentsWithRawResponse:
         return CheckoutIntentsResourceWithRawResponse(self._client.checkout_intents)
 
     @cached_property
+    def betas(self) -> betas.BetasResourceWithRawResponse:
+        from .resources.betas import BetasResourceWithRawResponse
+
+        return BetasResourceWithRawResponse(self._client.betas)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithRawResponse:
         from .resources.brands import BrandsResourceWithRawResponse
 
@@ -495,6 +514,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.checkout_intents import AsyncCheckoutIntentsResourceWithRawResponse
 
         return AsyncCheckoutIntentsResourceWithRawResponse(self._client.checkout_intents)
+
+    @cached_property
+    def betas(self) -> betas.AsyncBetasResourceWithRawResponse:
+        from .resources.betas import AsyncBetasResourceWithRawResponse
+
+        return AsyncBetasResourceWithRawResponse(self._client.betas)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
@@ -516,6 +541,12 @@ class CheckoutIntentsWithStreamedResponse:
         return CheckoutIntentsResourceWithStreamingResponse(self._client.checkout_intents)
 
     @cached_property
+    def betas(self) -> betas.BetasResourceWithStreamingResponse:
+        from .resources.betas import BetasResourceWithStreamingResponse
+
+        return BetasResourceWithStreamingResponse(self._client.betas)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithStreamingResponse:
         from .resources.brands import BrandsResourceWithStreamingResponse
 
@@ -533,6 +564,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.checkout_intents import AsyncCheckoutIntentsResourceWithStreamingResponse
 
         return AsyncCheckoutIntentsResourceWithStreamingResponse(self._client.checkout_intents)
+
+    @cached_property
+    def betas(self) -> betas.AsyncBetasResourceWithStreamingResponse:
+        from .resources.betas import AsyncBetasResourceWithStreamingResponse
+
+        return AsyncBetasResourceWithStreamingResponse(self._client.betas)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:
