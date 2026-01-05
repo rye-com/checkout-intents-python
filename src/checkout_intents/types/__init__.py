@@ -8,6 +8,7 @@ from .offer import Offer as Offer
 from .buyer_param import BuyerParam as BuyerParam
 from .payment_method import PaymentMethod as PaymentMethod
 from .checkout_intent import CheckoutIntent as CheckoutIntent
+from .checkout_session import CheckoutSession as CheckoutSession
 from .variant_selection import VariantSelection as VariantSelection
 from .base_checkout_intent import BaseCheckoutIntent as BaseCheckoutIntent
 from .payment_method_param import PaymentMethodParam as PaymentMethodParam
