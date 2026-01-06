@@ -9,8 +9,7 @@ class CheckoutSession(BaseModel):
     """
     A checkout session represents a hosted checkout form that shoppers can use to complete their purchases.
 
-    Checkout sessions provide a pre-built UI for collecting payment and shipping information,
-    allowing you to quickly integrate checkout functionality without building your own forms.
+    Checkout sessions provide a pre-built UI for collecting payment and shipping information, allowing you to quickly integrate checkout functionality without building your own forms.
     """
 
     url: str
