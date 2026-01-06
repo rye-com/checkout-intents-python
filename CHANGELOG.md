@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.0 (2026-01-06)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/rye-com/checkout-intents-python/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* Fix Slack follow-up messages not posting to thread when initial message fails ([61f39ce](https://github.com/rye-com/checkout-intents-python/commit/61f39ce09ad720d99fb866eca1d30cd6fbe353fc))
+* Improve JSDoc for checkout sessions ([dffa705](https://github.com/rye-com/checkout-intents-python/commit/dffa70546832f5f4c74ba0e1c3280a98739bc9bf))
+* RYE-6466: Enrich tracked analytics context for the checkout intents api ([26ed61e](https://github.com/rye-com/checkout-intents-python/commit/26ed61e274b71f66d5c952561fe9565213aeed1b))
+* Tidy API docs ([1ce6f5f](https://github.com/rye-com/checkout-intents-python/commit/1ce6f5fe5e7ca420b911b11d8bb5106e09e0ac40))
+
 ## 0.9.0 (2025-12-25)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/rye-com/checkout-intents-python/compare/v0.8.0...v0.9.0)
