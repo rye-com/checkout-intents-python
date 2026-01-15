@@ -15,7 +15,7 @@ __all__ = ["CheckoutSessionCreateParams", "Buyer", "Constraints"]
 class CheckoutSessionCreateParams(TypedDict, total=False):
     product_url: Required[Annotated[str, PropertyInfo(alias="productUrl")]]
 
-    quantity: Required[float]
+    quantity: Required[int]
 
     buyer: Buyer
     """
