@@ -18,7 +18,7 @@ class CheckoutIntentCreateParams(TypedDict, total=False):
 
     product_url: Required[Annotated[str, PropertyInfo(alias="productUrl")]]
 
-    quantity: Required[float]
+    quantity: Required[int]
 
     constraints: Constraints
 

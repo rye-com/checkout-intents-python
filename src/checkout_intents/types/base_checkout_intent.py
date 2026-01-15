@@ -27,7 +27,7 @@ class BaseCheckoutIntent(BaseModel):
 
     product_url: str = FieldInfo(alias="productUrl")
 
-    quantity: float
+    quantity: int
 
     constraints: Optional[Constraints] = None
 
