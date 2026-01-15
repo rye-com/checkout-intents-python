@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.11.0 (2026-01-15)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/rye-com/checkout-intents-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **client:** add support for binary request streaming ([438d3db](https://github.com/rye-com/checkout-intents-python/commit/438d3db019a0e94f9f7d2ea204887c15ea34ec8d))
+
+
+### Bug Fixes
+
+* **api:** correctly type quantity as int ([c0cfd41](https://github.com/rye-com/checkout-intents-python/commit/c0cfd41c5d71765cf3d34eddd1c640282caa4c33))
+* **api:** correctly type quantity as integer ([642e3f2](https://github.com/rye-com/checkout-intents-python/commit/642e3f206f4ba6120ff4f9892c8bc077f10fedfd))
+
+
+### Chores
+
+* **internal:** bump uv.lock version ([9e551da](https://github.com/rye-com/checkout-intents-python/commit/9e551da1755c820314699cc0d2ccaf8578f5f7f8))
+
 ## 0.10.0 (2026-01-06)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/rye-com/checkout-intents-python/compare/v0.9.0...v0.10.0)
