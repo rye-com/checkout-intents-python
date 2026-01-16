@@ -80,6 +80,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Create a checkout intent with the given request body.
@@ -92,6 +93,8 @@ class CheckoutIntentsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return cast(
             CheckoutIntent,
@@ -109,7 +112,11 @@ class CheckoutIntentsResource(SyncAPIResource):
                     checkout_intent_create_params.CheckoutIntentCreateParams,
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -217,6 +224,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Add payment details to a checkout intent
@@ -229,6 +237,8 @@ class CheckoutIntentsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -241,7 +251,11 @@ class CheckoutIntentsResource(SyncAPIResource):
                     checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -258,6 +272,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Confirm a checkout intent with provided payment information
@@ -273,6 +288,8 @@ class CheckoutIntentsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -284,7 +301,11 @@ class CheckoutIntentsResource(SyncAPIResource):
                     {"payment_method": payment_method}, checkout_intent_confirm_params.CheckoutIntentConfirmParams
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -306,6 +327,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Create a checkout intent and immediately trigger the purchase workflow.
@@ -322,6 +344,8 @@ class CheckoutIntentsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return cast(
             CheckoutIntent,
@@ -340,7 +364,11 @@ class CheckoutIntentsResource(SyncAPIResource):
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -741,6 +769,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Create a checkout intent with the given request body.
@@ -753,6 +782,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return cast(
             CheckoutIntent,
@@ -770,7 +801,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                     checkout_intent_create_params.CheckoutIntentCreateParams,
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -878,6 +913,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Add payment details to a checkout intent
@@ -890,6 +926,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -902,7 +940,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                     checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -919,6 +961,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Confirm a checkout intent with provided payment information
@@ -934,6 +977,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
@@ -945,7 +990,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                     {"payment_method": payment_method}, checkout_intent_confirm_params.CheckoutIntentConfirmParams
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
@@ -967,6 +1016,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
     ) -> CheckoutIntent:
         """
         Create a checkout intent and immediately trigger the purchase workflow.
@@ -983,6 +1033,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return cast(
             CheckoutIntent,
@@ -1001,7 +1053,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams
                 ),
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
                 ),
                 cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
             ),
