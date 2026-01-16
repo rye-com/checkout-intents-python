@@ -133,6 +133,8 @@ class CheckoutIntents(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self._idempotency_header = "Idempotency-Key"
+
     @cached_property
     def checkout_intents(self) -> CheckoutIntentsResource:
         from .resources.checkout_intents import CheckoutIntentsResource
@@ -344,6 +346,8 @@ class AsyncCheckoutIntents(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+        self._idempotency_header = "Idempotency-Key"
 
     @cached_property
     def checkout_intents(self) -> AsyncCheckoutIntentsResource:
