@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
@@ -34,3 +34,13 @@ class Constraints(TypedDict, total=False):
     max_shipping_price: Annotated[int, PropertyInfo(alias="maxShippingPrice")]
 
     max_total_price: Annotated[int, PropertyInfo(alias="maxTotalPrice")]
+
+    offer_retrieval_effort: Annotated[Literal["max", "low"], PropertyInfo(alias="offerRetrievalEffort")]
+    """Controls how much effort the system should spend retrieving an offer.
+
+    - 'max': Full effort including AI agent fallback (slower, higher success rate)
+    - 'low': Fast API-only retrieval, fails if API unavailable (faster, lower
+      success rate)
+
+    Default: 'max'
+    """
