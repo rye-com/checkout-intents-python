@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -16,6 +17,16 @@ class Constraints(BaseModel):
     max_shipping_price: Optional[int] = FieldInfo(alias="maxShippingPrice", default=None)
 
     max_total_price: Optional[int] = FieldInfo(alias="maxTotalPrice", default=None)
+
+    offer_retrieval_effort: Optional[Literal["max", "low"]] = FieldInfo(alias="offerRetrievalEffort", default=None)
+    """Controls how much effort the system should spend retrieving an offer.
+
+    - 'max': Full effort including AI agent fallback (slower, higher success rate)
+    - 'low': Fast API-only retrieval, fails if API unavailable (faster, lower
+      success rate)
+
+    Default: 'max'
+    """
 
 
 class BaseCheckoutIntent(BaseModel):
