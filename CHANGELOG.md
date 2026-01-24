@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.12.0 (2026-01-24)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/rye-com/checkout-intents-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* add support for idempotency for v2 api ([b7a09af](https://github.com/rye-com/checkout-intents-python/commit/b7a09af76927e67befdbe59566bddf7ab43240f0))
+* **api:** introduce offerRetrievalEffort constraint ([5bc7a2c](https://github.com/rye-com/checkout-intents-python/commit/5bc7a2cc58c555dd4dcd5c0e3abf1f157cd61e8f))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([526d94a](https://github.com/rye-com/checkout-intents-python/commit/526d94ae385eb0e5f54124ca429651d55ce0ec53))
+* **internal:** update `actions/checkout` version ([9eadb2e](https://github.com/rye-com/checkout-intents-python/commit/9eadb2e9a5a8abaad98be7567dd3dc195458cd53))
+
 ## 0.11.0 (2026-01-15)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/rye-com/checkout-intents-python/compare/v0.10.0...v0.11.0)
