@@ -8,6 +8,6 @@ __all__ = ["Money"]
 
 
 class Money(BaseModel):
-    amount_subunits: float = FieldInfo(alias="amountSubunits")
+    amount_subunits: int = FieldInfo(alias="amountSubunits")
 
     currency_code: str = FieldInfo(alias="currencyCode")
