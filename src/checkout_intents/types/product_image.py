@@ -4,10 +4,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Money"]
+__all__ = ["ProductImage"]
 
 
-class Money(BaseModel):
-    amount_subunits: int = FieldInfo(alias="amountSubunits")
+class ProductImage(BaseModel):
+    is_featured: bool = FieldInfo(alias="isFeatured")
 
-    currency_code: str = FieldInfo(alias="currencyCode")
+    url: str
