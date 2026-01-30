@@ -48,3 +48,15 @@ from checkout_intents.types import BrandRetrieveResponse
 Methods:
 
 - <code title="get /api/v1/brands/domain/{domain}">client.brands.<a href="./src/checkout_intents/resources/brands.py">retrieve</a>(domain) -> <a href="./src/checkout_intents/types/brand_retrieve_response.py">BrandRetrieveResponse</a></code>
+
+# Products
+
+Types:
+
+```python
+from checkout_intents.types import Product, ProductAvailability, ProductImage
+```
+
+Methods:
+
+- <code title="get /api/v1/products/lookup">client.products.<a href="./src/checkout_intents/resources/products.py">lookup</a>(\*\*<a href="src/checkout_intents/types/product_lookup_params.py">params</a>) -> <a href="./src/checkout_intents/types/product.py">Product</a></code>
