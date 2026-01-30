@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.13.0 (2026-01-30)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/rye-com/checkout-intents-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** introduce lookup product data endpoint ([a9083d2](https://github.com/rye-com/checkout-intents-python/commit/a9083d26b9f8648033a7f433e69936f5c6f1a3e9))
+* **client:** add custom JSON encoder for extended type support ([06b80ca](https://github.com/rye-com/checkout-intents-python/commit/06b80ca98bd630f63245e62a96726a13b19084ed))
+* Implement shipping profile -&gt; shipping option calculation ([b4aca4a](https://github.com/rye-com/checkout-intents-python/commit/b4aca4a8504dc530e00b2cd9ebe0f2ca77647bbe))
+
+
+### Chores
+
+* **internal:** rename `Product` type ([d9f34df](https://github.com/rye-com/checkout-intents-python/commit/d9f34dfc35d70140c380269a20e5214fca3bbb83))
+
 ## 0.12.0 (2026-01-24)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/rye-com/checkout-intents-python/compare/v0.11.0...v0.12.0)
