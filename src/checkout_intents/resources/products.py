@@ -53,7 +53,7 @@ class ProductsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Product:
         """
-        Retrieve a product's information by URL.
+        Lookup a product's information by URL.
 
         Args:
           extra_headers: Send extra headers
@@ -109,7 +109,7 @@ class AsyncProductsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Product:
         """
-        Retrieve a product's information by URL.
+        Lookup a product's information by URL.
 
         Args:
           extra_headers: Send extra headers
