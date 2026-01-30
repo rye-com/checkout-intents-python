@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.1 (2026-01-30)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/rye-com/checkout-intents-python/compare/v0.13.0...v0.13.1)
+
+### Chores
+
+* **docs:** rename "retrieve product" to "lookup product" ([6f7c761](https://github.com/rye-com/checkout-intents-python/commit/6f7c761b96d79e5971cade53f955dcd90e3c3378))
+
 ## 0.13.0 (2026-01-30)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/rye-com/checkout-intents-python/compare/v0.12.0...v0.13.0)
