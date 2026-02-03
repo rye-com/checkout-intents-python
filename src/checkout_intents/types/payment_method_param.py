@@ -7,7 +7,13 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["PaymentMethodParam", "StripeTokenPaymentMethod", "BasisTheoryPaymentMethod", "NekudaPaymentMethod"]
+__all__ = [
+    "PaymentMethodParam",
+    "StripeTokenPaymentMethod",
+    "BasisTheoryPaymentMethod",
+    "NekudaPaymentMethod",
+    "DrawdownPaymentMethod",
+]
 
 
 class StripeTokenPaymentMethod(TypedDict, total=False):
@@ -31,4 +37,10 @@ class NekudaPaymentMethod(TypedDict, total=False):
     """Construct a type with a set of properties K of type T"""
 
 
-PaymentMethodParam: TypeAlias = Union[StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod]
+class DrawdownPaymentMethod(TypedDict, total=False):
+    type: Required[Literal["drawdown"]]
+
+
+PaymentMethodParam: TypeAlias = Union[
+    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, DrawdownPaymentMethod
+]

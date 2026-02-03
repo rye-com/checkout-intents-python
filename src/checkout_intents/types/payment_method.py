@@ -7,7 +7,13 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PaymentMethod", "StripeTokenPaymentMethod", "BasisTheoryPaymentMethod", "NekudaPaymentMethod"]
+__all__ = [
+    "PaymentMethod",
+    "StripeTokenPaymentMethod",
+    "BasisTheoryPaymentMethod",
+    "NekudaPaymentMethod",
+    "DrawdownPaymentMethod",
+]
 
 
 class StripeTokenPaymentMethod(BaseModel):
@@ -31,4 +37,10 @@ class NekudaPaymentMethod(BaseModel):
     """Construct a type with a set of properties K of type T"""
 
 
-PaymentMethod: TypeAlias = Union[StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod]
+class DrawdownPaymentMethod(BaseModel):
+    type: Literal["drawdown"]
+
+
+PaymentMethod: TypeAlias = Union[
+    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, DrawdownPaymentMethod
+]
