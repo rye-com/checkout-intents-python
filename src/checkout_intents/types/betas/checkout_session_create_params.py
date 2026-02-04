@@ -25,8 +25,6 @@ class CheckoutSessionCreateParams(TypedDict, total=False):
 
     constraints: Constraints
 
-    discover_promo_codes: Annotated[bool, PropertyInfo(alias="discoverPromoCodes")]
-
     promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
