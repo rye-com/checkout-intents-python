@@ -42,8 +42,6 @@ class BaseCheckoutIntent(BaseModel):
 
     constraints: Optional[Constraints] = None
 
-    discover_promo_codes: Optional[bool] = FieldInfo(alias="discoverPromoCodes", default=None)
-
     promo_codes: Optional[List[str]] = FieldInfo(alias="promoCodes", default=None)
 
     variant_selections: Optional[List[VariantSelection]] = FieldInfo(alias="variantSelections", default=None)

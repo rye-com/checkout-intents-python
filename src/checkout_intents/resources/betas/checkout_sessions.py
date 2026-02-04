@@ -51,7 +51,6 @@ class CheckoutSessionsResource(SyncAPIResource):
         quantity: int,
         buyer: checkout_session_create_params.Buyer | Omit = omit,
         constraints: checkout_session_create_params.Constraints | Omit = omit,
-        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -90,7 +89,6 @@ class CheckoutSessionsResource(SyncAPIResource):
                     "quantity": quantity,
                     "buyer": buyer,
                     "constraints": constraints,
-                    "discover_promo_codes": discover_promo_codes,
                     "promo_codes": promo_codes,
                     "variant_selections": variant_selections,
                 },
@@ -134,7 +132,6 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
         quantity: int,
         buyer: checkout_session_create_params.Buyer | Omit = omit,
         constraints: checkout_session_create_params.Constraints | Omit = omit,
-        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -173,7 +170,6 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
                     "quantity": quantity,
                     "buyer": buyer,
                     "constraints": constraints,
-                    "discover_promo_codes": discover_promo_codes,
                     "promo_codes": promo_codes,
                     "variant_selections": variant_selections,
                 },
