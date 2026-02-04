@@ -73,6 +73,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -107,6 +108,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -320,6 +322,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -359,6 +362,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -407,6 +411,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -441,6 +446,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -654,6 +660,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -693,6 +700,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
