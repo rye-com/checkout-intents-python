@@ -26,7 +26,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from ..pagination import SyncCursorPagination, AsyncCursorPagination
-from ..._exceptions import PollTimeoutError
+from .._exceptions import PollTimeoutError
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.buyer_param import BuyerParam
 from ..types.checkout_intent import (
