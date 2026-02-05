@@ -63,6 +63,7 @@ class TestCheckoutIntents:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
@@ -396,6 +397,7 @@ class TestCheckoutIntents:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
@@ -513,6 +515,7 @@ class TestAsyncCheckoutIntents:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {
@@ -846,6 +849,7 @@ class TestAsyncCheckoutIntents:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["sqF12lZ1VlBb"],
             variant_selections=[
                 {

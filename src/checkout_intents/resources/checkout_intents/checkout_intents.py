@@ -7,34 +7,46 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import (
+from ...types import (
     checkout_intent_list_params,
     checkout_intent_create_params,
     checkout_intent_confirm_params,
     checkout_intent_purchase_params,
     checkout_intent_add_payment_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from .shipments import (
+    ShipmentsResource,
+    AsyncShipmentsResource,
+    ShipmentsResourceWithRawResponse,
+    AsyncShipmentsResourceWithRawResponse,
+    ShipmentsResourceWithStreamingResponse,
+    AsyncShipmentsResourceWithStreamingResponse,
+)
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCursorPagination, AsyncCursorPagination
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.buyer_param import BuyerParam
-from ..types.checkout_intent import CheckoutIntent
-from ..types.payment_method_param import PaymentMethodParam
-from ..types.variant_selection_param import VariantSelectionParam
+from ...pagination import SyncCursorPagination, AsyncCursorPagination
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.buyer_param import BuyerParam
+from ...types.checkout_intent import CheckoutIntent
+from ...types.payment_method_param import PaymentMethodParam
+from ...types.variant_selection_param import VariantSelectionParam
 
 __all__ = ["CheckoutIntentsResource", "AsyncCheckoutIntentsResource"]
 
 
 class CheckoutIntentsResource(SyncAPIResource):
+    @cached_property
+    def shipments(self) -> ShipmentsResource:
+        return ShipmentsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsResourceWithRawResponse:
         """
@@ -61,6 +73,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -95,6 +108,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -308,6 +322,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -347,6 +362,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -365,6 +381,10 @@ class CheckoutIntentsResource(SyncAPIResource):
 
 
 class AsyncCheckoutIntentsResource(AsyncAPIResource):
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResource:
+        return AsyncShipmentsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsResourceWithRawResponse:
         """
@@ -391,6 +411,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -425,6 +446,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -638,6 +660,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -677,6 +700,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -717,6 +741,10 @@ class CheckoutIntentsResourceWithRawResponse:
             checkout_intents.purchase,
         )
 
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithRawResponse:
+        return ShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
+
 
 class AsyncCheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: AsyncCheckoutIntentsResource) -> None:
@@ -740,6 +768,10 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.purchase = async_to_raw_response_wrapper(
             checkout_intents.purchase,
         )
+
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
+        return AsyncShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
 
 
 class CheckoutIntentsResourceWithStreamingResponse:
@@ -765,6 +797,10 @@ class CheckoutIntentsResourceWithStreamingResponse:
             checkout_intents.purchase,
         )
 
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithStreamingResponse:
+        return ShipmentsResourceWithStreamingResponse(self._checkout_intents.shipments)
+
 
 class AsyncCheckoutIntentsResourceWithStreamingResponse:
     def __init__(self, checkout_intents: AsyncCheckoutIntentsResource) -> None:
@@ -788,3 +824,7 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         self.purchase = async_to_streamed_response_wrapper(
             checkout_intents.purchase,
         )
+
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResourceWithStreamingResponse:
+        return AsyncShipmentsResourceWithStreamingResponse(self._checkout_intents.shipments)

@@ -73,6 +73,7 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "bot_protection_blocked",
         "constraint_total_price_exceeded",
         "constraint_shipping_cost_exceeded",
+        "promo_code_discovery_not_enabled",
         "unknown",
     ]
     """Type derived from runtime array - always in sync"""
