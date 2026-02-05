@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.14.0 (2026-02-05)
+
+Full Changelog: [v0.13.1...v0.14.0](https://github.com/rye-com/checkout-intents-python/compare/v0.13.1...v0.14.0)
+
+### Features
+
+* Add stainless updates ([381560b](https://github.com/rye-com/checkout-intents-python/commit/381560bb9453bcece48d9bb95342c513a4b9ae43))
+* **api:** add shipments tracking ([0d1e95a](https://github.com/rye-com/checkout-intents-python/commit/0d1e95a13e6c469f9608a3dff4b8a7d46b7862b2))
+* Billing: Envelope payment processing fields ([f8b33da](https://github.com/rye-com/checkout-intents-python/commit/f8b33daa590cc016a9597e9a2d20ad21816d5293))
+* Billing: Integrate drawdown payments in order flow ([252e1fa](https://github.com/rye-com/checkout-intents-python/commit/252e1fa3d916aaa45ba3715bd989dfe8aeaa89a4))
+* integrate promo codes discovery to checkout intent flow ([6ad9468](https://github.com/rye-com/checkout-intents-python/commit/6ad9468f90ec2c5de698eebaeec3a7d4656ac1f2))
+* Phase 3: Strategy Interface + Normalizer ([64987c1](https://github.com/rye-com/checkout-intents-python/commit/64987c13d11807eeb23f6e79baaa0179787d1f06))
+
+
+### Bug Fixes
+
+* **internal:** `PollTimeoutError` import ([b11f9b2](https://github.com/rye-com/checkout-intents-python/commit/b11f9b25a9c9fc57f13ca6d56d66a5bef141ee14))
+
 ## 0.13.1 (2026-01-30)
 
 Full Changelog: [v0.13.0...v0.13.1](https://github.com/rye-com/checkout-intents-python/compare/v0.13.0...v0.13.1)
