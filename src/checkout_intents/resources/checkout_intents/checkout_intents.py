@@ -8,35 +8,43 @@ from typing_extensions import Literal, TypeGuard
 
 import httpx
 
-from ..types import (
+from ...types import (
     checkout_intent_list_params,
     checkout_intent_create_params,
     checkout_intent_confirm_params,
     checkout_intent_purchase_params,
     checkout_intent_add_payment_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from .shipments import (
+    ShipmentsResource,
+    AsyncShipmentsResource,
+    ShipmentsResourceWithRawResponse,
+    AsyncShipmentsResourceWithRawResponse,
+    ShipmentsResourceWithStreamingResponse,
+    AsyncShipmentsResourceWithStreamingResponse,
+)
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCursorPagination, AsyncCursorPagination
-from .._exceptions import PollTimeoutError
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.buyer_param import BuyerParam
-from ..types.checkout_intent import (
+from ...pagination import SyncCursorPagination, AsyncCursorPagination
+from ..._exceptions import PollTimeoutError
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.buyer_param import BuyerParam
+from ...types.checkout_intent import (
     CheckoutIntent,
     FailedCheckoutIntent,
     CompletedCheckoutIntent,
     AwaitingConfirmationCheckoutIntent,
 )
-from ..types.payment_method_param import PaymentMethodParam
-from ..types.variant_selection_param import VariantSelectionParam
+from ...types.payment_method_param import PaymentMethodParam
+from ...types.variant_selection_param import VariantSelectionParam
 
 __all__ = ["CheckoutIntentsResource", "AsyncCheckoutIntentsResource"]
 
@@ -46,6 +54,10 @@ logger: logging.Logger = logging.getLogger(__name__)
 
 
 class CheckoutIntentsResource(SyncAPIResource):
+    @cached_property
+    def shipments(self) -> ShipmentsResource:
+        return ShipmentsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsResourceWithRawResponse:
         """
@@ -735,6 +747,10 @@ class CheckoutIntentsResource(SyncAPIResource):
 
 
 class AsyncCheckoutIntentsResource(AsyncAPIResource):
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResource:
+        return AsyncShipmentsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsResourceWithRawResponse:
         """
@@ -1460,6 +1476,10 @@ class CheckoutIntentsResourceWithRawResponse:
         )
 
 
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithRawResponse:
+        return ShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
+
 
 class AsyncCheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: AsyncCheckoutIntentsResource) -> None:
@@ -1496,6 +1516,10 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
             checkout_intents.confirm_and_poll,
         )
 
+
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
+        return AsyncShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
 
 
 class CheckoutIntentsResourceWithStreamingResponse:
@@ -1534,6 +1558,10 @@ class CheckoutIntentsResourceWithStreamingResponse:
         )
 
 
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithStreamingResponse:
+        return ShipmentsResourceWithStreamingResponse(self._checkout_intents.shipments)
+
 
 class AsyncCheckoutIntentsResourceWithStreamingResponse:
     def __init__(self, checkout_intents: AsyncCheckoutIntentsResource) -> None:
@@ -1569,3 +1597,7 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         self.confirm_and_poll = async_to_streamed_response_wrapper(
             checkout_intents.confirm_and_poll,
         )
+
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResourceWithStreamingResponse:
+        return AsyncShipmentsResourceWithStreamingResponse(self._checkout_intents.shipments)

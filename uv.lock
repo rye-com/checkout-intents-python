@@ -236,7 +236,7 @@ wheels = [
 
 [[package]]
 name = "checkout-intents"
-version = "0.10.0"
+version = "0.13.1"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
