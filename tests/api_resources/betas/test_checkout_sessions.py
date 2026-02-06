@@ -49,6 +49,7 @@ class TestCheckoutSessions:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["string"],
             variant_selections=[
                 {
@@ -125,6 +126,7 @@ class TestAsyncCheckoutSessions:
                 "max_total_price": 100000,
                 "offer_retrieval_effort": "max",
             },
+            discover_promo_codes=True,
             promo_codes=["string"],
             variant_selections=[
                 {
