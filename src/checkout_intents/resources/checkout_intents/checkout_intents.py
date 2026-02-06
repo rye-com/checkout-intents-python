@@ -84,6 +84,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -118,6 +119,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -327,12 +329,13 @@ class CheckoutIntentsResource(SyncAPIResource):
         self,
         *,
         buyer: BuyerParam,
+        payment_method: PaymentMethodParam,
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
-        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,7 +346,7 @@ class CheckoutIntentsResource(SyncAPIResource):
     ) -> CheckoutIntent:
         """
         Create a checkout intent and immediately trigger the purchase workflow.
-   
+
         This is a "fire-and-forget" endpoint that combines create + confirm in one step.
         The workflow handles offer retrieval, payment authorization, and order placement
         asynchronously. Poll the GET endpoint to check status.
@@ -362,7 +365,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         return cast(
             CheckoutIntent,
             self._post(
-                f"/api/v1/checkout-intents/purchase",
+                "/api/v1/checkout-intents/purchase",
                 body=maybe_transform(
                     {
                         "buyer": buyer,
@@ -370,10 +373,11 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
-                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers,
@@ -614,7 +618,7 @@ class CheckoutIntentsResource(SyncAPIResource):
     ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
         """
         A helper to create a checkout intent and poll until it's ready for confirmation.
-        This follows the Rye documented flow: create → poll until awaiting_confirmation.
+        This follows the Rye documented flow: create -> poll until awaiting_confirmation.
 
         After this method completes, you should review the offer (pricing, shipping, taxes)
         with the user before calling confirm().
@@ -777,6 +781,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         product_url: str,
         quantity: int,
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -811,6 +816,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
@@ -1020,12 +1026,13 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         self,
         *,
         buyer: BuyerParam,
+        payment_method: PaymentMethodParam,
         product_url: str,
         quantity: int,
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
+        discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
-        payment_method: PaymentMethodParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1036,7 +1043,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
     ) -> CheckoutIntent:
         """
         Create a checkout intent and immediately trigger the purchase workflow.
-   
+
         This is a "fire-and-forget" endpoint that combines create + confirm in one step.
         The workflow handles offer retrieval, payment authorization, and order placement
         asynchronously. Poll the GET endpoint to check status.
@@ -1055,7 +1062,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         return cast(
             CheckoutIntent,
             await self._post(
-                f"/api/v1/checkout-intents/purchase",
+                "/api/v1/checkout-intents/purchase",
                 body=await async_maybe_transform(
                     {
                         "buyer": buyer,
@@ -1063,10 +1070,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "product_url": product_url,
                         "quantity": quantity,
                         "constraints": constraints,
+                        "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
                         "variant_selections": variant_selections,
                     },
-                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams
+                    checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers,
@@ -1307,7 +1315,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
     ) -> Union[AwaitingConfirmationCheckoutIntent, FailedCheckoutIntent]:
         """
         A helper to create a checkout intent and poll until it's ready for confirmation.
-        This follows the Rye documented flow: create → poll until awaiting_confirmation.
+        This follows the Rye documented flow: create -> poll until awaiting_confirmation.
 
         After this method completes, you should review the offer (pricing, shipping, taxes)
         with the user before calling confirm().
@@ -1439,7 +1447,6 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         )
 
 
-
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
         self._checkout_intents = checkout_intents
@@ -1474,7 +1481,6 @@ class CheckoutIntentsResourceWithRawResponse:
         self.confirm_and_poll = to_raw_response_wrapper(
             checkout_intents.confirm_and_poll,
         )
-
 
     @cached_property
     def shipments(self) -> ShipmentsResourceWithRawResponse:
@@ -1516,7 +1522,6 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
             checkout_intents.confirm_and_poll,
         )
 
-
     @cached_property
     def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
         return AsyncShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
@@ -1556,7 +1561,6 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.confirm_and_poll = to_streamed_response_wrapper(
             checkout_intents.confirm_and_poll,
         )
-
 
     @cached_property
     def shipments(self) -> ShipmentsResourceWithStreamingResponse:
