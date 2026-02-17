@@ -2,6 +2,8 @@
 
 from typing import List, Optional
 
+from pydantic import Field as FieldInfo
+
 from .money import Money
 from .._models import BaseModel
 from .product_image import ProductImage
@@ -28,6 +30,8 @@ class Product(BaseModel):
     description: Optional[str] = None
 
     images: List[ProductImage]
+
+    is_purchasable: bool = FieldInfo(alias="isPurchasable")
 
     name: str
 
