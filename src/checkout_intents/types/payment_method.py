@@ -12,7 +12,6 @@ __all__ = [
     "StripeTokenPaymentMethod",
     "BasisTheoryPaymentMethod",
     "NekudaPaymentMethod",
-    "PravaPaymentMethod",
     "DrawdownPaymentMethod",
 ]
 
@@ -38,16 +37,10 @@ class NekudaPaymentMethod(BaseModel):
     """Construct a type with a set of properties K of type T"""
 
 
-class PravaPaymentMethod(BaseModel):
-    prava_token: str = FieldInfo(alias="pravaToken")
-
-    type: Literal["prava_token"]
-
-
 class DrawdownPaymentMethod(BaseModel):
     type: Literal["drawdown"]
 
 
 PaymentMethod: TypeAlias = Union[
-    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, PravaPaymentMethod, DrawdownPaymentMethod
+    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, DrawdownPaymentMethod
 ]
