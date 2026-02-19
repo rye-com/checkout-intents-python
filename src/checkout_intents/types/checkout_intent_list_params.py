@@ -19,4 +19,4 @@ class CheckoutIntentListParams(TypedDict, total=False):
 
     limit: float
 
-    state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
+    state: List[Literal["retrieving_offer", "awaiting_confirmation", "placing_order", "completed", "failed"]]
