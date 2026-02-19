@@ -180,7 +180,7 @@ class TestCheckoutIntents:
             after="after",
             before="before",
             limit=0,
-            state=["retrieving_offer"],
+            state=["completed"],
         )
         assert_matches_type(SyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
@@ -632,7 +632,7 @@ class TestAsyncCheckoutIntents:
             after="after",
             before="before",
             limit=0,
-            state=["retrieving_offer"],
+            state=["completed"],
         )
         assert_matches_type(AsyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
