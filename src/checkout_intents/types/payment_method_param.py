@@ -12,7 +12,6 @@ __all__ = [
     "StripeTokenPaymentMethod",
     "BasisTheoryPaymentMethod",
     "NekudaPaymentMethod",
-    "PravaPaymentMethod",
     "DrawdownPaymentMethod",
 ]
 
@@ -38,16 +37,10 @@ class NekudaPaymentMethod(TypedDict, total=False):
     """Construct a type with a set of properties K of type T"""
 
 
-class PravaPaymentMethod(TypedDict, total=False):
-    prava_token: Required[Annotated[str, PropertyInfo(alias="pravaToken")]]
-
-    type: Required[Literal["prava_token"]]
-
-
 class DrawdownPaymentMethod(TypedDict, total=False):
     type: Required[Literal["drawdown"]]
 
 
 PaymentMethodParam: TypeAlias = Union[
-    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, PravaPaymentMethod, DrawdownPaymentMethod
+    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, DrawdownPaymentMethod
 ]
