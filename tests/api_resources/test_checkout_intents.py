@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCheckoutIntents:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.create(
@@ -40,7 +40,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.create(
@@ -74,7 +74,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.create(
@@ -98,7 +98,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.create(
@@ -124,7 +124,7 @@ class TestCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.retrieve(
@@ -132,7 +132,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.retrieve(
@@ -144,7 +144,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.retrieve(
@@ -158,7 +158,7 @@ class TestCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: CheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -166,13 +166,13 @@ class TestCheckoutIntents:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.list()
         assert_matches_type(SyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.list(
@@ -184,7 +184,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(SyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.list()
@@ -194,7 +194,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(SyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.list() as response:
@@ -206,7 +206,7 @@ class TestCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add_payment(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.add_payment(
@@ -218,7 +218,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add_payment_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.add_payment(
@@ -230,7 +230,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_add_payment(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.add_payment(
@@ -246,7 +246,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_add_payment(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.add_payment(
@@ -264,7 +264,7 @@ class TestCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_add_payment(self, client: CheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -276,7 +276,7 @@ class TestCheckoutIntents:
                 },
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_confirm(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.confirm(
@@ -288,7 +288,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_confirm_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.confirm(
@@ -300,7 +300,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_confirm(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.confirm(
@@ -316,7 +316,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_confirm(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.confirm(
@@ -334,7 +334,7 @@ class TestCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_confirm(self, client: CheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -346,7 +346,7 @@ class TestCheckoutIntents:
                 },
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_purchase(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.purchase(
@@ -370,7 +370,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_purchase_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_intent = client.checkout_intents.purchase(
@@ -408,7 +408,7 @@ class TestCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_purchase(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.purchase(
@@ -436,7 +436,7 @@ class TestCheckoutIntents:
         checkout_intent = response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_purchase(self, client: CheckoutIntents) -> None:
         with client.checkout_intents.with_streaming_response.purchase(
@@ -472,7 +472,7 @@ class TestAsyncCheckoutIntents:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.create(
@@ -492,7 +492,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.create(
@@ -526,7 +526,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.create(
@@ -550,7 +550,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.create(
@@ -576,7 +576,7 @@ class TestAsyncCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.retrieve(
@@ -584,7 +584,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.retrieve(
@@ -596,7 +596,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.retrieve(
@@ -610,7 +610,7 @@ class TestAsyncCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -618,13 +618,13 @@ class TestAsyncCheckoutIntents:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.list()
         assert_matches_type(AsyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.list(
@@ -636,7 +636,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(AsyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.list()
@@ -646,7 +646,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(AsyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.list() as response:
@@ -658,7 +658,7 @@ class TestAsyncCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.add_payment(
@@ -670,7 +670,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add_payment_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.add_payment(
@@ -682,7 +682,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.add_payment(
@@ -698,7 +698,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.add_payment(
@@ -716,7 +716,7 @@ class TestAsyncCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_add_payment(self, async_client: AsyncCheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -728,7 +728,7 @@ class TestAsyncCheckoutIntents:
                 },
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_confirm(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.confirm(
@@ -740,7 +740,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_confirm_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.confirm(
@@ -752,7 +752,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_confirm(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.confirm(
@@ -768,7 +768,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_confirm(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.confirm(
@@ -786,7 +786,7 @@ class TestAsyncCheckoutIntents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_confirm(self, async_client: AsyncCheckoutIntents) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -798,7 +798,7 @@ class TestAsyncCheckoutIntents:
                 },
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_purchase(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.purchase(
@@ -822,7 +822,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_purchase_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.purchase(
@@ -860,7 +860,7 @@ class TestAsyncCheckoutIntents:
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_purchase(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.checkout_intents.with_raw_response.purchase(
@@ -888,7 +888,7 @@ class TestAsyncCheckoutIntents:
         checkout_intent = await response.parse()
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_purchase(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.checkout_intents.with_streaming_response.purchase(
