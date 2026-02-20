@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCheckoutSessions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: CheckoutIntents) -> None:
         checkout_session = client.betas.checkout_sessions.create(
@@ -26,7 +26,7 @@ class TestCheckoutSessions:
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_session = client.betas.checkout_sessions.create(
@@ -60,7 +60,7 @@ class TestCheckoutSessions:
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: CheckoutIntents) -> None:
         response = client.betas.checkout_sessions.with_raw_response.create(
@@ -73,7 +73,7 @@ class TestCheckoutSessions:
         checkout_session = response.parse()
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: CheckoutIntents) -> None:
         with client.betas.checkout_sessions.with_streaming_response.create(
@@ -94,7 +94,7 @@ class TestAsyncCheckoutSessions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_session = await async_client.betas.checkout_sessions.create(
@@ -103,7 +103,7 @@ class TestAsyncCheckoutSessions:
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_session = await async_client.betas.checkout_sessions.create(
@@ -137,7 +137,7 @@ class TestAsyncCheckoutSessions:
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.betas.checkout_sessions.with_raw_response.create(
@@ -150,7 +150,7 @@ class TestAsyncCheckoutSessions:
         checkout_session = await response.parse()
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.betas.checkout_sessions.with_streaming_response.create(
