@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal
 
 import httpx
 
@@ -53,7 +52,6 @@ class CheckoutSessionsResource(SyncAPIResource):
         buyer: checkout_session_create_params.Buyer | Omit = omit,
         constraints: checkout_session_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
-        layout: Literal["default", "wizard"] | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -74,9 +72,6 @@ class CheckoutSessionsResource(SyncAPIResource):
           buyer: Optional buyer information, used to pre-fill the checkout form with the buyer's
               information.
 
-          layout: Optional layout for the checkout UI (e.g. "wizard"). Defaults to the standard
-              layout.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -96,7 +91,6 @@ class CheckoutSessionsResource(SyncAPIResource):
                     "buyer": buyer,
                     "constraints": constraints,
                     "discover_promo_codes": discover_promo_codes,
-                    "layout": layout,
                     "promo_codes": promo_codes,
                     "variant_selections": variant_selections,
                 },
@@ -141,7 +135,6 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
         buyer: checkout_session_create_params.Buyer | Omit = omit,
         constraints: checkout_session_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
-        layout: Literal["default", "wizard"] | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -162,9 +155,6 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
           buyer: Optional buyer information, used to pre-fill the checkout form with the buyer's
               information.
 
-          layout: Optional layout for the checkout UI (e.g. "wizard"). Defaults to the standard
-              layout.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -184,7 +174,6 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
                     "buyer": buyer,
                     "constraints": constraints,
                     "discover_promo_codes": discover_promo_codes,
-                    "layout": layout,
                     "promo_codes": promo_codes,
                     "variant_selections": variant_selections,
                 },

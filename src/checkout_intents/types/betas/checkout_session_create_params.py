@@ -27,12 +27,6 @@ class CheckoutSessionCreateParams(TypedDict, total=False):
 
     discover_promo_codes: Annotated[bool, PropertyInfo(alias="discoverPromoCodes")]
 
-    layout: Literal["default", "wizard"]
-    """Optional layout for the checkout UI (e.g.
-
-    "wizard"). Defaults to the standard layout.
-    """
-
     promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
