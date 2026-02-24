@@ -67,6 +67,35 @@ pydantic-v1 = [
     "pydantic>=1.9.0, <3",
 ]
 
+[tool.rye.scripts]
+format = { chain = [
+  "format:ruff",
+  "format:docs",
+  "fix:ruff",
+  # run formatting again to fix any inconsistencies when imports are stripped
+  "format:ruff",
+]}
+"format:docs" = "bash -c 'python scripts/utils/ruffen-docs.py README.md $(find . -type f -name api.md)'"
+"format:ruff" = "ruff format"
+
+"lint" = { chain = [
+  "check:ruff",
+  "typecheck",
+  "check:importable",
+]}
+"check:ruff" = "ruff check ."
+"fix:ruff" = "ruff check --fix ."
+
+"check:importable" = "python -c 'import checkout_intents'"
+
+typecheck = { chain = [
+  "typecheck:pyright",
+  "typecheck:mypy"
+]}
+"typecheck:pyright" = "pyright"
+"typecheck:verify-types" = "pyright --verifytypes checkout_intents --ignoreexternal"
+"typecheck:mypy" = "mypy ."
+
 [build-system]
 requires = ["hatchling==1.26.3", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
