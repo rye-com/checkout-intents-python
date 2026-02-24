@@ -16,7 +16,7 @@ from ..types.checkout_intent import (
 )
 
 if TYPE_CHECKING:
-    from ..resources.checkout_intents.checkout_intents import (
+    from ..resources.checkout_intents import (
         CheckoutIntentsResource,
         AsyncCheckoutIntentsResource,
     )
