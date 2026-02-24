@@ -50,6 +50,7 @@ class TestCheckoutSessions:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
+            layout="default",
             promo_codes=["string"],
             variant_selections=[
                 {
@@ -127,6 +128,7 @@ class TestAsyncCheckoutSessions:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
+            layout="default",
             promo_codes=["string"],
             variant_selections=[
                 {
