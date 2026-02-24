@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Union, Optional
+from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
@@ -42,6 +43,8 @@ class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
 
 
 class CompletedCheckoutIntent(BaseCheckoutIntent):
+    estimated_delivery_date: Optional[datetime] = FieldInfo(alias="estimatedDeliveryDate", default=None)
+
     offer: Offer
 
     order_id: Optional[str] = FieldInfo(alias="orderId", default=None)
