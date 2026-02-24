@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.15.0 (2026-02-24)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/rye-com/checkout-intents-python/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* add merchants API endpoint ([466b30d](https://github.com/rye-com/checkout-intents-python/commit/466b30d55541062985872fdad7fde48f70a37b11))
+* Add PaymentMethod support for Prava ([8491d49](https://github.com/rye-com/checkout-intents-python/commit/8491d49ed610c1753c14e5898cf9a0daac189787))
+* Billing: Add BillingReconciliationService for expired drawdown orders ([1602c7b](https://github.com/rye-com/checkout-intents-python/commit/1602c7bf4a57249be075f246e1aa0a5308d510e6))
+* Centralize Shopify domain resolution into ShopifyDomainResolver service ([344a639](https://github.com/rye-com/checkout-intents-python/commit/344a63969eb6639643c55aca7f9f2754a4c0be1f))
+* Enable searching checkoutIntent by order Id on dev console ([f9e6a2b](https://github.com/rye-com/checkout-intents-python/commit/f9e6a2bd014add1daa175c7defa6f229129b0b38))
+* Remove `shipments` from our stainless config ([f0a4141](https://github.com/rye-com/checkout-intents-python/commit/f0a414106be48277e79281407f4d6ed19894bc57))
+* Remove duplicate method from controller ([f9d6de3](https://github.com/rye-com/checkout-intents-python/commit/f9d6de36b0f83b1d2d16684361ca0fca86dfa31f))
+* Store estimated delivery date on completed checkout intent ([5b18341](https://github.com/rye-com/checkout-intents-python/commit/5b18341f6830bf88168878337694822d5f45b485))
+* Unwrap `rd.bizrate.com` affiliate URLs ([3e3672e](https://github.com/rye-com/checkout-intents-python/commit/3e3672e7a877c6065309240a7af780cb2404ab51))
+* Update return states to better reflect return lifecycle ([4a1056f](https://github.com/rye-com/checkout-intents-python/commit/4a1056f3383bf25a61753792f32f2e162032e4a6))
+* wire up wizard layout and pass layout type through JWT ([1c2286b](https://github.com/rye-com/checkout-intents-python/commit/1c2286bdfd1bad99eebd65651fd93193b6be92c9))
+
+
+### Bug Fixes
+
+* **internal:** imports ([d5721ce](https://github.com/rye-com/checkout-intents-python/commit/d5721cea27ce3eb6177f400aba85948c0fd7f406))
+
+
+### Chores
+
+* format all `api.md` files ([73e7e50](https://github.com/rye-com/checkout-intents-python/commit/73e7e506e5a13b153fe2b374f255b97431505465))
+* **internal:** bump dependencies ([f0f140a](https://github.com/rye-com/checkout-intents-python/commit/f0f140a95ce0e3fd5f530698ddab5800bc7d094a))
+* **internal:** fix lint error on Python 3.14 ([95f86f0](https://github.com/rye-com/checkout-intents-python/commit/95f86f0d08d08528525fb7df107c57bdd5a2aa3c))
+* **internal:** improvements ([e8ce927](https://github.com/rye-com/checkout-intents-python/commit/e8ce927f2493fb78c5a830932d63c5cd0bbd038a))
+* **internal:** improvements ([dc9bb88](https://github.com/rye-com/checkout-intents-python/commit/dc9bb881f08e3119eed144affeef77dd8f75f869))
+* **internal:** improvements ([f6a24cf](https://github.com/rye-com/checkout-intents-python/commit/f6a24cfacb70f21eef110c02a63203eeda8b9411))
+* **internal:** move polling helpers to `lib/` dir ([980b367](https://github.com/rye-com/checkout-intents-python/commit/980b367a7713edda7979393f4d5e17435cea7b55))
+* **internal:** remove mock server code ([0e7a4cc](https://github.com/rye-com/checkout-intents-python/commit/0e7a4cc1c15588ea25cdaef661befd538ec6ed3e))
+* update mock server docs ([0f17c3f](https://github.com/rye-com/checkout-intents-python/commit/0f17c3f0b0fe8e2f02db05ea6c33a0ebce8a97a5))
+
 ## 0.14.0 (2026-02-05)
 
 Full Changelog: [v0.13.1...v0.14.0](https://github.com/rye-com/checkout-intents-python/compare/v0.13.1...v0.14.0)
