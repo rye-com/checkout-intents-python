@@ -64,3 +64,16 @@ from checkout_intents.types import Product, ProductAvailability, ProductImage
 Methods:
 
 - <code title="get /api/v1/products/lookup">client.products.<a href="./src/checkout_intents/resources/products.py">lookup</a>(\*\*<a href="src/checkout_intents/types/product_lookup_params.py">params</a>) -> <a href="./src/checkout_intents/types/product.py">Product</a></code>
+
+# Billing
+
+Types:
+
+```python
+from checkout_intents.types import BillingGetBalanceResponse, BillingListTransactionsResponse
+```
+
+Methods:
+
+- <code title="get /api/v1/billing/balance">client.billing.<a href="./src/checkout_intents/resources/billing.py">get_balance</a>() -> <a href="./src/checkout_intents/types/billing_get_balance_response.py">BillingGetBalanceResponse</a></code>
+- <code title="get /api/v1/billing/transactions">client.billing.<a href="./src/checkout_intents/resources/billing.py">list_transactions</a>(\*\*<a href="src/checkout_intents/types/billing_list_transactions_params.py">params</a>) -> <a href="./src/checkout_intents/types/billing_list_transactions_response.py">SyncCursorPagination[BillingListTransactionsResponse]</a></code>
