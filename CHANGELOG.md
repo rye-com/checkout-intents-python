@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.16.0 (2026-02-27)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/rye-com/checkout-intents-python/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* Add hidden billing API endpoints for drawdown balance and transactions ([8af9244](https://github.com/rye-com/checkout-intents-python/commit/8af9244c39eee35d47735c52d2e3e558f2d3142b))
+* Added new shipments endpoint for tracking Amazon orders ([e5e8a46](https://github.com/rye-com/checkout-intents-python/commit/e5e8a46cb084e099530423cfe92ff4dcb6c52c91))
+* proxy product images through Rye domain ([7913d19](https://github.com/rye-com/checkout-intents-python/commit/7913d19fb75ca691c2e58dcf4d9b5193038ce893))
+
+
+### Chores
+
+* **ci:** bump uv version ([b78c21e](https://github.com/rye-com/checkout-intents-python/commit/b78c21e0e62a1497e3b22ba48ddca4ee765dfe65))
+* **internal:** add request options to SSE classes ([6fc9197](https://github.com/rye-com/checkout-intents-python/commit/6fc919750ac21e67366a5d19c0fddb41dd04262d))
+* **internal:** improvements ([38698a0](https://github.com/rye-com/checkout-intents-python/commit/38698a04c3e6380ca38f5515161f5851d8d55edd))
+* **internal:** improvements ([72e6cbe](https://github.com/rye-com/checkout-intents-python/commit/72e6cbe941247c433b3acd755add48edba1426a1))
+* **internal:** improvements ([faf9197](https://github.com/rye-com/checkout-intents-python/commit/faf9197ad0b2316ea3f067f7f39fb37e857005ef))
+* **internal:** make `test_proxy_environment_variables` more resilient ([43b003f](https://github.com/rye-com/checkout-intents-python/commit/43b003f9e79805509605019e0e0b6bbabba21f87))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([43020ec](https://github.com/rye-com/checkout-intents-python/commit/43020ec8a3b4c3c34c5afaeafd445ef8f57483a3))
+
 ## 0.15.0 (2026-02-24)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/rye-com/checkout-intents-python/compare/v0.14.0...v0.15.0)
