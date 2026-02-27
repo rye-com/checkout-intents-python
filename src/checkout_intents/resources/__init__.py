@@ -16,6 +16,14 @@ from .brands import (
     BrandsResourceWithStreamingResponse,
     AsyncBrandsResourceWithStreamingResponse,
 )
+from .billing import (
+    BillingResource,
+    AsyncBillingResource,
+    BillingResourceWithRawResponse,
+    AsyncBillingResourceWithRawResponse,
+    BillingResourceWithStreamingResponse,
+    AsyncBillingResourceWithStreamingResponse,
+)
 from .products import (
     ProductsResource,
     AsyncProductsResource,
@@ -23,6 +31,14 @@ from .products import (
     AsyncProductsResourceWithRawResponse,
     ProductsResourceWithStreamingResponse,
     AsyncProductsResourceWithStreamingResponse,
+)
+from .shipments import (
+    ShipmentsResource,
+    AsyncShipmentsResource,
+    ShipmentsResourceWithRawResponse,
+    AsyncShipmentsResourceWithRawResponse,
+    ShipmentsResourceWithStreamingResponse,
+    AsyncShipmentsResourceWithStreamingResponse,
 )
 from .checkout_intents import (
     CheckoutIntentsResource,
@@ -58,4 +74,16 @@ __all__ = [
     "AsyncProductsResourceWithRawResponse",
     "ProductsResourceWithStreamingResponse",
     "AsyncProductsResourceWithStreamingResponse",
+    "ShipmentsResource",
+    "AsyncShipmentsResource",
+    "ShipmentsResourceWithRawResponse",
+    "AsyncShipmentsResourceWithRawResponse",
+    "ShipmentsResourceWithStreamingResponse",
+    "AsyncShipmentsResourceWithStreamingResponse",
+    "BillingResource",
+    "AsyncBillingResource",
+    "BillingResourceWithRawResponse",
+    "AsyncBillingResourceWithRawResponse",
+    "BillingResourceWithStreamingResponse",
+    "AsyncBillingResourceWithStreamingResponse",
 ]
