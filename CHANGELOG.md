@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.1 (2026-02-28)
+
+Full Changelog: [v0.16.0...v0.16.1](https://github.com/rye-com/checkout-intents-python/compare/v0.16.0...v0.16.1)
+
+### Chores
+
+* **internal:** improvements ([64b6b21](https://github.com/rye-com/checkout-intents-python/commit/64b6b2105be66032a02e973fcb013b7645cdb90e))
+
 ## 0.16.0 (2026-02-27)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/rye-com/checkout-intents-python/compare/v0.15.0...v0.16.0)
