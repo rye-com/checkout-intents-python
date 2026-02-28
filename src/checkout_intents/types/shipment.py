@@ -14,15 +14,19 @@ __all__ = [
     "WithStatusBaseShipmentWithTrackingShipped",
     "WithStatusBaseShipmentWithTrackingShippedTrackingEvent",
     "WithStatusBaseShipmentWithTrackingShippedTrackingEventLocation",
+    "WithStatusBaseShipmentWithTrackingShippedTrackingEventTimestamp",
     "DeliveredShipment",
     "DeliveredShipmentTrackingEvent",
     "DeliveredShipmentTrackingEventLocation",
+    "DeliveredShipmentTrackingEventTimestamp",
     "WithStatusBaseShipmentWithTrackingDelayed",
     "WithStatusBaseShipmentWithTrackingDelayedTrackingEvent",
     "WithStatusBaseShipmentWithTrackingDelayedTrackingEventLocation",
+    "WithStatusBaseShipmentWithTrackingDelayedTrackingEventTimestamp",
     "WithStatusBaseShipmentWithTrackingOutForDelivery",
     "WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEvent",
     "WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventLocation",
+    "WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventTimestamp",
     "WithStatusBaseShipmentOrdered",
     "WithStatusBaseShipmentCanceled",
 ]
@@ -36,14 +40,20 @@ class WithStatusBaseShipmentWithTrackingShippedTrackingEventLocation(BaseModel):
     province: Optional[str] = None
 
 
+class WithStatusBaseShipmentWithTrackingShippedTrackingEventTimestamp(BaseModel):
+    local: str
+    """ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00" """
+
+    utc: datetime
+    """UTC timestamp"""
+
+
 class WithStatusBaseShipmentWithTrackingShippedTrackingEvent(BaseModel):
     description: Optional[str] = None
 
-    display_date: Optional[str] = FieldInfo(alias="displayDate", default=None)
-
-    display_time: Optional[str] = FieldInfo(alias="displayTime", default=None)
-
     location: WithStatusBaseShipmentWithTrackingShippedTrackingEventLocation
+
+    timestamp: Optional[WithStatusBaseShipmentWithTrackingShippedTrackingEventTimestamp] = None
 
 
 class WithStatusBaseShipmentWithTrackingShipped(BaseModel):
@@ -54,6 +64,10 @@ class WithStatusBaseShipmentWithTrackingShipped(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
 
     external_id: str = FieldInfo(alias="externalId")
+    """
+    The external ID is provided by the marketplace and matches the shipment to their
+    system.
+    """
 
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
@@ -74,14 +88,20 @@ class DeliveredShipmentTrackingEventLocation(BaseModel):
     province: Optional[str] = None
 
 
+class DeliveredShipmentTrackingEventTimestamp(BaseModel):
+    local: str
+    """ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00" """
+
+    utc: datetime
+    """UTC timestamp"""
+
+
 class DeliveredShipmentTrackingEvent(BaseModel):
     description: Optional[str] = None
 
-    display_date: Optional[str] = FieldInfo(alias="displayDate", default=None)
-
-    display_time: Optional[str] = FieldInfo(alias="displayTime", default=None)
-
     location: DeliveredShipmentTrackingEventLocation
+
+    timestamp: Optional[DeliveredShipmentTrackingEventTimestamp] = None
 
 
 class DeliveredShipment(BaseModel):
@@ -94,6 +114,10 @@ class DeliveredShipment(BaseModel):
     delivered_at: datetime = FieldInfo(alias="deliveredAt")
 
     external_id: str = FieldInfo(alias="externalId")
+    """
+    The external ID is provided by the marketplace and matches the shipment to their
+    system.
+    """
 
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
@@ -114,14 +138,20 @@ class WithStatusBaseShipmentWithTrackingDelayedTrackingEventLocation(BaseModel):
     province: Optional[str] = None
 
 
+class WithStatusBaseShipmentWithTrackingDelayedTrackingEventTimestamp(BaseModel):
+    local: str
+    """ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00" """
+
+    utc: datetime
+    """UTC timestamp"""
+
+
 class WithStatusBaseShipmentWithTrackingDelayedTrackingEvent(BaseModel):
     description: Optional[str] = None
 
-    display_date: Optional[str] = FieldInfo(alias="displayDate", default=None)
-
-    display_time: Optional[str] = FieldInfo(alias="displayTime", default=None)
-
     location: WithStatusBaseShipmentWithTrackingDelayedTrackingEventLocation
+
+    timestamp: Optional[WithStatusBaseShipmentWithTrackingDelayedTrackingEventTimestamp] = None
 
 
 class WithStatusBaseShipmentWithTrackingDelayed(BaseModel):
@@ -132,6 +162,10 @@ class WithStatusBaseShipmentWithTrackingDelayed(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
 
     external_id: str = FieldInfo(alias="externalId")
+    """
+    The external ID is provided by the marketplace and matches the shipment to their
+    system.
+    """
 
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
@@ -152,14 +186,20 @@ class WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventLocation(Base
     province: Optional[str] = None
 
 
+class WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventTimestamp(BaseModel):
+    local: str
+    """ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00" """
+
+    utc: datetime
+    """UTC timestamp"""
+
+
 class WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEvent(BaseModel):
     description: Optional[str] = None
 
-    display_date: Optional[str] = FieldInfo(alias="displayDate", default=None)
-
-    display_time: Optional[str] = FieldInfo(alias="displayTime", default=None)
-
     location: WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventLocation
+
+    timestamp: Optional[WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventTimestamp] = None
 
 
 class WithStatusBaseShipmentWithTrackingOutForDelivery(BaseModel):
@@ -170,6 +210,10 @@ class WithStatusBaseShipmentWithTrackingOutForDelivery(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
 
     external_id: str = FieldInfo(alias="externalId")
+    """
+    The external ID is provided by the marketplace and matches the shipment to their
+    system.
+    """
 
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
