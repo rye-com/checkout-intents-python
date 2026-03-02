@@ -31,12 +31,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import betas, brands, billing, products, checkout_intents
+    from .resources import betas, brands, billing, products, shipments, checkout_intents
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.products import ProductsResource, AsyncProductsResource
+    from .resources.shipments import ShipmentsResource, AsyncShipmentsResource
     from .resources.betas.betas import BetasResource, AsyncBetasResource
-    from .resources.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
+    from .resources.checkout_intents.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -160,6 +161,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.products import ProductsResource
 
         return ProductsResource(self)
+
+    @cached_property
+    def shipments(self) -> ShipmentsResource:
+        from .resources.shipments import ShipmentsResource
+
+        return ShipmentsResource(self)
 
     @cached_property
     def billing(self) -> BillingResource:
@@ -388,6 +395,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncProductsResource(self)
 
     @cached_property
+    def shipments(self) -> AsyncShipmentsResource:
+        from .resources.shipments import AsyncShipmentsResource
+
+        return AsyncShipmentsResource(self)
+
+    @cached_property
     def billing(self) -> AsyncBillingResource:
         from .resources.billing import AsyncBillingResource
 
@@ -539,6 +552,12 @@ class CheckoutIntentsWithRawResponse:
         return ProductsResourceWithRawResponse(self._client.products)
 
     @cached_property
+    def shipments(self) -> shipments.ShipmentsResourceWithRawResponse:
+        from .resources.shipments import ShipmentsResourceWithRawResponse
+
+        return ShipmentsResourceWithRawResponse(self._client.shipments)
+
+    @cached_property
     def billing(self) -> billing.BillingResourceWithRawResponse:
         from .resources.billing import BillingResourceWithRawResponse
 
@@ -574,6 +593,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.products import AsyncProductsResourceWithRawResponse
 
         return AsyncProductsResourceWithRawResponse(self._client.products)
+
+    @cached_property
+    def shipments(self) -> shipments.AsyncShipmentsResourceWithRawResponse:
+        from .resources.shipments import AsyncShipmentsResourceWithRawResponse
+
+        return AsyncShipmentsResourceWithRawResponse(self._client.shipments)
 
     @cached_property
     def billing(self) -> billing.AsyncBillingResourceWithRawResponse:
@@ -613,6 +638,12 @@ class CheckoutIntentsWithStreamedResponse:
         return ProductsResourceWithStreamingResponse(self._client.products)
 
     @cached_property
+    def shipments(self) -> shipments.ShipmentsResourceWithStreamingResponse:
+        from .resources.shipments import ShipmentsResourceWithStreamingResponse
+
+        return ShipmentsResourceWithStreamingResponse(self._client.shipments)
+
+    @cached_property
     def billing(self) -> billing.BillingResourceWithStreamingResponse:
         from .resources.billing import BillingResourceWithStreamingResponse
 
@@ -648,6 +679,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.products import AsyncProductsResourceWithStreamingResponse
 
         return AsyncProductsResourceWithStreamingResponse(self._client.products)
+
+    @cached_property
+    def shipments(self) -> shipments.AsyncShipmentsResourceWithStreamingResponse:
+        from .resources.shipments import AsyncShipmentsResourceWithStreamingResponse
+
+        return AsyncShipmentsResourceWithStreamingResponse(self._client.shipments)
 
     @cached_property
     def billing(self) -> billing.AsyncBillingResourceWithStreamingResponse:
