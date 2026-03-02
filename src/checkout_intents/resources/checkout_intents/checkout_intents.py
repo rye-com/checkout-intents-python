@@ -1268,6 +1268,10 @@ class CheckoutIntentsResourceWithRawResponse:
     def shipments(self) -> ShipmentsResourceWithRawResponse:
         return ShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
 
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithRawResponse:
+        return ShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
+
 
 class AsyncCheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: AsyncCheckoutIntentsResource) -> None:
@@ -1308,6 +1312,10 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
     def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
         return AsyncShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
 
+    @cached_property
+    def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
+        return AsyncShipmentsResourceWithRawResponse(self._checkout_intents.shipments)
+
 
 class CheckoutIntentsResourceWithStreamingResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
@@ -1343,6 +1351,10 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.confirm_and_poll = to_streamed_response_wrapper(
             checkout_intents.confirm_and_poll,
         )
+
+    @cached_property
+    def shipments(self) -> ShipmentsResourceWithStreamingResponse:
+        return ShipmentsResourceWithStreamingResponse(self._checkout_intents.shipments)
 
     @cached_property
     def shipments(self) -> ShipmentsResourceWithStreamingResponse:
