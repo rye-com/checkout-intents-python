@@ -1,12 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
 from .money import Money
 from .._models import BaseModel
 from .product_image import ProductImage
+from .variant_selection import VariantSelection
 from .product_availability import ProductAvailability
 
 __all__ = ["Product", "VariantDimension", "Variant"]
@@ -19,9 +20,6 @@ class VariantDimension(BaseModel):
 
 
 class Variant(BaseModel):
-    attributes: Dict[str, str]
-    """Construct a type with a set of properties K of type T"""
-
     availability: ProductAvailability
     """The availability status of a product.
 
@@ -31,6 +29,8 @@ class Variant(BaseModel):
     - `backorder`: Product is temporarily out of stock but can be ordered
     - `unknown`: Availability could not be determined
     """
+
+    dimensions: List[VariantSelection]
 
     images: List[ProductImage]
 
