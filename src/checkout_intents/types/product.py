@@ -14,7 +14,7 @@ __all__ = ["Product", "VariantDimension", "Variant"]
 
 
 class VariantDimension(BaseModel):
-    name: str
+    label: str
 
     values: List[str]
 
