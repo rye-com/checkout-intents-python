@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.17.0 (2026-03-06)
+
+Full Changelog: [v0.16.1...v0.17.0](https://github.com/rye-com/checkout-intents-python/compare/v0.16.1...v0.17.0)
+
+### Features
+
+* Add variant models to Stainless SDK config ([4fd1821](https://github.com/rye-com/checkout-intents-python/commit/4fd1821d751e15c88a84fba019702d9da53a850a))
+* add variant types and wire through extraction pipeline (RYE-6876) ([0ecd388](https://github.com/rye-com/checkout-intents-python/commit/0ecd38871fcfc812f7c9cd8bfb289ea3b4b161f2))
+* Cut 1x Firestore read from offer retrieval ([c5a610e](https://github.com/rye-com/checkout-intents-python/commit/c5a610efca5222f15972d15b208079c33df01fe6))
+* rename ProductVariant.attributes to dimensions ([fccf08a](https://github.com/rye-com/checkout-intents-python/commit/fccf08a50b07f2e648199ca14d04d29d02307741))
+
+
+### Bug Fixes
+
+* handle [@type](https://github.com/type) array and AggregateOffer array in JSON-LD parser ([d1d8800](https://github.com/rye-com/checkout-intents-python/commit/d1d880027e6ce8de295d76a587875ae2f8dc4d45))
+* **internal:** duplicate definitions ([5c45e18](https://github.com/rye-com/checkout-intents-python/commit/5c45e1804fe1173a25f299c9e003ec15f6a17543))
+* rename VariantDimension.name to label for consistency with VariantSelection ([bd38b39](https://github.com/rye-com/checkout-intents-python/commit/bd38b396452fcee10b30aeadd1dcc16a063610a4))
+
+
+### Chores
+
+* **internal:** improvements ([dd6b3be](https://github.com/rye-com/checkout-intents-python/commit/dd6b3be7b0b2b84761e1f8638538d8b1da9ed75d))
+
 ## 0.16.1 (2026-02-28)
 
 Full Changelog: [v0.16.0...v0.16.1](https://github.com/rye-com/checkout-intents-python/compare/v0.16.0...v0.16.1)
