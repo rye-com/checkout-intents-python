@@ -64,7 +64,13 @@ Methods:
 Types:
 
 ```python
-from checkout_intents.types import Product, ProductAvailability, ProductImage
+from checkout_intents.types import (
+    Product,
+    ProductAvailability,
+    ProductImage,
+    ProductVariant,
+    VariantDimension,
+)
 ```
 
 Methods:

@@ -11,9 +11,11 @@ from .buyer_param import BuyerParam as BuyerParam
 from .product_image import ProductImage as ProductImage
 from .payment_method import PaymentMethod as PaymentMethod
 from .checkout_intent import CheckoutIntent as CheckoutIntent
+from .product_variant import ProductVariant as ProductVariant
 from .shipment_status import ShipmentStatus as ShipmentStatus
 from .checkout_session import CheckoutSession as CheckoutSession
 from .shipment_tracking import ShipmentTracking as ShipmentTracking
+from .variant_dimension import VariantDimension as VariantDimension
 from .variant_selection import VariantSelection as VariantSelection
 from .base_checkout_intent import BaseCheckoutIntent as BaseCheckoutIntent
 from .payment_method_param import PaymentMethodParam as PaymentMethodParam

@@ -2,21 +2,16 @@
 
 from typing import List, Optional
 
-from pydantic import Field as FieldInfo
-
 from .money import Money
 from .._models import BaseModel
 from .product_image import ProductImage
-from .product_variant import ProductVariant
-from .variant_dimension import VariantDimension
+from .variant_selection import VariantSelection
 from .product_availability import ProductAvailability
 
-__all__ = ["Product"]
+__all__ = ["ProductVariant"]
 
 
-class Product(BaseModel):
-    id: str
-
+class ProductVariant(BaseModel):
     availability: ProductAvailability
     """The availability status of a product.
 
@@ -27,22 +22,12 @@ class Product(BaseModel):
     - `unknown`: Availability could not be determined
     """
 
-    brand: Optional[str] = None
-
-    description: Optional[str] = None
+    dimensions: List[VariantSelection]
 
     images: List[ProductImage]
 
-    is_purchasable: bool = FieldInfo(alias="isPurchasable")
-
-    name: str
+    name: Optional[str] = None
 
     price: Money
 
     sku: Optional[str] = None
-
-    url: str
-
-    variant_dimensions: Optional[List[VariantDimension]] = FieldInfo(alias="variantDimensions", default=None)
-
-    variants: Optional[List[ProductVariant]] = None
