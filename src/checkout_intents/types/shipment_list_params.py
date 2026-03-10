@@ -18,6 +18,7 @@ class ShipmentListParams(TypedDict, total=False):
 
     ids: SequenceNotStr[str]
 
-    limit: float
+    limit: int
+    """Maximum number of results to return (default 100)"""
 
     status: List[ShipmentStatus]

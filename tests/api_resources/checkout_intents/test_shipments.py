@@ -33,7 +33,7 @@ class TestShipments:
             id="id",
             after="after",
             before="before",
-            limit=0,
+            limit=1,
         )
         assert_matches_type(SyncCursorPagination[Shipment], shipment, path=["response"])
 
@@ -92,7 +92,7 @@ class TestAsyncShipments:
             id="id",
             after="after",
             before="before",
-            limit=0,
+            limit=1,
         )
         assert_matches_type(AsyncCursorPagination[Shipment], shipment, path=["response"])
 

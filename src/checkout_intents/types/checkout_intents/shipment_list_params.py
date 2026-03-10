@@ -12,4 +12,5 @@ class ShipmentListParams(TypedDict, total=False):
 
     before: str
 
-    limit: float
+    limit: int
+    """Maximum number of results to return (default 100)"""

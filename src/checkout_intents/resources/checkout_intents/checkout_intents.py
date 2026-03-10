@@ -169,7 +169,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         id: SequenceNotStr[str] | Omit = omit,
         after: str | Omit = omit,
         before: str | Omit = omit,
-        limit: float | Omit = omit,
+        limit: int | Omit = omit,
         state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -186,6 +186,8 @@ class CheckoutIntentsResource(SyncAPIResource):
         filters and cursor-based pagination.
 
         Args:
+          limit: Maximum number of results to return (default 100)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -507,7 +509,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         id: SequenceNotStr[str] | Omit = omit,
         after: str | Omit = omit,
         before: str | Omit = omit,
-        limit: float | Omit = omit,
+        limit: int | Omit = omit,
         state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -524,6 +526,8 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         filters and cursor-based pagination.
 
         Args:
+          limit: Maximum number of results to return (default 100)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
