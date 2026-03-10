@@ -73,7 +73,7 @@ class TestShipments:
             after="after",
             before="before",
             ids=["string"],
-            limit=0,
+            limit=1,
             status=["out_for_delivery"],
         )
         assert_matches_type(SyncCursorPagination[Shipment], shipment, path=["response"])
@@ -161,7 +161,7 @@ class TestAsyncShipments:
             after="after",
             before="before",
             ids=["string"],
-            limit=0,
+            limit=1,
             status=["out_for_delivery"],
         )
         assert_matches_type(AsyncCursorPagination[Shipment], shipment, path=["response"])

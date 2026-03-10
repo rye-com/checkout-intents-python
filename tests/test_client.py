@@ -928,7 +928,7 @@ class TestCheckoutIntents:
                     "postal_code": "10001",
                     "province": "NY",
                 },
-                product_url="productUrl",
+                product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
                 quantity=1,
             ).__enter__()
 
@@ -952,7 +952,7 @@ class TestCheckoutIntents:
                     "postal_code": "10001",
                     "province": "NY",
                 },
-                product_url="productUrl",
+                product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
                 quantity=1,
             ).__enter__()
         assert _get_open_connections(client) == 0
@@ -995,7 +995,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -1033,7 +1033,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -1071,7 +1071,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             extra_headers={"x-stainless-retry-count": "42"},
         )
@@ -1955,7 +1955,7 @@ class TestAsyncCheckoutIntents:
                     "postal_code": "10001",
                     "province": "NY",
                 },
-                product_url="productUrl",
+                product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
                 quantity=1,
             ).__aenter__()
 
@@ -1981,7 +1981,7 @@ class TestAsyncCheckoutIntents:
                     "postal_code": "10001",
                     "province": "NY",
                 },
-                product_url="productUrl",
+                product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
                 quantity=1,
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
@@ -2024,7 +2024,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -2062,7 +2062,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -2100,7 +2100,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             extra_headers={"x-stainless-retry-count": "42"},
         )

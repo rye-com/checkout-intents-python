@@ -35,7 +35,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
@@ -56,7 +56,7 @@ class TestCheckoutIntents:
                 "province": "NY",
                 "address2": "Apt 1",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             constraints={
                 "max_shipping_price": 500,
@@ -64,7 +64,7 @@ class TestCheckoutIntents:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
-            promo_codes=["sqF12lZ1VlBb"],
+            promo_codes=["SAVE20"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -89,7 +89,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -113,7 +113,7 @@ class TestCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed
@@ -179,7 +179,7 @@ class TestCheckoutIntents:
             id=["string"],
             after="after",
             before="before",
-            limit=0,
+            limit=1,
             state=["completed"],
         )
         assert_matches_type(SyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
@@ -365,7 +365,7 @@ class TestCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
@@ -390,7 +390,7 @@ class TestCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             constraints={
                 "max_shipping_price": 500,
@@ -398,7 +398,7 @@ class TestCheckoutIntents:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
-            promo_codes=["sqF12lZ1VlBb"],
+            promo_codes=["SAVE20"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -427,7 +427,7 @@ class TestCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -455,7 +455,7 @@ class TestCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed
@@ -487,7 +487,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
@@ -508,7 +508,7 @@ class TestAsyncCheckoutIntents:
                 "province": "NY",
                 "address2": "Apt 1",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             constraints={
                 "max_shipping_price": 500,
@@ -516,7 +516,7 @@ class TestAsyncCheckoutIntents:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
-            promo_codes=["sqF12lZ1VlBb"],
+            promo_codes=["SAVE20"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -541,7 +541,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -565,7 +565,7 @@ class TestAsyncCheckoutIntents:
                 "postal_code": "10001",
                 "province": "NY",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed
@@ -631,7 +631,7 @@ class TestAsyncCheckoutIntents:
             id=["string"],
             after="after",
             before="before",
-            limit=0,
+            limit=1,
             state=["completed"],
         )
         assert_matches_type(AsyncCursorPagination[CheckoutIntent], checkout_intent, path=["response"])
@@ -817,7 +817,7 @@ class TestAsyncCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
@@ -842,7 +842,7 @@ class TestAsyncCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             constraints={
                 "max_shipping_price": 500,
@@ -850,7 +850,7 @@ class TestAsyncCheckoutIntents:
                 "offer_retrieval_effort": "max",
             },
             discover_promo_codes=True,
-            promo_codes=["sqF12lZ1VlBb"],
+            promo_codes=["SAVE20"],
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -879,7 +879,7 @@ class TestAsyncCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -907,7 +907,7 @@ class TestAsyncCheckoutIntents:
                 "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
                 "type": "stripe_token",
             },
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed

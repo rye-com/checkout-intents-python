@@ -21,7 +21,7 @@ class TestCheckoutSessions:
     @parametrize
     def test_method_create(self, client: CheckoutIntents) -> None:
         checkout_session = client.betas.checkout_sessions.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
@@ -30,7 +30,7 @@ class TestCheckoutSessions:
     @parametrize
     def test_method_create_with_all_params(self, client: CheckoutIntents) -> None:
         checkout_session = client.betas.checkout_sessions.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             buyer={
                 "address1": "123 Main St",
@@ -65,7 +65,7 @@ class TestCheckoutSessions:
     @parametrize
     def test_raw_response_create(self, client: CheckoutIntents) -> None:
         response = client.betas.checkout_sessions.with_raw_response.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -78,7 +78,7 @@ class TestCheckoutSessions:
     @parametrize
     def test_streaming_response_create(self, client: CheckoutIntents) -> None:
         with client.betas.checkout_sessions.with_streaming_response.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed
@@ -99,7 +99,7 @@ class TestAsyncCheckoutSessions:
     @parametrize
     async def test_method_create(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_session = await async_client.betas.checkout_sessions.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
         assert_matches_type(CheckoutSession, checkout_session, path=["response"])
@@ -108,7 +108,7 @@ class TestAsyncCheckoutSessions:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_session = await async_client.betas.checkout_sessions.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
             buyer={
                 "address1": "123 Main St",
@@ -143,7 +143,7 @@ class TestAsyncCheckoutSessions:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.betas.checkout_sessions.with_raw_response.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         )
 
@@ -156,7 +156,7 @@ class TestAsyncCheckoutSessions:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.betas.checkout_sessions.with_streaming_response.create(
-            product_url="productUrl",
+            product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
             quantity=1,
         ) as response:
             assert not response.is_closed
