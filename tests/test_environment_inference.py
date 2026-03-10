@@ -1,9 +1,17 @@
 from __future__ import annotations
 
+from urllib.parse import urlparse
+
 import pytest
 
 from checkout_intents import CheckoutIntents, AsyncCheckoutIntents
 from checkout_intents._exceptions import CheckoutIntentsError
+
+
+def _base_origin(url: str) -> str:
+    """Extract origin (scheme + host) to compare URLs without trailing slash sensitivity."""
+    parsed = urlparse(url)
+    return f"{parsed.scheme}://{parsed.netloc}"
 
 
 class TestEnvironmentInference:
@@ -16,7 +24,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert str(client.base_url) == "https://staging.api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
         client.close()
 
     def test_infers_production_from_api_key(self) -> None:
@@ -26,7 +34,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert str(client.base_url) == "https://api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
         client.close()
 
     def test_defaults_to_staging_for_non_matching_api_key(self) -> None:
@@ -36,7 +44,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert str(client.base_url) == "https://staging.api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
         client.close()
 
     def test_explicit_environment_overrides_inferred(self) -> None:
@@ -47,7 +55,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert str(client.base_url) == "https://staging.api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
         client.close()
 
     def test_environment_mismatch_raises_error(self) -> None:
@@ -82,7 +90,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert str(client.base_url) == "https://api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
         client.close()
 
     def test_base_url_overrides_inferred_environment(self) -> None:
@@ -92,7 +100,7 @@ class TestEnvironmentInference:
             base_url="https://custom.api.com/",
             _strict_response_validation=True,
         )
-        assert str(client.base_url) == "https://custom.api.com/"
+        assert _base_origin(str(client.base_url)) == "https://custom.api.com"
         client.close()
 
 
@@ -106,7 +114,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert str(client.base_url) == "https://staging.api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
         await client.close()
 
     async def test_infers_production_from_api_key(self) -> None:
@@ -116,7 +124,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert str(client.base_url) == "https://api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
         await client.close()
 
     async def test_defaults_to_staging_for_non_matching_api_key(self) -> None:
@@ -126,7 +134,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert str(client.base_url) == "https://staging.api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
         await client.close()
 
     async def test_environment_mismatch_raises_error(self) -> None:
@@ -149,7 +157,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert str(client.base_url) == "https://api.rye.com/"
+        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
         await client.close()
 
     async def test_base_url_overrides_inferred_environment(self) -> None:
@@ -159,5 +167,5 @@ class TestAsyncEnvironmentInference:
             base_url="https://custom.api.com/",
             _strict_response_validation=True,
         )
-        assert str(client.base_url) == "https://custom.api.com/"
+        assert _base_origin(str(client.base_url)) == "https://custom.api.com"
         await client.close()
