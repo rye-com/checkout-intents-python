@@ -351,7 +351,7 @@ checkout_intent = client.checkout_intents.purchase(
         "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
         "type": "stripe_token",
     },
-    product_url="productUrl",
+    product_url="https://www.amazon.com/dp/B0DFC9MT8Q",
     quantity=1,
 )
 print(checkout_intent.buyer)

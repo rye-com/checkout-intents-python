@@ -89,7 +89,7 @@ class ShipmentsResource(SyncAPIResource):
         after: str | Omit = omit,
         before: str | Omit = omit,
         ids: SequenceNotStr[str] | Omit = omit,
-        limit: float | Omit = omit,
+        limit: int | Omit = omit,
         status: List[ShipmentStatus] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -105,6 +105,8 @@ class ShipmentsResource(SyncAPIResource):
         filters and cursor-based pagination.
 
         Args:
+          limit: Maximum number of results to return (default 100)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -200,7 +202,7 @@ class AsyncShipmentsResource(AsyncAPIResource):
         after: str | Omit = omit,
         before: str | Omit = omit,
         ids: SequenceNotStr[str] | Omit = omit,
-        limit: float | Omit = omit,
+        limit: int | Omit = omit,
         status: List[ShipmentStatus] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -216,6 +218,8 @@ class AsyncShipmentsResource(AsyncAPIResource):
         filters and cursor-based pagination.
 
         Args:
+          limit: Maximum number of results to return (default 100)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

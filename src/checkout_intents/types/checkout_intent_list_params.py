@@ -17,6 +17,7 @@ class CheckoutIntentListParams(TypedDict, total=False):
 
     before: str
 
-    limit: float
+    limit: int
+    """Maximum number of results to return (default 100)"""
 
     state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
