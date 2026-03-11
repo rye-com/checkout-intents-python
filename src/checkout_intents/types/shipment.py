@@ -69,6 +69,8 @@ class WithStatusBaseShipmentWithTrackingShipped(BaseModel):
     system.
     """
 
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
+
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
     status: Literal["shipped"]
@@ -119,6 +121,8 @@ class DeliveredShipment(BaseModel):
     system.
     """
 
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
+
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
     status: Literal["delivered"]
@@ -166,6 +170,8 @@ class WithStatusBaseShipmentWithTrackingDelayed(BaseModel):
     The external ID is provided by the marketplace and matches the shipment to their
     system.
     """
+
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
 
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
@@ -215,6 +221,8 @@ class WithStatusBaseShipmentWithTrackingOutForDelivery(BaseModel):
     system.
     """
 
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
+
     shipped_at: datetime = FieldInfo(alias="shippedAt")
 
     status: Literal["out_for_delivery"]
@@ -235,6 +243,8 @@ class WithStatusBaseShipmentOrdered(BaseModel):
 
     created_at: datetime = FieldInfo(alias="createdAt")
 
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
+
     status: Literal["ordered"]
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
@@ -246,6 +256,8 @@ class WithStatusBaseShipmentCanceled(BaseModel):
     checkout_intent_id: str = FieldInfo(alias="checkoutIntentId")
 
     created_at: datetime = FieldInfo(alias="createdAt")
+
+    marketplace_order_id: str = FieldInfo(alias="marketplaceOrderId")
 
     status: Literal["canceled"]
 
