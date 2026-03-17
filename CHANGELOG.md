@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.18.0 (2026-03-17)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/rye-com/checkout-intents-python/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* Return 403 for non-drawdown developers on billing endpoints ([4af9f70](https://github.com/rye-com/checkout-intents-python/commit/4af9f70a83cdfdd43def3662642617779cf4bffc))
+* Update shipment types in prep for tracking updates ([a7e961b](https://github.com/rye-com/checkout-intents-python/commit/a7e961bb3f6719b94f125ec1c282fd8afb65a9ef))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([f091341](https://github.com/rye-com/checkout-intents-python/commit/f091341965c422e2000ae91af8d59b6a90fecb17))
+* **docs:** remove double-slash from server urls ([3085ed4](https://github.com/rye-com/checkout-intents-python/commit/3085ed4b85626da020827fe10717a90804121c99))
+* **pydantic:** do not pass `by_alias` unless set ([9e0774e](https://github.com/rye-com/checkout-intents-python/commit/9e0774e3da803b64e61fa94fe023a2aa96fd1374))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([f1f6597](https://github.com/rye-com/checkout-intents-python/commit/f1f6597e19f6bac06300d4f8f7f6b783dc1495b0))
+* **docs:** improve examples ([15cfd8e](https://github.com/rye-com/checkout-intents-python/commit/15cfd8ebdcca501f6663cfc66ebc911838d2234f))
+* **internal:** tweak CI branches ([ddf8eaa](https://github.com/rye-com/checkout-intents-python/commit/ddf8eaa99e0fe5c002dfa18c45f5bec9f9deb5d5))
+* **internal:** update tests ([c585a9f](https://github.com/rye-com/checkout-intents-python/commit/c585a9f6f2ed5573adcf6dd777e85b60964769fd))
+
 ## 0.17.0 (2026-03-06)
 
 Full Changelog: [v0.16.1...v0.17.0](https://github.com/rye-com/checkout-intents-python/compare/v0.16.1...v0.17.0)
