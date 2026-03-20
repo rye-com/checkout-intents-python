@@ -15,7 +15,7 @@ from ...types import (
     checkout_intent_add_payment_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .shipments import (
     ShipmentsResource,
@@ -155,7 +155,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         return cast(
             CheckoutIntent,
             self._get(
-                f"/api/v1/checkout-intents/{id}",
+                path_template("/api/v1/checkout-intents/{id}", id=id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -250,7 +250,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         return cast(
             CheckoutIntent,
             self._post(
-                f"/api/v1/checkout-intents/{id}/payment",
+                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
                 body=maybe_transform(
                     {"payment_method": payment_method},
                     checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
@@ -301,7 +301,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         return cast(
             CheckoutIntent,
             self._post(
-                f"/api/v1/checkout-intents/{id}/confirm",
+                path_template("/api/v1/checkout-intents/{id}/confirm", id=id),
                 body=maybe_transform(
                     {"payment_method": payment_method}, checkout_intent_confirm_params.CheckoutIntentConfirmParams
                 ),
@@ -495,7 +495,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         return cast(
             CheckoutIntent,
             await self._get(
-                f"/api/v1/checkout-intents/{id}",
+                path_template("/api/v1/checkout-intents/{id}", id=id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -590,7 +590,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         return cast(
             CheckoutIntent,
             await self._post(
-                f"/api/v1/checkout-intents/{id}/payment",
+                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
                 body=await async_maybe_transform(
                     {"payment_method": payment_method},
                     checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
@@ -641,7 +641,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         return cast(
             CheckoutIntent,
             await self._post(
-                f"/api/v1/checkout-intents/{id}/confirm",
+                path_template("/api/v1/checkout-intents/{id}/confirm", id=id),
                 body=await async_maybe_transform(
                     {"payment_method": payment_method}, checkout_intent_confirm_params.CheckoutIntentConfirmParams
                 ),
