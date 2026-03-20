@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.0 (2026-03-20)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/rye-com/checkout-intents-python/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* Add deliveryEstimate to shipping options in offers. ([ce9ab11](https://github.com/rye-com/checkout-intents-python/commit/ce9ab11cb94184ce809d525ae0286710dad39e59))
+
 ## 0.18.0 (2026-03-17)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/rye-com/checkout-intents-python/compare/v0.17.0...v0.18.0)
