@@ -1,13 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
 from .money import Money
 from .._models import BaseModel
 
-__all__ = ["Offer", "Cost", "Shipping", "ShippingAvailableOption"]
+__all__ = ["Offer", "Cost", "Shipping", "ShippingAvailableOption", "ShippingAvailableOptionDeliveryEstimate"]
 
 
 class Cost(BaseModel):
@@ -24,10 +25,20 @@ class Cost(BaseModel):
     tax: Optional[Money] = None
 
 
+class ShippingAvailableOptionDeliveryEstimate(BaseModel):
+    earliest: datetime
+
+    latest: datetime
+
+
 class ShippingAvailableOption(BaseModel):
     id: str
 
     cost: Money
+
+    delivery_estimate: Optional[ShippingAvailableOptionDeliveryEstimate] = FieldInfo(
+        alias="deliveryEstimate", default=None
+    )
 
     discount: Optional[Money] = None
 

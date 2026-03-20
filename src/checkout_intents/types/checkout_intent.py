@@ -43,8 +43,6 @@ class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
 
 
 class CompletedCheckoutIntent(BaseCheckoutIntent):
-    estimated_delivery_date: Optional[datetime] = FieldInfo(alias="estimatedDeliveryDate", default=None)
-
     offer: Offer
 
     order_id: Optional[str] = FieldInfo(alias="orderId", default=None)
@@ -52,6 +50,8 @@ class CompletedCheckoutIntent(BaseCheckoutIntent):
     payment_method: PaymentMethod = FieldInfo(alias="paymentMethod")
 
     state: Literal["completed"]
+
+    estimated_delivery_date: Optional[datetime] = FieldInfo(alias="estimatedDeliveryDate", default=None)
 
 
 class FailedCheckoutIntentFailureReason(BaseModel):
