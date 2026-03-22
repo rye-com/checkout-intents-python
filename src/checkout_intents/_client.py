@@ -219,7 +219,7 @@ class CheckoutIntents(SyncAPIClient):
     @property
     @override
     def qs(self) -> Querystring:
-        return Querystring(array_format="repeat")
+        return Querystring(array_format="comma")
 
     @property
     @override
@@ -468,7 +468,7 @@ class AsyncCheckoutIntents(AsyncAPIClient):
     @property
     @override
     def qs(self) -> Querystring:
-        return Querystring(array_format="repeat")
+        return Querystring(array_format="comma")
 
     @property
     @override
