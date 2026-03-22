@@ -531,6 +531,21 @@ class TestCheckoutIntents:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
+    def test_query_array_repeat_format(self, client: CheckoutIntents) -> None:
+        """Array query params must be serialized as repeated keys (?id=a&id=b),
+        not comma-separated (?id=a,b), so the server can parse them correctly."""
+        request = client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/foo",
+                **make_request_options(
+                    query={"id": ["ci_aaa", "ci_bbb"]},
+                ),
+            ),
+        )
+        assert str(request.url).endswith("?id=ci_aaa&id=ci_bbb")
+        assert request.url.params.multi_items() == [("id", "ci_aaa"), ("id", "ci_bbb")]
+
     def test_multipart_repeating_array(self, client: CheckoutIntents) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
@@ -1550,6 +1565,21 @@ class TestAsyncCheckoutIntents:
         )
         params = dict(request.url.params)
         assert params == {"foo": "2"}
+
+    def test_query_array_repeat_format(self, async_client: AsyncCheckoutIntents) -> None:
+        """Array query params must be serialized as repeated keys (?id=a&id=b),
+        not comma-separated (?id=a,b), so the server can parse them correctly."""
+        request = async_client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/foo",
+                **make_request_options(
+                    query={"id": ["ci_aaa", "ci_bbb"]},
+                ),
+            ),
+        )
+        assert str(request.url).endswith("?id=ci_aaa&id=ci_bbb")
+        assert request.url.params.multi_items() == [("id", "ci_aaa"), ("id", "ci_bbb")]
 
     def test_multipart_repeating_array(self, async_client: AsyncCheckoutIntents) -> None:
         request = async_client._build_request(
