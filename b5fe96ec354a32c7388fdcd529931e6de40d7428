@@ -1,0 +1,23 @@
+tests/test_client.py
+  d6079635e208ab21 534-548,1569-1583
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "b5fe96ec354a32c7388fdcd529931e6de40d7428",
+  "prompts": {
+    "d6079635e208ab21": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a334c3f-fd66-4b4e-ab32-fb31c2d83ab2",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Victor Tsyan <victor@rye.com>",
+      "messages": [],
+      "total_additions": 30,
+      "total_deletions": 0,
+      "accepted_lines": 30,
+      "overriden_lines": 0
+    }
+  }
+}
