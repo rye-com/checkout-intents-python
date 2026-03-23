@@ -12,6 +12,8 @@ __all__ = ["ProductVariant"]
 
 
 class ProductVariant(BaseModel):
+    id: Optional[str] = None
+
     availability: ProductAvailability
     """The availability status of a product.
 
