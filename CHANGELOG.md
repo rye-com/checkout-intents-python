@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.19.1 (2026-03-23)
+
+Full Changelog: [v0.19.0...v0.19.1](https://github.com/rye-com/checkout-intents-python/compare/v0.19.0...v0.19.1)
+
+### Bug Fixes
+
+* **api:** use repeat format for array query param serialization ([42c1770](https://github.com/rye-com/checkout-intents-python/commit/42c1770aca5e11e7e2204d613ba4057d6830a653))
+* sanitize endpoint path params ([5eadf8e](https://github.com/rye-com/checkout-intents-python/commit/5eadf8e2056a7180ad392506100b96dc366d83c5))
+
 ## 0.19.0 (2026-03-20)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/rye-com/checkout-intents-python/compare/v0.18.0...v0.19.0)
