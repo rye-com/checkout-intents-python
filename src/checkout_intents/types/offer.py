@@ -26,9 +26,23 @@ class Cost(BaseModel):
 
 
 class ShippingAvailableOptionDeliveryEstimate(BaseModel):
-    earliest: datetime
+    """Estimated range of dates that items will be delivered in.
 
-    latest: datetime
+    At least one of
+    `earliest` or `latest` are guaranteed to be set.
+
+    Interpretation:
+
+    * If both `earliest` and `latest` are set, then the delivery estimate is the range between the two dates.
+    * If only `earliest` is set, then the delivery estimate is any date after that date.
+    * If only `latest` is set, then the delivery estimate is any date before that date.
+    """
+
+    earliest: Optional[datetime] = None
+    """Earliest date that items will be delivered by."""
+
+    latest: Optional[datetime] = None
+    """Latest date that items will be delivered by."""
 
 
 class ShippingAvailableOption(BaseModel):
@@ -39,6 +53,19 @@ class ShippingAvailableOption(BaseModel):
     delivery_estimate: Optional[ShippingAvailableOptionDeliveryEstimate] = FieldInfo(
         alias="deliveryEstimate", default=None
     )
+    """Estimated range of dates that items will be delivered in.
+
+    At least one of `earliest` or `latest` are guaranteed to be set.
+
+    Interpretation:
+
+    - If both `earliest` and `latest` are set, then the delivery estimate is the
+      range between the two dates.
+    - If only `earliest` is set, then the delivery estimate is any date after that
+      date.
+    - If only `latest` is set, then the delivery estimate is any date before that
+      date.
+    """
 
     discount: Optional[Money] = None
 
