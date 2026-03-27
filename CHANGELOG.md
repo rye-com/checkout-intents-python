@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.20.0 (2026-03-27)
+
+Full Changelog: [v0.19.1...v0.20.0](https://github.com/rye-com/checkout-intents-python/compare/v0.19.1...v0.20.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([9d41a60](https://github.com/rye-com/checkout-intents-python/commit/9d41a60e54ce870e39ad29ea16bce3c0cd101d16))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([457fe79](https://github.com/rye-com/checkout-intents-python/commit/457fe79f9ef293cd400dff5819aac6bb206fd936))
+* **internal:** improvements ([3eecd5f](https://github.com/rye-com/checkout-intents-python/commit/3eecd5f1b7927ed2d35e817ab1d79c99e9d2ec0e))
+* **internal:** update gitignore ([8633106](https://github.com/rye-com/checkout-intents-python/commit/86331066ebca3cc730170bf7cf7f8388928c9f8d))
+
 ## 0.19.1 (2026-03-23)
 
 Full Changelog: [v0.19.0...v0.19.1](https://github.com/rye-com/checkout-intents-python/compare/v0.19.0...v0.19.1)
