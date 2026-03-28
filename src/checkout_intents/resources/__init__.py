@@ -48,6 +48,14 @@ from .checkout_intents import (
     CheckoutIntentsResourceWithStreamingResponse,
     AsyncCheckoutIntentsResourceWithStreamingResponse,
 )
+from .payment_gateways import (
+    PaymentGatewaysResource,
+    AsyncPaymentGatewaysResource,
+    PaymentGatewaysResourceWithRawResponse,
+    AsyncPaymentGatewaysResourceWithRawResponse,
+    PaymentGatewaysResourceWithStreamingResponse,
+    AsyncPaymentGatewaysResourceWithStreamingResponse,
+)
 
 __all__ = [
     "CheckoutIntentsResource",
@@ -80,6 +88,12 @@ __all__ = [
     "AsyncShipmentsResourceWithRawResponse",
     "ShipmentsResourceWithStreamingResponse",
     "AsyncShipmentsResourceWithStreamingResponse",
+    "PaymentGatewaysResource",
+    "AsyncPaymentGatewaysResource",
+    "PaymentGatewaysResourceWithRawResponse",
+    "AsyncPaymentGatewaysResourceWithRawResponse",
+    "PaymentGatewaysResourceWithStreamingResponse",
+    "AsyncPaymentGatewaysResourceWithStreamingResponse",
     "BillingResource",
     "AsyncBillingResource",
     "BillingResourceWithRawResponse",

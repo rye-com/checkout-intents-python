@@ -31,12 +31,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import betas, brands, billing, products, shipments, checkout_intents
+    from .resources import betas, brands, billing, products, shipments, checkout_intents, payment_gateways
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.products import ProductsResource, AsyncProductsResource
     from .resources.shipments import ShipmentsResource, AsyncShipmentsResource
     from .resources.betas.betas import BetasResource, AsyncBetasResource
+    from .resources.payment_gateways import PaymentGatewaysResource, AsyncPaymentGatewaysResource
     from .resources.checkout_intents.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
@@ -201,6 +202,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.shipments import ShipmentsResource
 
         return ShipmentsResource(self)
+
+    @cached_property
+    def payment_gateways(self) -> PaymentGatewaysResource:
+        from .resources.payment_gateways import PaymentGatewaysResource
+
+        return PaymentGatewaysResource(self)
 
     @cached_property
     def billing(self) -> BillingResource:
@@ -452,6 +459,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncShipmentsResource(self)
 
     @cached_property
+    def payment_gateways(self) -> AsyncPaymentGatewaysResource:
+        from .resources.payment_gateways import AsyncPaymentGatewaysResource
+
+        return AsyncPaymentGatewaysResource(self)
+
+    @cached_property
     def billing(self) -> AsyncBillingResource:
         from .resources.billing import AsyncBillingResource
 
@@ -609,6 +622,12 @@ class CheckoutIntentsWithRawResponse:
         return ShipmentsResourceWithRawResponse(self._client.shipments)
 
     @cached_property
+    def payment_gateways(self) -> payment_gateways.PaymentGatewaysResourceWithRawResponse:
+        from .resources.payment_gateways import PaymentGatewaysResourceWithRawResponse
+
+        return PaymentGatewaysResourceWithRawResponse(self._client.payment_gateways)
+
+    @cached_property
     def billing(self) -> billing.BillingResourceWithRawResponse:
         from .resources.billing import BillingResourceWithRawResponse
 
@@ -650,6 +669,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.shipments import AsyncShipmentsResourceWithRawResponse
 
         return AsyncShipmentsResourceWithRawResponse(self._client.shipments)
+
+    @cached_property
+    def payment_gateways(self) -> payment_gateways.AsyncPaymentGatewaysResourceWithRawResponse:
+        from .resources.payment_gateways import AsyncPaymentGatewaysResourceWithRawResponse
+
+        return AsyncPaymentGatewaysResourceWithRawResponse(self._client.payment_gateways)
 
     @cached_property
     def billing(self) -> billing.AsyncBillingResourceWithRawResponse:
@@ -695,6 +720,12 @@ class CheckoutIntentsWithStreamedResponse:
         return ShipmentsResourceWithStreamingResponse(self._client.shipments)
 
     @cached_property
+    def payment_gateways(self) -> payment_gateways.PaymentGatewaysResourceWithStreamingResponse:
+        from .resources.payment_gateways import PaymentGatewaysResourceWithStreamingResponse
+
+        return PaymentGatewaysResourceWithStreamingResponse(self._client.payment_gateways)
+
+    @cached_property
     def billing(self) -> billing.BillingResourceWithStreamingResponse:
         from .resources.billing import BillingResourceWithStreamingResponse
 
@@ -736,6 +767,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.shipments import AsyncShipmentsResourceWithStreamingResponse
 
         return AsyncShipmentsResourceWithStreamingResponse(self._client.shipments)
+
+    @cached_property
+    def payment_gateways(self) -> payment_gateways.AsyncPaymentGatewaysResourceWithStreamingResponse:
+        from .resources.payment_gateways import AsyncPaymentGatewaysResourceWithStreamingResponse
+
+        return AsyncPaymentGatewaysResourceWithStreamingResponse(self._client.payment_gateways)
 
     @cached_property
     def billing(self) -> billing.AsyncBillingResourceWithStreamingResponse:
