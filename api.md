@@ -86,6 +86,18 @@ Methods:
 - <code title="get /api/v1/shipments/{id}">client.shipments.<a href="./src/checkout_intents/resources/shipments.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/shipment.py">Shipment</a></code>
 - <code title="get /api/v1/shipments">client.shipments.<a href="./src/checkout_intents/resources/shipments.py">list</a>(\*\*<a href="src/checkout_intents/types/shipment_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/shipment.py">SyncCursorPagination[Shipment]</a></code>
 
+# PaymentGateways
+
+Types:
+
+```python
+from checkout_intents.types import PaymentGateway, PaymentGatewaySession
+```
+
+Methods:
+
+- <code title="post /api/v1/payment-gateways/{gateway}/session">client.payment_gateways.<a href="./src/checkout_intents/resources/payment_gateways.py">create_session</a>(gateway) -> <a href="./src/checkout_intents/types/payment_gateway_session.py">PaymentGatewaySession</a></code>
+
 # Billing
 
 Types:

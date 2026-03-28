@@ -11,6 +11,7 @@ from .buyer_param import BuyerParam as BuyerParam
 from .product_image import ProductImage as ProductImage
 from .payment_method import PaymentMethod as PaymentMethod
 from .checkout_intent import CheckoutIntent as CheckoutIntent
+from .payment_gateway import PaymentGateway as PaymentGateway
 from .product_variant import ProductVariant as ProductVariant
 from .shipment_status import ShipmentStatus as ShipmentStatus
 from .checkout_session import CheckoutSession as CheckoutSession
@@ -23,6 +24,7 @@ from .product_availability import ProductAvailability as ProductAvailability
 from .shipment_list_params import ShipmentListParams as ShipmentListParams
 from .product_lookup_params import ProductLookupParams as ProductLookupParams
 from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveResponse
+from .payment_gateway_session import PaymentGatewaySession as PaymentGatewaySession
 from .variant_selection_param import VariantSelectionParam as VariantSelectionParam
 from .checkout_intent_list_params import CheckoutIntentListParams as CheckoutIntentListParams
 from .billing_get_balance_response import BillingGetBalanceResponse as BillingGetBalanceResponse
