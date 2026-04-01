@@ -7,6 +7,7 @@ from typing_extensions import Literal, TypeAlias
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .shipment_status import ShipmentStatus
 from .shipment_tracking import ShipmentTracking
 
 __all__ = [
@@ -52,6 +53,8 @@ class WithStatusBaseShipmentWithTrackingShippedTrackingEvent(BaseModel):
     description: Optional[str] = None
 
     location: WithStatusBaseShipmentWithTrackingShippedTrackingEventLocation
+
+    status: ShipmentStatus
 
     timestamp: Optional[WithStatusBaseShipmentWithTrackingShippedTrackingEventTimestamp] = None
 
@@ -102,6 +105,8 @@ class DeliveredShipmentTrackingEvent(BaseModel):
     description: Optional[str] = None
 
     location: DeliveredShipmentTrackingEventLocation
+
+    status: ShipmentStatus
 
     timestamp: Optional[DeliveredShipmentTrackingEventTimestamp] = None
 
@@ -155,6 +160,8 @@ class WithStatusBaseShipmentWithTrackingDelayedTrackingEvent(BaseModel):
 
     location: WithStatusBaseShipmentWithTrackingDelayedTrackingEventLocation
 
+    status: ShipmentStatus
+
     timestamp: Optional[WithStatusBaseShipmentWithTrackingDelayedTrackingEventTimestamp] = None
 
 
@@ -204,6 +211,8 @@ class WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEvent(BaseModel):
     description: Optional[str] = None
 
     location: WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventLocation
+
+    status: ShipmentStatus
 
     timestamp: Optional[WithStatusBaseShipmentWithTrackingOutForDeliveryTrackingEventTimestamp] = None
 
