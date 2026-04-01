@@ -14,6 +14,7 @@ __all__ = [
     "NekudaPaymentMethod",
     "PravaPaymentMethod",
     "DrawdownPaymentMethod",
+    "X402PaymentMethod",
 ]
 
 
@@ -48,6 +49,17 @@ class DrawdownPaymentMethod(TypedDict, total=False):
     type: Required[Literal["drawdown"]]
 
 
+class X402PaymentMethod(TypedDict, total=False):
+    network: Required[Literal["base", "solana", "tempo"]]
+
+    type: Required[Literal["x402"]]
+
+
 PaymentMethodParam: TypeAlias = Union[
-    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, PravaPaymentMethod, DrawdownPaymentMethod
+    StripeTokenPaymentMethod,
+    BasisTheoryPaymentMethod,
+    NekudaPaymentMethod,
+    PravaPaymentMethod,
+    DrawdownPaymentMethod,
+    X402PaymentMethod,
 ]
