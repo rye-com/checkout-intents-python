@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 (2026-04-01)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/rye-com/checkout-intents-python/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* RYE-7142: Add shipment status to individual tracking events ([c408d1e](https://github.com/rye-com/checkout-intents-python/commit/c408d1edf3c473821e26069ca38477c46424ce7d))
+
 ## 0.21.0 (2026-03-28)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/rye-com/checkout-intents-python/compare/v0.20.0...v0.21.0)
