@@ -14,6 +14,7 @@ __all__ = [
     "NekudaPaymentMethod",
     "PravaPaymentMethod",
     "DrawdownPaymentMethod",
+    "X402PaymentMethod",
 ]
 
 
@@ -48,6 +49,17 @@ class DrawdownPaymentMethod(BaseModel):
     type: Literal["drawdown"]
 
 
+class X402PaymentMethod(BaseModel):
+    network: Literal["base", "solana", "tempo"]
+
+    type: Literal["x402"]
+
+
 PaymentMethod: TypeAlias = Union[
-    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, NekudaPaymentMethod, PravaPaymentMethod, DrawdownPaymentMethod
+    StripeTokenPaymentMethod,
+    BasisTheoryPaymentMethod,
+    NekudaPaymentMethod,
+    PravaPaymentMethod,
+    DrawdownPaymentMethod,
+    X402PaymentMethod,
 ]
