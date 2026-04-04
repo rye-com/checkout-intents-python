@@ -15,6 +15,7 @@ __all__ = [
     "CheckoutIntent",
     "RetrievingOfferCheckoutIntent",
     "AwaitingConfirmationCheckoutIntent",
+    "AwaitingPaymentCheckoutIntent",
     "PlacingOrderCheckoutIntent",
     "CompletedCheckoutIntent",
     "FailedCheckoutIntent",
@@ -32,6 +33,14 @@ class AwaitingConfirmationCheckoutIntent(BaseCheckoutIntent):
     state: Literal["awaiting_confirmation"]
 
     payment_method: Optional[PaymentMethod] = FieldInfo(alias="paymentMethod", default=None)
+
+
+class AwaitingPaymentCheckoutIntent(BaseCheckoutIntent):
+    offer: Offer
+
+    payment_method: PaymentMethod = FieldInfo(alias="paymentMethod")
+
+    state: Literal["awaiting_payment"]
 
 
 class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
@@ -97,6 +106,7 @@ class FailedCheckoutIntent(BaseCheckoutIntent):
 CheckoutIntent: TypeAlias = Union[
     RetrievingOfferCheckoutIntent,
     AwaitingConfirmationCheckoutIntent,
+    AwaitingPaymentCheckoutIntent,
     PlacingOrderCheckoutIntent,
     CompletedCheckoutIntent,
     FailedCheckoutIntent,
