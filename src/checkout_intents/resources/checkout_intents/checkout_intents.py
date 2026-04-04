@@ -181,7 +181,11 @@ class CheckoutIntentsResource(SyncAPIResource):
         after: str | Omit = omit,
         before: str | Omit = omit,
         limit: int | Omit = omit,
-        state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
+        state: List[
+            Literal[
+                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "awaiting_payment", "placing_order"
+            ]
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -771,7 +775,11 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         after: str | Omit = omit,
         before: str | Omit = omit,
         limit: int | Omit = omit,
-        state: List[Literal["completed", "failed", "retrieving_offer", "awaiting_confirmation", "placing_order"]]
+        state: List[
+            Literal[
+                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "awaiting_payment", "placing_order"
+            ]
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
