@@ -15,7 +15,9 @@ __all__ = [
     "CheckoutIntent",
     "RetrievingOfferCheckoutIntent",
     "AwaitingConfirmationCheckoutIntent",
-    "AwaitingPaymentCheckoutIntent",
+    "RequiresActionCheckoutIntent",
+    "RequiresActionCheckoutIntentNextAction",
+    "RequiresActionCheckoutIntentNextActionX402",
     "PlacingOrderCheckoutIntent",
     "CompletedCheckoutIntent",
     "FailedCheckoutIntent",
@@ -35,12 +37,34 @@ class AwaitingConfirmationCheckoutIntent(BaseCheckoutIntent):
     payment_method: Optional[PaymentMethod] = FieldInfo(alias="paymentMethod", default=None)
 
 
-class AwaitingPaymentCheckoutIntent(BaseCheckoutIntent):
+class RequiresActionCheckoutIntentNextActionX402(BaseModel):
+    currency: Literal["USDC"]
+
+    expires_at: str = FieldInfo(alias="expiresAt")
+
+    max_amount_required: str = FieldInfo(alias="maxAmountRequired")
+
+    network: str
+
+    recipient: str
+
+    scheme: Literal["exact"]
+
+
+class RequiresActionCheckoutIntentNextAction(BaseModel):
+    type: Literal["x402"]
+
+    x402: RequiresActionCheckoutIntentNextActionX402
+
+
+class RequiresActionCheckoutIntent(BaseCheckoutIntent):
+    next_action: RequiresActionCheckoutIntentNextAction = FieldInfo(alias="nextAction")
+
     offer: Offer
 
     payment_method: PaymentMethod = FieldInfo(alias="paymentMethod")
 
-    state: Literal["awaiting_payment"]
+    state: Literal["requires_action"]
 
 
 class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
@@ -106,7 +130,7 @@ class FailedCheckoutIntent(BaseCheckoutIntent):
 CheckoutIntent: TypeAlias = Union[
     RetrievingOfferCheckoutIntent,
     AwaitingConfirmationCheckoutIntent,
-    AwaitingPaymentCheckoutIntent,
+    RequiresActionCheckoutIntent,
     PlacingOrderCheckoutIntent,
     CompletedCheckoutIntent,
     FailedCheckoutIntent,
