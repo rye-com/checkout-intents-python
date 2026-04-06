@@ -172,7 +172,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         limit: int | Omit = omit,
         state: List[
             Literal[
-                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "awaiting_payment", "placing_order"
+                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "requires_action", "placing_order"
             ]
         ]
         | Omit = omit,
@@ -516,7 +516,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         state: List[
             Literal[
-                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "awaiting_payment", "placing_order"
+                "completed", "failed", "retrieving_offer", "awaiting_confirmation", "requires_action", "placing_order"
             ]
         ]
         | Omit = omit,
