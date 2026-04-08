@@ -89,6 +89,7 @@ class CompletedCheckoutIntent(BaseCheckoutIntent):
 
 class FailedCheckoutIntentFailureReason(BaseModel):
     code: Literal[
+        "unknown",
         "checkout_intent_expired",
         "payment_failed",
         "insufficient_stock",
@@ -110,7 +111,6 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "constraint_total_price_exceeded",
         "constraint_shipping_cost_exceeded",
         "promo_code_discovery_not_enabled",
-        "unknown",
     ]
     """Type derived from runtime array - always in sync"""
 
