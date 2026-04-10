@@ -34,3 +34,7 @@ from .checkout_intent_purchase_params import CheckoutIntentPurchaseParams as Che
 from .billing_list_transactions_params import BillingListTransactionsParams as BillingListTransactionsParams
 from .billing_list_transactions_response import BillingListTransactionsResponse as BillingListTransactionsResponse
 from .checkout_intent_add_payment_params import CheckoutIntentAddPaymentParams as CheckoutIntentAddPaymentParams
+from .billing_create_topup_invoice_params import BillingCreateTopupInvoiceParams as BillingCreateTopupInvoiceParams
+from .billing_create_topup_invoice_response import (
+    BillingCreateTopupInvoiceResponse as BillingCreateTopupInvoiceResponse,
+)

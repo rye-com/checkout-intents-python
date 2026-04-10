@@ -12,6 +12,7 @@ from checkout_intents import CheckoutIntents, AsyncCheckoutIntents
 from checkout_intents.types import (
     BillingGetBalanceResponse,
     BillingListTransactionsResponse,
+    BillingCreateTopupInvoiceResponse,
 )
 from checkout_intents.pagination import SyncCursorPagination, AsyncCursorPagination
 
@@ -20,6 +21,91 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestBilling:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_cancel_topup_invoice(self, client: CheckoutIntents) -> None:
+        billing = client.billing.cancel_topup_invoice(
+            "invoiceId",
+        )
+        assert billing is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_cancel_topup_invoice(self, client: CheckoutIntents) -> None:
+        response = client.billing.with_raw_response.cancel_topup_invoice(
+            "invoiceId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        billing = response.parse()
+        assert billing is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_cancel_topup_invoice(self, client: CheckoutIntents) -> None:
+        with client.billing.with_streaming_response.cancel_topup_invoice(
+            "invoiceId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            billing = response.parse()
+            assert billing is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_cancel_topup_invoice(self, client: CheckoutIntents) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `invoice_id` but received ''"):
+            client.billing.with_raw_response.cancel_topup_invoice(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_topup_invoice(self, client: CheckoutIntents) -> None:
+        billing = client.billing.create_topup_invoice(
+            amount_subunits=500000,
+        )
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_topup_invoice_with_all_params(self, client: CheckoutIntents) -> None:
+        billing = client.billing.create_topup_invoice(
+            amount_subunits=500000,
+            charge_automatically=False,
+        )
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_create_topup_invoice(self, client: CheckoutIntents) -> None:
+        response = client.billing.with_raw_response.create_topup_invoice(
+            amount_subunits=500000,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        billing = response.parse()
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_create_topup_invoice(self, client: CheckoutIntents) -> None:
+        with client.billing.with_streaming_response.create_topup_invoice(
+            amount_subunits=500000,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            billing = response.parse()
+            assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -92,6 +178,91 @@ class TestAsyncBilling:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_cancel_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        billing = await async_client.billing.cancel_topup_invoice(
+            "invoiceId",
+        )
+        assert billing is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_cancel_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        response = await async_client.billing.with_raw_response.cancel_topup_invoice(
+            "invoiceId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        billing = await response.parse()
+        assert billing is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_cancel_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        async with async_client.billing.with_streaming_response.cancel_topup_invoice(
+            "invoiceId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            billing = await response.parse()
+            assert billing is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_cancel_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `invoice_id` but received ''"):
+            await async_client.billing.with_raw_response.cancel_topup_invoice(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        billing = await async_client.billing.create_topup_invoice(
+            amount_subunits=500000,
+        )
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_topup_invoice_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
+        billing = await async_client.billing.create_topup_invoice(
+            amount_subunits=500000,
+            charge_automatically=False,
+        )
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_create_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        response = await async_client.billing.with_raw_response.create_topup_invoice(
+            amount_subunits=500000,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        billing = await response.parse()
+        assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_topup_invoice(self, async_client: AsyncCheckoutIntents) -> None:
+        async with async_client.billing.with_streaming_response.create_topup_invoice(
+            amount_subunits=500000,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            billing = await response.parse()
+            assert_matches_type(BillingCreateTopupInvoiceResponse, billing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
