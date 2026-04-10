@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import billing_list_transactions_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform
+from ..types import billing_list_transactions_params, billing_create_topup_invoice_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -19,6 +19,7 @@ from ..pagination import SyncCursorPagination, AsyncCursorPagination
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.billing_get_balance_response import BillingGetBalanceResponse
 from ..types.billing_list_transactions_response import BillingListTransactionsResponse
+from ..types.billing_create_topup_invoice_response import BillingCreateTopupInvoiceResponse
 
 __all__ = ["BillingResource", "AsyncBillingResource"]
 
@@ -42,6 +43,102 @@ class BillingResource(SyncAPIResource):
         For more information, see https://www.github.com/rye-com/checkout-intents-python#with_streaming_response
         """
         return BillingResourceWithStreamingResponse(self)
+
+    def cancel_topup_invoice(
+        self,
+        invoice_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """Cancel/void an unpaid top-up invoice.
+
+        Only invoices in open state can be
+        cancelled.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not invoice_id:
+            raise ValueError(f"Expected a non-empty value for `invoice_id` but received {invoice_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            path_template("/api/v1/billing/drawdown/topup/{invoice_id}", invoice_id=invoice_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
+    def create_topup_invoice(
+        self,
+        *,
+        amount_subunits: int,
+        charge_automatically: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> BillingCreateTopupInvoiceResponse:
+        """Request an on-demand top-up invoice..
+
+        Requires drawdown billing to be enabled.
+        Only one unpaid top-up invoice is allowed at a time.
+
+        Args:
+          amount_subunits: Amount in smallest currency unit (e.g. cents).
+
+          charge_automatically: Override whether to automatically charge the invoice. Defaults to the
+              developer's drawdown config value if not specified.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/api/v1/billing/drawdown/topup",
+            body=maybe_transform(
+                {
+                    "amount_subunits": amount_subunits,
+                    "charge_automatically": charge_automatically,
+                },
+                billing_create_topup_invoice_params.BillingCreateTopupInvoiceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=BillingCreateTopupInvoiceResponse,
+        )
 
     def get_balance(
         self,
@@ -134,6 +231,102 @@ class AsyncBillingResource(AsyncAPIResource):
         """
         return AsyncBillingResourceWithStreamingResponse(self)
 
+    async def cancel_topup_invoice(
+        self,
+        invoice_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """Cancel/void an unpaid top-up invoice.
+
+        Only invoices in open state can be
+        cancelled.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not invoice_id:
+            raise ValueError(f"Expected a non-empty value for `invoice_id` but received {invoice_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            path_template("/api/v1/billing/drawdown/topup/{invoice_id}", invoice_id=invoice_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
+    async def create_topup_invoice(
+        self,
+        *,
+        amount_subunits: int,
+        charge_automatically: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> BillingCreateTopupInvoiceResponse:
+        """Request an on-demand top-up invoice..
+
+        Requires drawdown billing to be enabled.
+        Only one unpaid top-up invoice is allowed at a time.
+
+        Args:
+          amount_subunits: Amount in smallest currency unit (e.g. cents).
+
+          charge_automatically: Override whether to automatically charge the invoice. Defaults to the
+              developer's drawdown config value if not specified.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/api/v1/billing/drawdown/topup",
+            body=await async_maybe_transform(
+                {
+                    "amount_subunits": amount_subunits,
+                    "charge_automatically": charge_automatically,
+                },
+                billing_create_topup_invoice_params.BillingCreateTopupInvoiceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=BillingCreateTopupInvoiceResponse,
+        )
+
     async def get_balance(
         self,
         *,
@@ -209,6 +402,12 @@ class BillingResourceWithRawResponse:
     def __init__(self, billing: BillingResource) -> None:
         self._billing = billing
 
+        self.cancel_topup_invoice = to_raw_response_wrapper(
+            billing.cancel_topup_invoice,
+        )
+        self.create_topup_invoice = to_raw_response_wrapper(
+            billing.create_topup_invoice,
+        )
         self.get_balance = to_raw_response_wrapper(
             billing.get_balance,
         )
@@ -221,6 +420,12 @@ class AsyncBillingResourceWithRawResponse:
     def __init__(self, billing: AsyncBillingResource) -> None:
         self._billing = billing
 
+        self.cancel_topup_invoice = async_to_raw_response_wrapper(
+            billing.cancel_topup_invoice,
+        )
+        self.create_topup_invoice = async_to_raw_response_wrapper(
+            billing.create_topup_invoice,
+        )
         self.get_balance = async_to_raw_response_wrapper(
             billing.get_balance,
         )
@@ -233,6 +438,12 @@ class BillingResourceWithStreamingResponse:
     def __init__(self, billing: BillingResource) -> None:
         self._billing = billing
 
+        self.cancel_topup_invoice = to_streamed_response_wrapper(
+            billing.cancel_topup_invoice,
+        )
+        self.create_topup_invoice = to_streamed_response_wrapper(
+            billing.create_topup_invoice,
+        )
         self.get_balance = to_streamed_response_wrapper(
             billing.get_balance,
         )
@@ -245,6 +456,12 @@ class AsyncBillingResourceWithStreamingResponse:
     def __init__(self, billing: AsyncBillingResource) -> None:
         self._billing = billing
 
+        self.cancel_topup_invoice = async_to_streamed_response_wrapper(
+            billing.cancel_topup_invoice,
+        )
+        self.create_topup_invoice = async_to_streamed_response_wrapper(
+            billing.create_topup_invoice,
+        )
         self.get_balance = async_to_streamed_response_wrapper(
             billing.get_balance,
         )
