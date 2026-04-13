@@ -111,6 +111,7 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "constraint_total_price_exceeded",
         "constraint_shipping_cost_exceeded",
         "promo_code_discovery_not_enabled",
+        "product_not_found",
     ]
     """Type derived from runtime array - always in sync"""
 
