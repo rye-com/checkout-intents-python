@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.23.0 (2026-04-14)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/rye-com/checkout-intents-python/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* Add clearer product-not-found error for ASIN 404s ([4717f46](https://github.com/rye-com/checkout-intents-python/commit/4717f46b474eef87ec8ebb026402d72b00f0c893))
+* **api:** manual updates ([9ef8f11](https://github.com/rye-com/checkout-intents-python/commit/9ef8f114fcb7e8bb7b869b2abc4983ed11192211))
+* **api:** manual updates ([ec120fd](https://github.com/rye-com/checkout-intents-python/commit/ec120fd095847fc6fcff1d082ccb647fcaa1d99b))
+* **billing:** add DELETE /billing/drawdown/topup/:invoiceId endpoint ([6901e3d](https://github.com/rye-com/checkout-intents-python/commit/6901e3d2108a6e715c5d943579ca76c98feca9d3))
+* Fix TSOA spec generation by adding ci-billing path mapping ([5417e22](https://github.com/rye-com/checkout-intents-python/commit/5417e2222003d3d5fbb49a28238b897076843536))
+* Gate x402 payments behind Hypertune feature flag ([286500e](https://github.com/rye-com/checkout-intents-python/commit/286500eec3647181f6154051960ece2f4f913b49))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([6ecb889](https://github.com/rye-com/checkout-intents-python/commit/6ecb88988ece30d5cf4604b18347d7817c589c3a))
+* ensure file data are only sent as 1 parameter ([b1257e8](https://github.com/rye-com/checkout-intents-python/commit/b1257e82ecc71842e4dccd7baf06927f448fadb6))
+
 ## 0.22.0 (2026-04-01)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/rye-com/checkout-intents-python/compare/v0.21.0...v0.22.0)
