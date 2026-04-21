@@ -31,8 +31,9 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import betas, brands, billing, products, shipments, checkout_intents, payment_gateways
+    from .resources import betas, brands, events, billing, products, shipments, checkout_intents, payment_gateways
     from .resources.brands import BrandsResource, AsyncBrandsResource
+    from .resources.events import EventsResource, AsyncEventsResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.products import ProductsResource, AsyncProductsResource
     from .resources.shipments import ShipmentsResource, AsyncShipmentsResource
@@ -214,6 +215,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.billing import BillingResource
 
         return BillingResource(self)
+
+    @cached_property
+    def events(self) -> EventsResource:
+        from .resources.events import EventsResource
+
+        return EventsResource(self)
 
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsWithRawResponse:
@@ -471,6 +478,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncBillingResource(self)
 
     @cached_property
+    def events(self) -> AsyncEventsResource:
+        from .resources.events import AsyncEventsResource
+
+        return AsyncEventsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsWithRawResponse:
         return AsyncCheckoutIntentsWithRawResponse(self)
 
@@ -633,6 +646,12 @@ class CheckoutIntentsWithRawResponse:
 
         return BillingResourceWithRawResponse(self._client.billing)
 
+    @cached_property
+    def events(self) -> events.EventsResourceWithRawResponse:
+        from .resources.events import EventsResourceWithRawResponse
+
+        return EventsResourceWithRawResponse(self._client.events)
+
 
 class AsyncCheckoutIntentsWithRawResponse:
     _client: AsyncCheckoutIntents
@@ -681,6 +700,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.billing import AsyncBillingResourceWithRawResponse
 
         return AsyncBillingResourceWithRawResponse(self._client.billing)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithRawResponse:
+        from .resources.events import AsyncEventsResourceWithRawResponse
+
+        return AsyncEventsResourceWithRawResponse(self._client.events)
 
 
 class CheckoutIntentsWithStreamedResponse:
@@ -731,6 +756,12 @@ class CheckoutIntentsWithStreamedResponse:
 
         return BillingResourceWithStreamingResponse(self._client.billing)
 
+    @cached_property
+    def events(self) -> events.EventsResourceWithStreamingResponse:
+        from .resources.events import EventsResourceWithStreamingResponse
+
+        return EventsResourceWithStreamingResponse(self._client.events)
+
 
 class AsyncCheckoutIntentsWithStreamedResponse:
     _client: AsyncCheckoutIntents
@@ -779,6 +810,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.billing import AsyncBillingResourceWithStreamingResponse
 
         return AsyncBillingResourceWithStreamingResponse(self._client.billing)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
+        from .resources.events import AsyncEventsResourceWithStreamingResponse
+
+        return AsyncEventsResourceWithStreamingResponse(self._client.events)
 
 
 Client = CheckoutIntents
