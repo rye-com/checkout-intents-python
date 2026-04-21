@@ -18,7 +18,7 @@ class Source(BaseModel):
     id: str
     """ID of the object which triggered the event."""
 
-    type: Literal["checkout_intent", "shipment"]
+    type: Literal["checkout_intent", "shipment", "webhook_endpoint"]
     """Type of the object which triggered the event."""
 
 
@@ -48,6 +48,7 @@ class Event(BaseModel):
         "checkout_intent.order_failed",
         "shipment.created",
         "shipment.updated",
+        "webhook_endpoint.verification_challenge",
     ]
     """Description of the event.
 
