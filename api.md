@@ -116,3 +116,16 @@ Methods:
 - <code title="post /api/v1/billing/drawdown/topup">client.billing.<a href="./src/checkout_intents/resources/billing.py">create_topup_invoice</a>(\*\*<a href="src/checkout_intents/types/billing_create_topup_invoice_params.py">params</a>) -> <a href="./src/checkout_intents/types/billing_create_topup_invoice_response.py">BillingCreateTopupInvoiceResponse</a></code>
 - <code title="get /api/v1/billing/balance">client.billing.<a href="./src/checkout_intents/resources/billing.py">get_balance</a>() -> <a href="./src/checkout_intents/types/billing_get_balance_response.py">BillingGetBalanceResponse</a></code>
 - <code title="get /api/v1/billing/transactions">client.billing.<a href="./src/checkout_intents/resources/billing.py">list_transactions</a>(\*\*<a href="src/checkout_intents/types/billing_list_transactions_params.py">params</a>) -> <a href="./src/checkout_intents/types/billing_list_transactions_response.py">SyncCursorPagination[BillingListTransactionsResponse]</a></code>
+
+# Events
+
+Types:
+
+```python
+from checkout_intents.types import Event
+```
+
+Methods:
+
+- <code title="get /api/v1/events/{id}">client.events.<a href="./src/checkout_intents/resources/events.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/event.py">Event</a></code>
+- <code title="get /api/v1/events">client.events.<a href="./src/checkout_intents/resources/events.py">list</a>(\*\*<a href="src/checkout_intents/types/event_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/event.py">SyncCursorPagination[Event]</a></code>
