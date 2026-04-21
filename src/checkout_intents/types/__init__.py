@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .buyer import Buyer as Buyer
+from .event import Event as Event
 from .money import Money as Money
 from .offer import Offer as Offer
 from .product import Product as Product
@@ -15,6 +16,7 @@ from .payment_gateway import PaymentGateway as PaymentGateway
 from .product_variant import ProductVariant as ProductVariant
 from .shipment_status import ShipmentStatus as ShipmentStatus
 from .checkout_session import CheckoutSession as CheckoutSession
+from .event_list_params import EventListParams as EventListParams
 from .shipment_tracking import ShipmentTracking as ShipmentTracking
 from .variant_dimension import VariantDimension as VariantDimension
 from .variant_selection import VariantSelection as VariantSelection

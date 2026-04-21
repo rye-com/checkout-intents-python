@@ -16,6 +16,14 @@ from .brands import (
     BrandsResourceWithStreamingResponse,
     AsyncBrandsResourceWithStreamingResponse,
 )
+from .events import (
+    EventsResource,
+    AsyncEventsResource,
+    EventsResourceWithRawResponse,
+    AsyncEventsResourceWithRawResponse,
+    EventsResourceWithStreamingResponse,
+    AsyncEventsResourceWithStreamingResponse,
+)
 from .billing import (
     BillingResource,
     AsyncBillingResource,
@@ -100,4 +108,10 @@ __all__ = [
     "AsyncBillingResourceWithRawResponse",
     "BillingResourceWithStreamingResponse",
     "AsyncBillingResourceWithStreamingResponse",
+    "EventsResource",
+    "AsyncEventsResource",
+    "EventsResourceWithRawResponse",
+    "AsyncEventsResourceWithRawResponse",
+    "EventsResourceWithStreamingResponse",
+    "AsyncEventsResourceWithStreamingResponse",
 ]
