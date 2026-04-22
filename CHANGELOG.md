@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.24.0 (2026-04-22)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/rye-com/checkout-intents-python/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* Add `events.unwrap()` method for webhook signature verification ([aad594c](https://github.com/rye-com/checkout-intents-python/commit/aad594cb3f04ba23020e51cd021fb09c1b74f0a0))
+* Add `webhook_endpoint.verification_challenge` event type ([a554197](https://github.com/rye-com/checkout-intents-python/commit/a554197988b693630e0cd0ce1dd3d940d12c591f))
+* Add events endpoints ([62914f8](https://github.com/rye-com/checkout-intents-python/commit/62914f8402ff6f26f41ebb224ecc7e7925cd7cad))
+* **api:** add events endpoints ([8008da9](https://github.com/rye-com/checkout-intents-python/commit/8008da92312a57836114756212045d05487308ac))
+
+
+### Bug Fixes
+
+* Use compat layer for Pydantic v1/v2 compatibility in unwrap ([a7f2f2f](https://github.com/rye-com/checkout-intents-python/commit/a7f2f2ffd3ab7a4298e3d4e4b26e345c784321b4))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([c7762e8](https://github.com/rye-com/checkout-intents-python/commit/c7762e87ce840cf8a70f10f0d97adbdaba957f76))
+
+
+### Chores
+
+* **internal:** improvements ([907becb](https://github.com/rye-com/checkout-intents-python/commit/907becbb3d8a7ced132e03b39edd85fbd85f59ad))
+
+
+### Styles
+
+* Fix import sorting and remove unused import ([70aa50c](https://github.com/rye-com/checkout-intents-python/commit/70aa50cf194c9347ee952d3f24ecf8aa3f954d53))
+* Fix import sorting for ruff compliance ([52446c6](https://github.com/rye-com/checkout-intents-python/commit/52446c644a44609f94cc3d96c6f5dda6fd7ef0e0))
+
 ## 0.23.0 (2026-04-14)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/rye-com/checkout-intents-python/compare/v0.22.0...v0.23.0)
