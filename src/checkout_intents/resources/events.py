@@ -18,6 +18,7 @@ from .._response import (
 from ..pagination import SyncCursorPagination, AsyncCursorPagination
 from ..types.event import Event
 from .._base_client import AsyncPaginator, make_request_options
+from ..lib.event_signature import unwrap_event
 
 __all__ = ["EventsResource", "AsyncEventsResource"]
 
@@ -41,6 +42,31 @@ class EventsResource(SyncAPIResource):
         For more information, see https://www.github.com/rye-com/checkout-intents-python#with_streaming_response
         """
         return EventsResourceWithStreamingResponse(self)
+
+    def unwrap(
+        self,
+        body: str | bytes,
+        signature_header: str | None,
+        secret: str,
+    ) -> Event:
+        """
+        Verifies the webhook signature and parses the payload into an Event.
+
+        Args:
+            body: The raw request body. Must be the exact bytes/string received; do not
+                decode or modify.
+            signature_header: The value of the `x-rye-signature` HTTP header.
+            secret: Your webhook secret key (typically from the `RYE_HMAC_SECRET_KEY`
+                environment variable).
+
+        Returns:
+            The parsed Event if the signature is valid.
+
+        Raises:
+            WebhookSignatureVerificationError: If the signature is missing, malformed,
+                or invalid.
+        """
+        return unwrap_event(body, signature_header, secret)
 
     def retrieve(
         self,
@@ -142,6 +168,31 @@ class AsyncEventsResource(AsyncAPIResource):
         For more information, see https://www.github.com/rye-com/checkout-intents-python#with_streaming_response
         """
         return AsyncEventsResourceWithStreamingResponse(self)
+
+    def unwrap(
+        self,
+        body: str | bytes,
+        signature_header: str | None,
+        secret: str,
+    ) -> Event:
+        """
+        Verifies the webhook signature and parses the payload into an Event.
+
+        Args:
+            body: The raw request body. Must be the exact bytes/string received; do not
+                decode or modify.
+            signature_header: The value of the `x-rye-signature` HTTP header.
+            secret: Your webhook secret key (typically from the `RYE_HMAC_SECRET_KEY`
+                environment variable).
+
+        Returns:
+            The parsed Event if the signature is valid.
+
+        Raises:
+            WebhookSignatureVerificationError: If the signature is missing, malformed,
+                or invalid.
+        """
+        return unwrap_event(body, signature_header, secret)
 
     async def retrieve(
         self,
