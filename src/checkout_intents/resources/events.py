@@ -4,21 +4,21 @@ from __future__ import annotations
 
 import httpx
 
-from .._base_client import AsyncPaginator, make_request_options
+from ..types import event_list_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import path_template, maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
 )
-from .._types import Body, Headers, NotGiven, Omit, Query, not_given, omit
-from .._utils import maybe_transform, path_template
-from ..lib.event_signature import unwrap_event
-from ..pagination import AsyncCursorPagination, SyncCursorPagination
-from ..types import event_list_params
+from ..pagination import SyncCursorPagination, AsyncCursorPagination
 from ..types.event import Event
+from .._base_client import AsyncPaginator, make_request_options
+from ..lib.event_signature import unwrap_event
 
 __all__ = ["EventsResource", "AsyncEventsResource"]
 
