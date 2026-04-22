@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-import hmac
 import hashlib
+import hmac
 
 import pytest
 
-from checkout_intents import CheckoutIntents, AsyncCheckoutIntents, WebhookSignatureVerificationError
-from checkout_intents.types import Event
+from checkout_intents import AsyncCheckoutIntents, CheckoutIntents, WebhookSignatureVerificationError
 
 
 WEBHOOK_SECRET = "test_webhook_secret_key"
