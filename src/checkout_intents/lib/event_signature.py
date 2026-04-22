@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import json
 import hmac
 import hashlib
+from typing import Any
 
+from .._compat import parse_obj
 from .._exceptions import WebhookSignatureVerificationError
 from ..types.event import Event
 
@@ -53,6 +56,7 @@ def unwrap_event(body: str | bytes, signature_header: str | None, secret: str) -
         )
 
     try:
-        return Event.model_validate_json(body_bytes)
+        data: Any = json.loads(body_bytes)
+        return parse_obj(Event, data)
     except Exception as e:
         raise WebhookSignatureVerificationError(f"Failed to parse webhook payload: {e}") from e
