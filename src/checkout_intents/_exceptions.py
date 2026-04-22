@@ -16,6 +16,7 @@ __all__ = [
     "RateLimitError",
     "InternalServerError",
     "PollTimeoutError",
+    "WebhookSignatureVerificationError",
 ]
 
 
@@ -139,4 +140,11 @@ class PollTimeoutError(CheckoutIntentsError):
                 f"Consider increasing max_attempts, polling_interval_ms, or checking the intent state manually."
             )
 
+        super().__init__(message)
+
+
+class WebhookSignatureVerificationError(CheckoutIntentsError):
+    """Raised when webhook signature verification fails."""
+
+    def __init__(self, message: str) -> None:
         super().__init__(message)
