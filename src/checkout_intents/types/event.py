@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import builtins
+from typing import Dict, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -18,7 +20,7 @@ class Source(BaseModel):
     id: str
     """ID of the object which triggered the event."""
 
-    type: Literal["checkout_intent", "shipment", "webhook_endpoint"]
+    type: Literal["checkout_intent", "shipment", "product", "webhook_endpoint"]
     """Type of the object which triggered the event."""
 
 
@@ -48,10 +50,19 @@ class Event(BaseModel):
         "checkout_intent.order_failed",
         "shipment.created",
         "shipment.updated",
+        "product.updated",
+        "product.removed",
         "webhook_endpoint.verification_challenge",
     ]
     """Description of the event.
 
     Refer to [types of events](https://docs.rye.com/api-v2/webhooks/types) for a
     list of possible values.
+    """
+
+    data: Optional[Dict[str, builtins.object]] = None
+    """The event data payload. The concrete shape depends on `source.type`.
+
+    Refer to [webhook event types](https://docs.rye.com/api-v2/webhooks/types) for
+    the payload shape associated with each `source.type`.
     """
