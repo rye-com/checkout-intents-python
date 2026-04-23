@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.25.0 (2026-04-23)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/rye-com/checkout-intents-python/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** add new data field to event type ([34cc569](https://github.com/rye-com/checkout-intents-python/commit/34cc56991e30a1639ba0f3ac84516b5f1fd85fc8))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([926abb9](https://github.com/rye-com/checkout-intents-python/commit/926abb990304eca3de50d3c2fa14ccdc3d23633b))
+
 ## 0.24.0 (2026-04-22)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/rye-com/checkout-intents-python/compare/v0.23.0...v0.24.0)
