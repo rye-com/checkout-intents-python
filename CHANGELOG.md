@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.26.0 (2026-04-27)
+
+Full Changelog: [v0.25.0...v0.26.0](https://github.com/rye-com/checkout-intents-python/compare/v0.25.0...v0.26.0)
+
+### Features
+
+* Expose `retailer` field ([955b824](https://github.com/rye-com/checkout-intents-python/commit/955b824d217c5423161611168cdb2cf59b117bf5))
+
 ## 0.25.0 (2026-04-23)
 
 Full Changelog: [v0.24.0...v0.25.0](https://github.com/rye-com/checkout-intents-python/compare/v0.24.0...v0.25.0)
