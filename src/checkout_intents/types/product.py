@@ -39,6 +39,8 @@ class Product(BaseModel):
 
     price: Money
 
+    retailer: Optional[str] = None
+
     sku: Optional[str] = None
 
     url: str
