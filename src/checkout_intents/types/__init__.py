@@ -17,6 +17,7 @@ from .product_variant import ProductVariant as ProductVariant
 from .shipment_status import ShipmentStatus as ShipmentStatus
 from .checkout_session import CheckoutSession as CheckoutSession
 from .event_list_params import EventListParams as EventListParams
+from .installation_link import InstallationLink as InstallationLink
 from .shipment_tracking import ShipmentTracking as ShipmentTracking
 from .variant_dimension import VariantDimension as VariantDimension
 from .variant_selection import VariantSelection as VariantSelection
@@ -39,4 +40,7 @@ from .checkout_intent_add_payment_params import CheckoutIntentAddPaymentParams a
 from .billing_create_topup_invoice_params import BillingCreateTopupInvoiceParams as BillingCreateTopupInvoiceParams
 from .billing_create_topup_invoice_response import (
     BillingCreateTopupInvoiceResponse as BillingCreateTopupInvoiceResponse,
+)
+from .merchant_connector_create_installation_link_params import (
+    MerchantConnectorCreateInstallationLinkParams as MerchantConnectorCreateInstallationLinkParams,
 )

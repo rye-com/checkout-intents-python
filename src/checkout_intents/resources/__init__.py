@@ -64,6 +64,14 @@ from .payment_gateways import (
     PaymentGatewaysResourceWithStreamingResponse,
     AsyncPaymentGatewaysResourceWithStreamingResponse,
 )
+from .merchant_connectors import (
+    MerchantConnectorsResource,
+    AsyncMerchantConnectorsResource,
+    MerchantConnectorsResourceWithRawResponse,
+    AsyncMerchantConnectorsResourceWithRawResponse,
+    MerchantConnectorsResourceWithStreamingResponse,
+    AsyncMerchantConnectorsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "CheckoutIntentsResource",
@@ -114,4 +122,10 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
+    "MerchantConnectorsResource",
+    "AsyncMerchantConnectorsResource",
+    "MerchantConnectorsResourceWithRawResponse",
+    "AsyncMerchantConnectorsResourceWithRawResponse",
+    "MerchantConnectorsResourceWithStreamingResponse",
+    "AsyncMerchantConnectorsResourceWithStreamingResponse",
 ]
