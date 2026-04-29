@@ -133,3 +133,15 @@ Methods:
 
 - <code title="get /api/v1/events/{id}">client.events.<a href="./src/checkout_intents/resources/events.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/event.py">Event</a></code>
 - <code title="get /api/v1/events">client.events.<a href="./src/checkout_intents/resources/events.py">list</a>(\*\*<a href="src/checkout_intents/types/event_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/event.py">SyncCursorPagination[Event]</a></code>
+
+# MerchantConnectors
+
+Types:
+
+```python
+from checkout_intents.types import InstallationLink
+```
+
+Methods:
+
+- <code title="get /api/v1/merchant-connectors/{connector}/installation-link">client.merchant_connectors.<a href="./src/checkout_intents/resources/merchant_connectors.py">create_installation_link</a>(connector, \*\*<a href="src/checkout_intents/types/merchant_connector_create_installation_link_params.py">params</a>) -> <a href="./src/checkout_intents/types/installation_link.py">InstallationLink</a></code>
