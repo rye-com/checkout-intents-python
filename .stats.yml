@@ -1,4 +1,4 @@
 configured_endpoints: 20
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/rye/checkout-intents-ba28015137357850849aa39bfa767ce4bb332b8364ac255511802f40bbb57f2e.yml
-openapi_spec_hash: f3af1ad4a4fbd6611ecab237ea50f0ff
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/rye/checkout-intents-a6d1583cf122e307d6671801fdaee6935ac1d067294c4fc9adaddf784d370a7d.yml
+openapi_spec_hash: 7ebb9b85049912c99bce3707b5c30b27
 config_hash: 841caa7c138829c8ef3d7cdf943e8532
