@@ -124,6 +124,7 @@ class FailedCheckoutIntentFailureReason(BaseModel):
         "unknown",
         "checkout_intent_expired",
         "payment_failed",
+        "payment_cvc_expired",
         "insufficient_stock",
         "product_out_of_stock",
         "offer_retrieval_failed",
