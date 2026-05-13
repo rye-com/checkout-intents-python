@@ -90,6 +90,18 @@ Methods:
 - <code title="get /api/v1/shipments/{id}">client.shipments.<a href="./src/checkout_intents/resources/shipments.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/shipment.py">Shipment</a></code>
 - <code title="get /api/v1/shipments">client.shipments.<a href="./src/checkout_intents/resources/shipments.py">list</a>(\*\*<a href="src/checkout_intents/types/shipment_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/shipment.py">SyncCursorPagination[Shipment]</a></code>
 
+# Commissions
+
+Types:
+
+```python
+from checkout_intents.types import Commission, CommissionStatus, CommissionType, SettlementDirection
+```
+
+Methods:
+
+- <code title="get /api/v1/commissions">client.commissions.<a href="./src/checkout_intents/resources/commissions.py">list</a>(\*\*<a href="src/checkout_intents/types/commission_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/commission.py">SyncCursorPagination[Commission]</a></code>
+
 # PaymentGateways
 
 Types:
