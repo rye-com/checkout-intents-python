@@ -49,6 +49,7 @@ class CommissionsResource(SyncAPIResource):
         *,
         after: str | Omit = omit,
         before: str | Omit = omit,
+        checkout_intent_id: str | Omit = omit,
         limit: int | Omit = omit,
         status: CommissionStatus | Omit = omit,
         type: CommissionType | Omit = omit,
@@ -99,6 +100,7 @@ class CommissionsResource(SyncAPIResource):
                     {
                         "after": after,
                         "before": before,
+                        "checkout_intent_id": checkout_intent_id,
                         "limit": limit,
                         "status": status,
                         "type": type,
@@ -135,6 +137,7 @@ class AsyncCommissionsResource(AsyncAPIResource):
         *,
         after: str | Omit = omit,
         before: str | Omit = omit,
+        checkout_intent_id: str | Omit = omit,
         limit: int | Omit = omit,
         status: CommissionStatus | Omit = omit,
         type: CommissionType | Omit = omit,
@@ -185,6 +188,7 @@ class AsyncCommissionsResource(AsyncAPIResource):
                     {
                         "after": after,
                         "before": before,
+                        "checkout_intent_id": checkout_intent_id,
                         "limit": limit,
                         "status": status,
                         "type": type,

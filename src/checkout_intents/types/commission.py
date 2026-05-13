@@ -26,17 +26,11 @@ class Commission(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
     """Time the commission was first recorded."""
 
-    developer_share_amount: Money = FieldInfo(alias="developerShareAmount")
-    """Portion of `grossAmount` allocated to the developer."""
+    developer_commission: Money = FieldInfo(alias="developerCommission")
+    """Commission amount paid to the developer."""
 
-    developer_share_percent: float = FieldInfo(alias="developerSharePercent")
-    """Developer's share of `grossAmount` expressed as a percentage (0–100)."""
-
-    gross_amount: Money = FieldInfo(alias="grossAmount")
-    """Gross commission amount before splitting between developer and Rye."""
-
-    rye_share_amount: Money = FieldInfo(alias="ryeShareAmount")
-    """Portion of `grossAmount` allocated to Rye."""
+    rye_fee: Money = FieldInfo(alias="ryeFee")
+    """Fee retained by Rye."""
 
     settlement_direction: SettlementDirection = FieldInfo(alias="settlementDirection")
     """Whether Rye owes the developer or vice versa once settled."""

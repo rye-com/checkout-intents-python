@@ -30,6 +30,7 @@ class TestCommissions:
         commission = client.commissions.list(
             after="after",
             before="before",
+            checkout_intent_id="checkoutIntentId",
             limit=1,
             status="pending",
             type="surcharge",
@@ -76,6 +77,7 @@ class TestAsyncCommissions:
         commission = await async_client.commissions.list(
             after="after",
             before="before",
+            checkout_intent_id="checkoutIntentId",
             limit=1,
             status="pending",
             type="surcharge",
