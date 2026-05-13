@@ -1,12 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
-from .money import Money
 from .offer import Offer
 from .._models import BaseModel
 from .payment_method import PaymentMethod
@@ -21,8 +20,6 @@ __all__ = [
     "RequiresActionCheckoutIntentNextActionX402",
     "PlacingOrderCheckoutIntent",
     "CompletedCheckoutIntent",
-    "CompletedCheckoutIntentCommissions",
-    "CompletedCheckoutIntentCommissionsItem",
     "FailedCheckoutIntent",
     "FailedCheckoutIntentFailureReason",
 ]
@@ -78,33 +75,6 @@ class PlacingOrderCheckoutIntent(BaseCheckoutIntent):
     state: Literal["placing_order"]
 
 
-class CompletedCheckoutIntentCommissionsItem(BaseModel):
-    id: str
-
-    developer_share_amount: Money = FieldInfo(alias="developerShareAmount")
-
-    gross_amount: Money = FieldInfo(alias="grossAmount")
-
-    settlement_direction: Literal["rye_owes_developer", "developer_owes_rye"] = FieldInfo(alias="settlementDirection")
-    """Direction of settlement: who owes whom once the commission is finalized."""
-
-    status: Literal["pending", "confirmed", "updated", "finalized", "refunded", "expired"]
-    """Lifecycle status of a commission record."""
-
-    type: Literal["surcharge", "promo_arbitrage", "discount_code", "affiliate", "out_of_band"]
-    """Type of commission earned on an order.
-
-    Canonical definition used by both the API contract and the internal
-    `@rye-com/ci-commissions` package.
-    """
-
-
-class CompletedCheckoutIntentCommissions(BaseModel):
-    count: float
-
-    items: List[CompletedCheckoutIntentCommissionsItem]
-
-
 class CompletedCheckoutIntent(BaseCheckoutIntent):
     offer: Offer
 
@@ -113,8 +83,6 @@ class CompletedCheckoutIntent(BaseCheckoutIntent):
     payment_method: PaymentMethod = FieldInfo(alias="paymentMethod")
 
     state: Literal["completed"]
-
-    commissions: Optional[CompletedCheckoutIntentCommissions] = None
 
     estimated_delivery_date: Optional[datetime] = FieldInfo(alias="estimatedDeliveryDate", default=None)
 
