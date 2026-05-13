@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .commission_type import CommissionType
 from .commission_status import CommissionStatus
 
@@ -16,6 +17,8 @@ class CommissionListParams(TypedDict, total=False):
 
     before: str
     """Cursor from a previous response's `pageInfo.startCursor`"""
+
+    checkout_intent_id: Annotated[str, PropertyInfo(alias="checkoutIntentId")]
 
     limit: int
     """Maximum number of results to return (default 100)"""
