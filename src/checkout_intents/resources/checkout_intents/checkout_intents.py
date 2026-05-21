@@ -12,7 +12,6 @@ from ...types import (
     checkout_intent_create_params,
     checkout_intent_confirm_params,
     checkout_intent_purchase_params,
-    checkout_intent_add_payment_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -220,54 +219,6 @@ class CheckoutIntentsResource(SyncAPIResource):
                 ),
             ),
             model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
-        )
-
-    def add_payment(
-        self,
-        id: str,
-        *,
-        payment_method: PaymentMethodParam,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> CheckoutIntent:
-        """
-        Add payment details to a checkout intent
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return cast(
-            CheckoutIntent,
-            self._post(
-                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
-                body=maybe_transform(
-                    {"payment_method": payment_method},
-                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    idempotency_key=idempotency_key,
-                ),
-                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
-            ),
         )
 
     def confirm(
@@ -566,54 +517,6 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
         )
 
-    async def add_payment(
-        self,
-        id: str,
-        *,
-        payment_method: PaymentMethodParam,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> CheckoutIntent:
-        """
-        Add payment details to a checkout intent
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return cast(
-            CheckoutIntent,
-            await self._post(
-                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
-                body=await async_maybe_transform(
-                    {"payment_method": payment_method},
-                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    idempotency_key=idempotency_key,
-                ),
-                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
-
     async def confirm(
         self,
         id: str,
@@ -743,9 +646,6 @@ class CheckoutIntentsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             checkout_intents.list,
         )
-        self.add_payment = to_raw_response_wrapper(
-            checkout_intents.add_payment,
-        )
         self.confirm = to_raw_response_wrapper(
             checkout_intents.confirm,
         )
@@ -770,9 +670,6 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             checkout_intents.list,
-        )
-        self.add_payment = async_to_raw_response_wrapper(
-            checkout_intents.add_payment,
         )
         self.confirm = async_to_raw_response_wrapper(
             checkout_intents.confirm,
@@ -799,9 +696,6 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             checkout_intents.list,
         )
-        self.add_payment = to_streamed_response_wrapper(
-            checkout_intents.add_payment,
-        )
         self.confirm = to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
@@ -826,9 +720,6 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             checkout_intents.list,
-        )
-        self.add_payment = async_to_streamed_response_wrapper(
-            checkout_intents.add_payment,
         )
         self.confirm = async_to_streamed_response_wrapper(
             checkout_intents.confirm,
