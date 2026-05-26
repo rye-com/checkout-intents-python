@@ -32,6 +32,5 @@ class BillingCreateTopupInvoiceResponse(BaseModel):
     """Vendor-agnostic bank transfer details for push-based payment"""
 
     status: Literal["draft", "open", "paid", "uncollectible", "void", "unknown"]
-    """Vendor-agnostic provider types"""
 
     url: Optional[str] = None
