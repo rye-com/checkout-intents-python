@@ -8,7 +8,14 @@ from pydantic import Field as FieldInfo
 from .money import Money
 from .._models import BaseModel
 
-__all__ = ["Offer", "Cost", "Shipping", "ShippingAvailableOption", "ShippingAvailableOptionDeliveryEstimate"]
+__all__ = [
+    "Offer",
+    "Cost",
+    "Shipping",
+    "ShippingAvailableOption",
+    "ShippingAvailableOptionDeliveryEstimate",
+    "DeveloperCommission",
+]
 
 
 class Cost(BaseModel):
@@ -76,9 +83,20 @@ class Shipping(BaseModel):
     selected_option_id: Optional[str] = FieldInfo(alias="selectedOptionId", default=None)
 
 
+class DeveloperCommission(BaseModel):
+    """The developer's commission on an offer."""
+
+    amount: Money
+
+    estimate: bool
+
+
 class Offer(BaseModel):
     cost: Cost
 
     shipping: Shipping
 
     applied_promo_codes: Optional[List[str]] = FieldInfo(alias="appliedPromoCodes", default=None)
+
+    developer_commission: Optional[DeveloperCommission] = FieldInfo(alias="developerCommission", default=None)
+    """The developer's commission on an offer."""
