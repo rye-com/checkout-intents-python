@@ -14,7 +14,7 @@ __all__ = [
     "Shipping",
     "ShippingAvailableOption",
     "ShippingAvailableOptionDeliveryEstimate",
-    "DeveloperCommission",
+    "Commission",
 ]
 
 
@@ -83,8 +83,8 @@ class Shipping(BaseModel):
     selected_option_id: Optional[str] = FieldInfo(alias="selectedOptionId", default=None)
 
 
-class DeveloperCommission(BaseModel):
-    """The developer's commission on an offer."""
+class Commission(BaseModel):
+    """The commission a developer would earn if this offer is placed."""
 
     amount: Money
 
@@ -98,5 +98,5 @@ class Offer(BaseModel):
 
     applied_promo_codes: Optional[List[str]] = FieldInfo(alias="appliedPromoCodes", default=None)
 
-    developer_commission: Optional[DeveloperCommission] = FieldInfo(alias="developerCommission", default=None)
-    """The developer's commission on an offer."""
+    commission: Optional[Commission] = None
+    """The commission a developer would earn if this offer is placed."""
