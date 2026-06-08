@@ -40,6 +40,7 @@ if TYPE_CHECKING:
         brands,
         events,
         billing,
+        returns,
         products,
         shipments,
         commissions,
@@ -50,6 +51,7 @@ if TYPE_CHECKING:
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.billing import BillingResource, AsyncBillingResource
+    from .resources.returns import ReturnsResource, AsyncReturnsResource
     from .resources.products import ProductsResource, AsyncProductsResource
     from .resources.shipments import ShipmentsResource, AsyncShipmentsResource
     from .resources.betas.betas import BetasResource, AsyncBetasResource
@@ -225,6 +227,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.merchant_connectors import MerchantConnectorsResource
 
         return MerchantConnectorsResource(self)
+
+    @cached_property
+    def returns(self) -> ReturnsResource:
+        from .resources.returns import ReturnsResource
+
+        return ReturnsResource(self)
 
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsWithRawResponse:
@@ -492,6 +500,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncMerchantConnectorsResource(self)
 
     @cached_property
+    def returns(self) -> AsyncReturnsResource:
+        from .resources.returns import AsyncReturnsResource
+
+        return AsyncReturnsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsWithRawResponse:
         return AsyncCheckoutIntentsWithRawResponse(self)
 
@@ -672,6 +686,12 @@ class CheckoutIntentsWithRawResponse:
 
         return MerchantConnectorsResourceWithRawResponse(self._client.merchant_connectors)
 
+    @cached_property
+    def returns(self) -> returns.ReturnsResourceWithRawResponse:
+        from .resources.returns import ReturnsResourceWithRawResponse
+
+        return ReturnsResourceWithRawResponse(self._client.returns)
+
 
 class AsyncCheckoutIntentsWithRawResponse:
     _client: AsyncCheckoutIntents
@@ -738,6 +758,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.merchant_connectors import AsyncMerchantConnectorsResourceWithRawResponse
 
         return AsyncMerchantConnectorsResourceWithRawResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.AsyncReturnsResourceWithRawResponse:
+        from .resources.returns import AsyncReturnsResourceWithRawResponse
+
+        return AsyncReturnsResourceWithRawResponse(self._client.returns)
 
 
 class CheckoutIntentsWithStreamedResponse:
@@ -806,6 +832,12 @@ class CheckoutIntentsWithStreamedResponse:
 
         return MerchantConnectorsResourceWithStreamingResponse(self._client.merchant_connectors)
 
+    @cached_property
+    def returns(self) -> returns.ReturnsResourceWithStreamingResponse:
+        from .resources.returns import ReturnsResourceWithStreamingResponse
+
+        return ReturnsResourceWithStreamingResponse(self._client.returns)
+
 
 class AsyncCheckoutIntentsWithStreamedResponse:
     _client: AsyncCheckoutIntents
@@ -872,6 +904,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.merchant_connectors import AsyncMerchantConnectorsResourceWithStreamingResponse
 
         return AsyncMerchantConnectorsResourceWithStreamingResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.AsyncReturnsResourceWithStreamingResponse:
+        from .resources.returns import AsyncReturnsResourceWithStreamingResponse
+
+        return AsyncReturnsResourceWithStreamingResponse(self._client.returns)
 
 
 Client = CheckoutIntents
