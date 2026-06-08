@@ -32,6 +32,14 @@ from .billing import (
     BillingResourceWithStreamingResponse,
     AsyncBillingResourceWithStreamingResponse,
 )
+from .returns import (
+    ReturnsResource,
+    AsyncReturnsResource,
+    ReturnsResourceWithRawResponse,
+    AsyncReturnsResourceWithRawResponse,
+    ReturnsResourceWithStreamingResponse,
+    AsyncReturnsResourceWithStreamingResponse,
+)
 from .products import (
     ProductsResource,
     AsyncProductsResource,
@@ -142,4 +150,10 @@ __all__ = [
     "AsyncMerchantConnectorsResourceWithRawResponse",
     "MerchantConnectorsResourceWithStreamingResponse",
     "AsyncMerchantConnectorsResourceWithStreamingResponse",
+    "ReturnsResource",
+    "AsyncReturnsResource",
+    "ReturnsResourceWithRawResponse",
+    "AsyncReturnsResourceWithRawResponse",
+    "ReturnsResourceWithStreamingResponse",
+    "AsyncReturnsResourceWithStreamingResponse",
 ]

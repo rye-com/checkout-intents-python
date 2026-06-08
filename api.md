@@ -156,3 +156,25 @@ from checkout_intents.types import InstallationLink
 Methods:
 
 - <code title="get /api/v1/merchant-connectors/{connector}/installation-link">client.merchant_connectors.<a href="./src/checkout_intents/resources/merchant_connectors.py">create_installation_link</a>(connector, \*\*<a href="src/checkout_intents/types/merchant_connector_create_installation_link_params.py">params</a>) -> <a href="./src/checkout_intents/types/installation_link.py">InstallationLink</a></code>
+
+# Returns
+
+Types:
+
+```python
+from checkout_intents.types import (
+    Return,
+    ReturnDenial,
+    ReturnFailure,
+    ReturnNextAction,
+    ReturnReason,
+    ReturnRefund,
+    ReturnState,
+    ReturnTimeline,
+)
+```
+
+Methods:
+
+- <code title="post /api/v1/returns">client.returns.<a href="./src/checkout_intents/resources/returns.py">create</a>(\*\*<a href="src/checkout_intents/types/return_create_params.py">params</a>) -> <a href="./src/checkout_intents/types/return_.py">Return</a></code>
+- <code title="get /api/v1/returns/{returnId}">client.returns.<a href="./src/checkout_intents/resources/returns.py">retrieve</a>(return*id) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
