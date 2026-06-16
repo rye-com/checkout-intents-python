@@ -32,6 +32,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...pagination import SyncCursorPagination, AsyncCursorPagination
+from ...types.order import Order
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.buyer_param import BuyerParam
 from ...types.checkout_intent import CheckoutIntent
@@ -336,6 +337,42 @@ class CheckoutIntentsResource(SyncAPIResource):
             ),
         )
 
+    def retrieve_order(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Order:
+        """
+        Retrieve the order associated with a checkout intent.
+
+        Returns the single order created when the checkout intent reached the
+        `completed` state. 404 if the intent has not produced an order yet.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/api/v1/checkout-intents/{id}/order", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Order,
+        )
+
 
 class AsyncCheckoutIntentsResource(AsyncAPIResource):
     @cached_property
@@ -632,6 +669,42 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             ),
         )
 
+    async def retrieve_order(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Order:
+        """
+        Retrieve the order associated with a checkout intent.
+
+        Returns the single order created when the checkout intent reached the
+        `completed` state. 404 if the intent has not produced an order yet.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/api/v1/checkout-intents/{id}/order", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Order,
+        )
+
 
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
@@ -651,6 +724,9 @@ class CheckoutIntentsResourceWithRawResponse:
         )
         self.purchase = to_raw_response_wrapper(
             checkout_intents.purchase,
+        )
+        self.retrieve_order = to_raw_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property
@@ -677,6 +753,9 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.purchase = async_to_raw_response_wrapper(
             checkout_intents.purchase,
         )
+        self.retrieve_order = async_to_raw_response_wrapper(
+            checkout_intents.retrieve_order,
+        )
 
     @cached_property
     def shipments(self) -> AsyncShipmentsResourceWithRawResponse:
@@ -702,6 +781,9 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.purchase = to_streamed_response_wrapper(
             checkout_intents.purchase,
         )
+        self.retrieve_order = to_streamed_response_wrapper(
+            checkout_intents.retrieve_order,
+        )
 
     @cached_property
     def shipments(self) -> ShipmentsResourceWithStreamingResponse:
@@ -726,6 +808,9 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.purchase = async_to_streamed_response_wrapper(
             checkout_intents.purchase,
+        )
+        self.retrieve_order = async_to_streamed_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property
