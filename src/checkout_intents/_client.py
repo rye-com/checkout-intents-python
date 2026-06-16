@@ -39,6 +39,7 @@ if TYPE_CHECKING:
         betas,
         brands,
         events,
+        orders,
         billing,
         returns,
         products,
@@ -50,6 +51,7 @@ if TYPE_CHECKING:
     )
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.orders import OrdersResource, AsyncOrdersResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.returns import ReturnsResource, AsyncReturnsResource
     from .resources.products import ProductsResource, AsyncProductsResource
@@ -219,6 +221,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.brands import BrandsResource
 
         return BrandsResource(self)
+
+    @cached_property
+    def orders(self) -> OrdersResource:
+        from .resources.orders import OrdersResource
+
+        return OrdersResource(self)
 
     @cached_property
     def products(self) -> ProductsResource:
@@ -509,6 +517,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncBrandsResource(self)
 
     @cached_property
+    def orders(self) -> AsyncOrdersResource:
+        from .resources.orders import AsyncOrdersResource
+
+        return AsyncOrdersResource(self)
+
+    @cached_property
     def products(self) -> AsyncProductsResource:
         from .resources.products import AsyncProductsResource
 
@@ -696,6 +710,12 @@ class CheckoutIntentsWithRawResponse:
         return BrandsResourceWithRawResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.OrdersResourceWithRawResponse:
+        from .resources.orders import OrdersResourceWithRawResponse
+
+        return OrdersResourceWithRawResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.ProductsResourceWithRawResponse:
         from .resources.products import ProductsResourceWithRawResponse
 
@@ -767,6 +787,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.brands import AsyncBrandsResourceWithRawResponse
 
         return AsyncBrandsResourceWithRawResponse(self._client.brands)
+
+    @cached_property
+    def orders(self) -> orders.AsyncOrdersResourceWithRawResponse:
+        from .resources.orders import AsyncOrdersResourceWithRawResponse
+
+        return AsyncOrdersResourceWithRawResponse(self._client.orders)
 
     @cached_property
     def products(self) -> products.AsyncProductsResourceWithRawResponse:
@@ -842,6 +868,12 @@ class CheckoutIntentsWithStreamedResponse:
         return BrandsResourceWithStreamingResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.OrdersResourceWithStreamingResponse:
+        from .resources.orders import OrdersResourceWithStreamingResponse
+
+        return OrdersResourceWithStreamingResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.ProductsResourceWithStreamingResponse:
         from .resources.products import ProductsResourceWithStreamingResponse
 
@@ -913,6 +945,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.brands import AsyncBrandsResourceWithStreamingResponse
 
         return AsyncBrandsResourceWithStreamingResponse(self._client.brands)
+
+    @cached_property
+    def orders(self) -> orders.AsyncOrdersResourceWithStreamingResponse:
+        from .resources.orders import AsyncOrdersResourceWithStreamingResponse
+
+        return AsyncOrdersResourceWithStreamingResponse(self._client.orders)
 
     @cached_property
     def products(self) -> products.AsyncProductsResourceWithStreamingResponse:
