@@ -72,6 +72,14 @@ from .commissions import (
     CommissionsResourceWithStreamingResponse,
     AsyncCommissionsResourceWithStreamingResponse,
 )
+from .test_helpers import (
+    TestHelpersResource,
+    AsyncTestHelpersResource,
+    TestHelpersResourceWithRawResponse,
+    AsyncTestHelpersResourceWithRawResponse,
+    TestHelpersResourceWithStreamingResponse,
+    AsyncTestHelpersResourceWithStreamingResponse,
+)
 from .checkout_intents import (
     CheckoutIntentsResource,
     AsyncCheckoutIntentsResource,
@@ -170,4 +178,10 @@ __all__ = [
     "AsyncReturnsResourceWithRawResponse",
     "ReturnsResourceWithStreamingResponse",
     "AsyncReturnsResourceWithStreamingResponse",
+    "TestHelpersResource",
+    "AsyncTestHelpersResource",
+    "TestHelpersResourceWithRawResponse",
+    "AsyncTestHelpersResourceWithRawResponse",
+    "TestHelpersResourceWithStreamingResponse",
+    "AsyncTestHelpersResourceWithStreamingResponse",
 ]

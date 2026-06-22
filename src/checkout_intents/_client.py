@@ -45,6 +45,7 @@ if TYPE_CHECKING:
         products,
         shipments,
         commissions,
+        test_helpers,
         checkout_intents,
         payment_gateways,
         merchant_connectors,
@@ -60,6 +61,7 @@ if TYPE_CHECKING:
     from .resources.commissions import CommissionsResource, AsyncCommissionsResource
     from .resources.payment_gateways import PaymentGatewaysResource, AsyncPaymentGatewaysResource
     from .resources.merchant_connectors import MerchantConnectorsResource, AsyncMerchantConnectorsResource
+    from .resources.test_helpers.test_helpers import TestHelpersResource, AsyncTestHelpersResource
     from .resources.checkout_intents.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
@@ -275,6 +277,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.returns import ReturnsResource
 
         return ReturnsResource(self)
+
+    @cached_property
+    def test_helpers(self) -> TestHelpersResource:
+        from .resources.test_helpers import TestHelpersResource
+
+        return TestHelpersResource(self)
 
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsWithRawResponse:
@@ -571,6 +579,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncReturnsResource(self)
 
     @cached_property
+    def test_helpers(self) -> AsyncTestHelpersResource:
+        from .resources.test_helpers import AsyncTestHelpersResource
+
+        return AsyncTestHelpersResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsWithRawResponse:
         return AsyncCheckoutIntentsWithRawResponse(self)
 
@@ -763,6 +777,12 @@ class CheckoutIntentsWithRawResponse:
 
         return ReturnsResourceWithRawResponse(self._client.returns)
 
+    @cached_property
+    def test_helpers(self) -> test_helpers.TestHelpersResourceWithRawResponse:
+        from .resources.test_helpers import TestHelpersResourceWithRawResponse
+
+        return TestHelpersResourceWithRawResponse(self._client.test_helpers)
+
 
 class AsyncCheckoutIntentsWithRawResponse:
     _client: AsyncCheckoutIntents
@@ -841,6 +861,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.returns import AsyncReturnsResourceWithRawResponse
 
         return AsyncReturnsResourceWithRawResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.AsyncTestHelpersResourceWithRawResponse:
+        from .resources.test_helpers import AsyncTestHelpersResourceWithRawResponse
+
+        return AsyncTestHelpersResourceWithRawResponse(self._client.test_helpers)
 
 
 class CheckoutIntentsWithStreamedResponse:
@@ -921,6 +947,12 @@ class CheckoutIntentsWithStreamedResponse:
 
         return ReturnsResourceWithStreamingResponse(self._client.returns)
 
+    @cached_property
+    def test_helpers(self) -> test_helpers.TestHelpersResourceWithStreamingResponse:
+        from .resources.test_helpers import TestHelpersResourceWithStreamingResponse
+
+        return TestHelpersResourceWithStreamingResponse(self._client.test_helpers)
+
 
 class AsyncCheckoutIntentsWithStreamedResponse:
     _client: AsyncCheckoutIntents
@@ -999,6 +1031,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.returns import AsyncReturnsResourceWithStreamingResponse
 
         return AsyncReturnsResourceWithStreamingResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.AsyncTestHelpersResourceWithStreamingResponse:
+        from .resources.test_helpers import AsyncTestHelpersResourceWithStreamingResponse
+
+        return AsyncTestHelpersResourceWithStreamingResponse(self._client.test_helpers)
 
 
 Client = CheckoutIntents
