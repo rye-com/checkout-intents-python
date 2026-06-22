@@ -188,3 +188,27 @@ Methods:
 
 - <code title="post /api/v1/returns">client.returns.<a href="./src/checkout_intents/resources/returns.py">create</a>(\*\*<a href="src/checkout_intents/types/return_create_params.py">params</a>) -> <a href="./src/checkout_intents/types/return_.py">Return</a></code>
 - <code title="get /api/v1/returns/{returnId}">client.returns.<a href="./src/checkout_intents/resources/returns.py">retrieve</a>(return*id) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+
+# TestHelpers
+
+## Returns
+
+Methods:
+
+- <code title="post /api/v1/test-helpers/returns">client.test*helpers.returns.<a href="./src/checkout_intents/resources/test_helpers/returns.py">create</a>(\*\*<a href="src/checkout_intents/types/test_helpers/return_create_params.py">params</a>) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+- <code title="post /api/v1/test-helpers/returns/{returnId}/approve">client.test*helpers.returns.<a href="./src/checkout_intents/resources/test_helpers/returns.py">approve</a>(return_id, \*\*<a href="src/checkout_intents/types/test_helpers/return_approve_params.py">params</a>) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+- <code title="post /api/v1/test-helpers/returns/{returnId}/deny">client.test*helpers.returns.<a href="./src/checkout_intents/resources/test_helpers/returns.py">deny</a>(return_id, \*\*<a href="src/checkout_intents/types/test_helpers/return_deny_params.py">params</a>) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+- <code title="post /api/v1/test-helpers/returns/{returnId}/fail">client.test*helpers.returns.<a href="./src/checkout_intents/resources/test_helpers/returns.py">fail</a>(return_id, \*\*<a href="src/checkout_intents/types/test_helpers/return_fail_params.py">params</a>) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+- <code title="post /api/v1/test-helpers/returns/{returnId}/refund">client.test*helpers.returns.<a href="./src/checkout_intents/resources/test_helpers/returns.py">refund</a>(return_id, \*\*<a href="src/checkout_intents/types/test_helpers/return_refund_params.py">params</a>) -> <a href="./src/checkout_intents/types/return*.py">Return</a></code>
+
+## Shipments
+
+Types:
+
+```python
+from checkout_intents.types.test_helpers import ShipmentAdvanceResponse
+```
+
+Methods:
+
+- <code title="post /api/v1/test-helpers/checkout-intents/{checkoutIntentId}/shipments/advance">client.test_helpers.shipments.<a href="./src/checkout_intents/resources/test_helpers/shipments.py">advance</a>(checkout_intent_id) -> <a href="./src/checkout_intents/types/test_helpers/shipment_advance_response.py">ShipmentAdvanceResponse</a></code>
