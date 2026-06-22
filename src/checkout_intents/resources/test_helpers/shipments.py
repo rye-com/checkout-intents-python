@@ -52,7 +52,13 @@ class ShipmentsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
         idempotency_key: str | None = None,
     ) -> ShipmentAdvanceResponse:
-        """
+        """Advance the simulated shipment for a checkout intent.
+
+        To trigger delayed or
+        canceled shipping scenarios, create the checkout intent with a matching shipping
+        and delivery test product:
+        https://rye.com/docs/api-v2/testing/test-products#shipping-&-delivery
+
         Args:
           extra_headers: Send extra headers
 
@@ -114,7 +120,13 @@ class AsyncShipmentsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
         idempotency_key: str | None = None,
     ) -> ShipmentAdvanceResponse:
-        """
+        """Advance the simulated shipment for a checkout intent.
+
+        To trigger delayed or
+        canceled shipping scenarios, create the checkout intent with a matching shipping
+        and delivery test product:
+        https://rye.com/docs/api-v2/testing/test-products#shipping-&-delivery
+
         Args:
           extra_headers: Send extra headers
 
