@@ -26,6 +26,8 @@ class CheckoutIntentCreateParams(TypedDict, total=False):
 
     promo_codes: Annotated[SequenceNotStr[str], PropertyInfo(alias="promoCodes")]
 
+    reference_id: Annotated[str, PropertyInfo(alias="referenceId")]
+
     variant_selections: Annotated[Iterable[VariantSelectionParam], PropertyInfo(alias="variantSelections")]
 
 

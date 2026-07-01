@@ -52,6 +52,7 @@ class TestCheckoutSessions:
             discover_promo_codes=True,
             layout="default",
             promo_codes=["string"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -130,6 +131,7 @@ class TestAsyncCheckoutSessions:
             discover_promo_codes=True,
             layout="default",
             promo_codes=["string"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",

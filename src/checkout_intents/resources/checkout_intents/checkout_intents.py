@@ -86,6 +86,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -121,6 +122,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
@@ -293,6 +295,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -333,6 +336,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
@@ -668,6 +672,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -703,6 +708,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
@@ -875,6 +881,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -915,6 +922,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams,

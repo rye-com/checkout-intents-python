@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
+
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
@@ -24,3 +26,9 @@ class Order(BaseModel):
 
     updated_at: str = FieldInfo(alias="updatedAt")
     """Timestamp the order was last updated at"""
+
+    reference_id: Optional[str] = FieldInfo(alias="referenceId", default=None)
+    """
+    The `referenceId` you supplied on the checkout intent, echoed back so you can
+    reconcile this order against your own records. Absent when none was supplied.
+    """
