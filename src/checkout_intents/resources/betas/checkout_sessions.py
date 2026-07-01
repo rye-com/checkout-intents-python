@@ -55,6 +55,7 @@ class CheckoutSessionsResource(SyncAPIResource):
         discover_promo_codes: bool | Omit = omit,
         layout: Literal["default", "wizard"] | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,6 +99,7 @@ class CheckoutSessionsResource(SyncAPIResource):
                     "discover_promo_codes": discover_promo_codes,
                     "layout": layout,
                     "promo_codes": promo_codes,
+                    "reference_id": reference_id,
                     "variant_selections": variant_selections,
                 },
                 checkout_session_create_params.CheckoutSessionCreateParams,
@@ -143,6 +145,7 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
         discover_promo_codes: bool | Omit = omit,
         layout: Literal["default", "wizard"] | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -186,6 +189,7 @@ class AsyncCheckoutSessionsResource(AsyncAPIResource):
                     "discover_promo_codes": discover_promo_codes,
                     "layout": layout,
                     "promo_codes": promo_codes,
+                    "reference_id": reference_id,
                     "variant_selections": variant_selections,
                 },
                 checkout_session_create_params.CheckoutSessionCreateParams,

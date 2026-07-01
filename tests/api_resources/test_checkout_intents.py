@@ -66,6 +66,7 @@ class TestCheckoutIntents:
             },
             discover_promo_codes=True,
             promo_codes=["SAVE20"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -330,6 +331,7 @@ class TestCheckoutIntents:
             },
             discover_promo_codes=True,
             promo_codes=["SAVE20"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -490,6 +492,7 @@ class TestAsyncCheckoutIntents:
             },
             discover_promo_codes=True,
             promo_codes=["SAVE20"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
@@ -754,6 +757,7 @@ class TestAsyncCheckoutIntents:
             },
             discover_promo_codes=True,
             promo_codes=["SAVE20"],
+            reference_id="order-1234",
             variant_selections=[
                 {
                     "label": "Size, Color, etc.",
