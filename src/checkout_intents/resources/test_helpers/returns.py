@@ -122,6 +122,8 @@ class ReturnsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Approve a simulated return.
+
         Args:
           next_action: `ship_items_to_merchant` lands the return in `requires_action` with a stub
               shipping label; `no_action_required` lands it directly in `processing`. Defaults
@@ -167,6 +169,8 @@ class ReturnsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Deny a simulated return.
+
         Args:
           reason: Defaults to `other`.
 
@@ -215,6 +219,8 @@ class ReturnsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Mark a simulated return as failed.
+
         Args:
           extra_headers: Send extra headers
 
@@ -255,6 +261,8 @@ class ReturnsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Refund a simulated return using the order total as the simulated refund amount.
+
         Args:
           cost_bearer: Defaults to `shopper`.
 
@@ -374,6 +382,8 @@ class AsyncReturnsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Approve a simulated return.
+
         Args:
           next_action: `ship_items_to_merchant` lands the return in `requires_action` with a stub
               shipping label; `no_action_required` lands it directly in `processing`. Defaults
@@ -419,6 +429,8 @@ class AsyncReturnsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Deny a simulated return.
+
         Args:
           reason: Defaults to `other`.
 
@@ -467,6 +479,8 @@ class AsyncReturnsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Mark a simulated return as failed.
+
         Args:
           extra_headers: Send extra headers
 
@@ -507,6 +521,8 @@ class AsyncReturnsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> Return:
         """
+        Refund a simulated return using the order total as the simulated refund amount.
+
         Args:
           cost_bearer: Defaults to `shopper`.
 
