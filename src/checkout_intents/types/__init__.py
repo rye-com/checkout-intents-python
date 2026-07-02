@@ -12,6 +12,7 @@ from .return_ import Return as Return
 from .shipment import Shipment as Shipment
 from .commission import Commission as Commission
 from .buyer_param import BuyerParam as BuyerParam
+from .cancellation import Cancellation as Cancellation
 from .return_state import ReturnState as ReturnState
 from .product_image import ProductImage as ProductImage
 from .return_denial import ReturnDenial as ReturnDenial
@@ -34,6 +35,7 @@ from .shipment_tracking import ShipmentTracking as ShipmentTracking
 from .variant_dimension import VariantDimension as VariantDimension
 from .variant_selection import VariantSelection as VariantSelection
 from .return_next_action import ReturnNextAction as ReturnNextAction
+from .order_cancel_params import OrderCancelParams as OrderCancelParams
 from .base_checkout_intent import BaseCheckoutIntent as BaseCheckoutIntent
 from .payment_method_param import PaymentMethodParam as PaymentMethodParam
 from .product_availability import ProductAvailability as ProductAvailability
