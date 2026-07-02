@@ -64,13 +64,14 @@ Methods:
 Types:
 
 ```python
-from checkout_intents.types import Order
+from checkout_intents.types import Cancellation, Order
 ```
 
 Methods:
 
 - <code title="get /api/v1/orders/{id}">client.orders.<a href="./src/checkout_intents/resources/orders.py">retrieve</a>(id) -> <a href="./src/checkout_intents/types/order.py">Order</a></code>
 - <code title="get /api/v1/orders">client.orders.<a href="./src/checkout_intents/resources/orders.py">list</a>(\*\*<a href="src/checkout_intents/types/order_list_params.py">params</a>) -> <a href="./src/checkout_intents/types/order.py">SyncCursorPagination[Order]</a></code>
+- <code title="post /api/v1/orders/{id}/cancel">client.orders.<a href="./src/checkout_intents/resources/orders.py">cancel</a>(id, \*\*<a href="src/checkout_intents/types/order_cancel_params.py">params</a>) -> <a href="./src/checkout_intents/types/cancellation.py">Cancellation</a></code>
 
 # Products
 

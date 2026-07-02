@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 import httpx
 
-from ..types import order_list_params
+from ..types import order_list_params, order_cancel_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -18,6 +20,7 @@ from .._response import (
 from ..pagination import SyncCursorPagination, AsyncCursorPagination
 from ..types.order import Order
 from .._base_client import AsyncPaginator, make_request_options
+from ..types.cancellation import Cancellation
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
@@ -122,6 +125,53 @@ class OrdersResource(SyncAPIResource):
             model=Order,
         )
 
+    def cancel(
+        self,
+        id: str,
+        *,
+        reason: order_cancel_params.Reason,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> Cancellation:
+        """
+        Request cancellation of an order.
+
+        Order cancellations are subject to each merchant's cancellation policy.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return cast(
+            Cancellation,
+            self._post(
+                path_template("/api/v1/orders/{id}/cancel", id=id),
+                body=maybe_transform({"reason": reason}, order_cancel_params.OrderCancelParams),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
+                ),
+                cast_to=cast(Any, Cancellation),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
 
 class AsyncOrdersResource(AsyncAPIResource):
     @cached_property
@@ -223,6 +273,53 @@ class AsyncOrdersResource(AsyncAPIResource):
             model=Order,
         )
 
+    async def cancel(
+        self,
+        id: str,
+        *,
+        reason: order_cancel_params.Reason,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> Cancellation:
+        """
+        Request cancellation of an order.
+
+        Order cancellations are subject to each merchant's cancellation policy.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return cast(
+            Cancellation,
+            await self._post(
+                path_template("/api/v1/orders/{id}/cancel", id=id),
+                body=await async_maybe_transform({"reason": reason}, order_cancel_params.OrderCancelParams),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    idempotency_key=idempotency_key,
+                ),
+                cast_to=cast(Any, Cancellation),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
 
 class OrdersResourceWithRawResponse:
     def __init__(self, orders: OrdersResource) -> None:
@@ -233,6 +330,9 @@ class OrdersResourceWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             orders.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            orders.cancel,
         )
 
 
@@ -246,6 +346,9 @@ class AsyncOrdersResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             orders.list,
         )
+        self.cancel = async_to_raw_response_wrapper(
+            orders.cancel,
+        )
 
 
 class OrdersResourceWithStreamingResponse:
@@ -258,6 +361,9 @@ class OrdersResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             orders.list,
         )
+        self.cancel = to_streamed_response_wrapper(
+            orders.cancel,
+        )
 
 
 class AsyncOrdersResourceWithStreamingResponse:
@@ -269,4 +375,7 @@ class AsyncOrdersResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             orders.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            orders.cancel,
         )
