@@ -222,18 +222,6 @@ class TestCheckoutIntents:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_confirm_with_all_params(self, client: CheckoutIntents) -> None:
-        checkout_intent = client.checkout_intents.confirm(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_raw_response_confirm(self, client: CheckoutIntents) -> None:
         response = client.checkout_intents.with_raw_response.confirm(
             id="id",
@@ -637,18 +625,6 @@ class TestAsyncCheckoutIntents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_confirm(self, async_client: AsyncCheckoutIntents) -> None:
-        checkout_intent = await async_client.checkout_intents.confirm(
-            id="id",
-            payment_method={
-                "stripe_token": "tok_1RkrWWHGDlstla3f1Fc7ZrhH",
-                "type": "stripe_token",
-            },
-        )
-        assert_matches_type(CheckoutIntent, checkout_intent, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_confirm_with_all_params(self, async_client: AsyncCheckoutIntents) -> None:
         checkout_intent = await async_client.checkout_intents.confirm(
             id="id",
             payment_method={
