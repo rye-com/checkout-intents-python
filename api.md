@@ -78,14 +78,21 @@ from checkout_intents.types import (
     Product,
     ProductAvailability,
     ProductImage,
+    ProductSubscription,
+    ProductSubscriptionProduct,
+    ProductSubscriptionStore,
     ProductVariant,
     VariantDimension,
+    ProductListSubscriptionsResponse,
 )
 ```
 
 Methods:
 
+- <code title="get /api/v1/products/subscriptions">client.products.<a href="./src/checkout_intents/resources/products.py">list_subscriptions</a>() -> <a href="./src/checkout_intents/types/product_list_subscriptions_response.py">ProductListSubscriptionsResponse</a></code>
 - <code title="get /api/v1/products/lookup">client.products.<a href="./src/checkout_intents/resources/products.py">lookup</a>(\*\*<a href="src/checkout_intents/types/product_lookup_params.py">params</a>) -> <a href="./src/checkout_intents/types/product.py">Product</a></code>
+- <code title="post /api/v1/products/subscribe">client.products.<a href="./src/checkout_intents/resources/products.py">subscribe</a>(\*\*<a href="src/checkout_intents/types/product_subscribe_params.py">params</a>) -> <a href="./src/checkout_intents/types/product_subscription.py">ProductSubscription</a></code>
+- <code title="post /api/v1/products/unsubscribe">client.products.<a href="./src/checkout_intents/resources/products.py">unsubscribe</a>(\*\*<a href="src/checkout_intents/types/product_unsubscribe_params.py">params</a>) -> <a href="./src/checkout_intents/types/product_subscription.py">ProductSubscription</a></code>
 
 # Shipments
 
