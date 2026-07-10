@@ -114,7 +114,7 @@ class ProductsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> ProductSubscription:
         """
-        Subscribe to product events for one integrated Shopify URL.
+        Subscribe to product events from a store.
 
         Args:
           type: Scope of the subscription change.
@@ -169,7 +169,7 @@ class ProductsResource(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> ProductSubscription:
         """
-        Unsubscribe from product events for one integrated Shopify URL.
+        Unsubscribe from product events from a store.
 
         Args:
           type: Scope of the subscription change.
@@ -299,7 +299,7 @@ class AsyncProductsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> ProductSubscription:
         """
-        Subscribe to product events for one integrated Shopify URL.
+        Subscribe to product events from a store.
 
         Args:
           type: Scope of the subscription change.
@@ -354,7 +354,7 @@ class AsyncProductsResource(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> ProductSubscription:
         """
-        Unsubscribe from product events for one integrated Shopify URL.
+        Unsubscribe from product events from a store.
 
         Args:
           type: Scope of the subscription change.
