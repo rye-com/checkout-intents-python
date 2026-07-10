@@ -88,7 +88,7 @@ class TestProducts:
     def test_method_subscribe(self, client: CheckoutIntents) -> None:
         product = client.products.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
         assert_matches_type(ProductSubscription, product, path=["response"])
 
@@ -97,7 +97,7 @@ class TestProducts:
     def test_raw_response_subscribe(self, client: CheckoutIntents) -> None:
         response = client.products.with_raw_response.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
 
         assert response.is_closed is True
@@ -110,7 +110,7 @@ class TestProducts:
     def test_streaming_response_subscribe(self, client: CheckoutIntents) -> None:
         with client.products.with_streaming_response.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -125,7 +125,7 @@ class TestProducts:
     def test_method_unsubscribe(self, client: CheckoutIntents) -> None:
         product = client.products.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
         assert_matches_type(ProductSubscription, product, path=["response"])
 
@@ -134,7 +134,7 @@ class TestProducts:
     def test_raw_response_unsubscribe(self, client: CheckoutIntents) -> None:
         response = client.products.with_raw_response.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
 
         assert response.is_closed is True
@@ -147,7 +147,7 @@ class TestProducts:
     def test_streaming_response_unsubscribe(self, client: CheckoutIntents) -> None:
         with client.products.with_streaming_response.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -230,7 +230,7 @@ class TestAsyncProducts:
     async def test_method_subscribe(self, async_client: AsyncCheckoutIntents) -> None:
         product = await async_client.products.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
         assert_matches_type(ProductSubscription, product, path=["response"])
 
@@ -239,7 +239,7 @@ class TestAsyncProducts:
     async def test_raw_response_subscribe(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.products.with_raw_response.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
 
         assert response.is_closed is True
@@ -252,7 +252,7 @@ class TestAsyncProducts:
     async def test_streaming_response_subscribe(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.products.with_streaming_response.subscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -267,7 +267,7 @@ class TestAsyncProducts:
     async def test_method_unsubscribe(self, async_client: AsyncCheckoutIntents) -> None:
         product = await async_client.products.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
         assert_matches_type(ProductSubscription, product, path=["response"])
 
@@ -276,7 +276,7 @@ class TestAsyncProducts:
     async def test_raw_response_unsubscribe(self, async_client: AsyncCheckoutIntents) -> None:
         response = await async_client.products.with_raw_response.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         )
 
         assert response.is_closed is True
@@ -289,7 +289,7 @@ class TestAsyncProducts:
     async def test_streaming_response_unsubscribe(self, async_client: AsyncCheckoutIntents) -> None:
         async with async_client.products.with_streaming_response.unsubscribe(
             type="store",
-            url="https://store.myshopify.com",
+            url="https://store.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
