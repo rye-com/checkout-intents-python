@@ -4,6 +4,7 @@ from typing import Optional
 
 from pydantic import Field as FieldInfo
 
+from .buyer import Buyer
 from .._models import BaseModel
 from .cancellation import Cancellation
 
@@ -18,6 +19,9 @@ class Order(BaseModel):
     """
 
     id: str
+
+    buyer: Buyer
+    """Buyer and shipping-address details captured for this order."""
 
     cancellation: Optional[Cancellation] = None
     """
