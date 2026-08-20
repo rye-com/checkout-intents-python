@@ -49,6 +49,7 @@ from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveRespo
 from .payment_gateway_session import PaymentGatewaySession as PaymentGatewaySession
 from .variant_selection_param import VariantSelectionParam as VariantSelectionParam
 from .product_subscribe_params import ProductSubscribeParams as ProductSubscribeParams
+from .order_update_buyer_params import OrderUpdateBuyerParams as OrderUpdateBuyerParams
 from .product_subscription_store import ProductSubscriptionStore as ProductSubscriptionStore
 from .product_unsubscribe_params import ProductUnsubscribeParams as ProductUnsubscribeParams
 from .checkout_intent_list_params import CheckoutIntentListParams as CheckoutIntentListParams
