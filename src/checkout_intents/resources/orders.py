@@ -6,7 +6,7 @@ from typing import Any, cast
 
 import httpx
 
-from ..types import order_list_params, order_cancel_params
+from ..types import order_list_params, order_cancel_params, order_update_buyer_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -172,6 +172,50 @@ class OrdersResource(SyncAPIResource):
             ),
         )
 
+    def update_buyer(
+        self,
+        id: str,
+        *,
+        buyer: order_update_buyer_params.Buyer,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> Order:
+        """
+        Update buyer fields for an order and update its Shopify shipping address.
+
+        Args:
+          buyer: Buyer fields to merge over the order's current buyer.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._put(
+            path_template("/api/v1/orders/{id}/buyer", id=id),
+            body=maybe_transform({"buyer": buyer}, order_update_buyer_params.OrderUpdateBuyerParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Order,
+        )
+
 
 class AsyncOrdersResource(AsyncAPIResource):
     @cached_property
@@ -320,6 +364,50 @@ class AsyncOrdersResource(AsyncAPIResource):
             ),
         )
 
+    async def update_buyer(
+        self,
+        id: str,
+        *,
+        buyer: order_update_buyer_params.Buyer,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        idempotency_key: str | None = None,
+    ) -> Order:
+        """
+        Update buyer fields for an order and update its Shopify shipping address.
+
+        Args:
+          buyer: Buyer fields to merge over the order's current buyer.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._put(
+            path_template("/api/v1/orders/{id}/buyer", id=id),
+            body=await async_maybe_transform({"buyer": buyer}, order_update_buyer_params.OrderUpdateBuyerParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Order,
+        )
+
 
 class OrdersResourceWithRawResponse:
     def __init__(self, orders: OrdersResource) -> None:
@@ -333,6 +421,9 @@ class OrdersResourceWithRawResponse:
         )
         self.cancel = to_raw_response_wrapper(
             orders.cancel,
+        )
+        self.update_buyer = to_raw_response_wrapper(
+            orders.update_buyer,
         )
 
 
@@ -349,6 +440,9 @@ class AsyncOrdersResourceWithRawResponse:
         self.cancel = async_to_raw_response_wrapper(
             orders.cancel,
         )
+        self.update_buyer = async_to_raw_response_wrapper(
+            orders.update_buyer,
+        )
 
 
 class OrdersResourceWithStreamingResponse:
@@ -364,6 +458,9 @@ class OrdersResourceWithStreamingResponse:
         self.cancel = to_streamed_response_wrapper(
             orders.cancel,
         )
+        self.update_buyer = to_streamed_response_wrapper(
+            orders.update_buyer,
+        )
 
 
 class AsyncOrdersResourceWithStreamingResponse:
@@ -378,4 +475,7 @@ class AsyncOrdersResourceWithStreamingResponse:
         )
         self.cancel = async_to_streamed_response_wrapper(
             orders.cancel,
+        )
+        self.update_buyer = async_to_streamed_response_wrapper(
+            orders.update_buyer,
         )
