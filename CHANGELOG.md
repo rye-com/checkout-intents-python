@@ -1,5 +1,57 @@
 # Changelog
 
+## 0.27.0 (2026-08-20)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/rye-com/checkout-intents-python/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* [return-api/release]: mark return api as public ([2541df9](https://github.com/rye-com/checkout-intents-python/commit/2541df93c47814533be86018cf5d083bf2c77554))
+* Add `POST /orders/:id/cancel` endpoint ([6385f4d](https://github.com/rye-com/checkout-intents-python/commit/6385f4ddd7344dec2c21acad27c942cda0f89db6))
+* Add more paginator test cases ([3d3235c](https://github.com/rye-com/checkout-intents-python/commit/3d3235cdb47c8b5035b77b8978f2962b50eb7213))
+* Add referenceId field, log Rye order ID upon placement if available ([4a2fd27](https://github.com/rye-com/checkout-intents-python/commit/4a2fd272a504c773ebc0f85dda20ea64f45497c9))
+* **api:** add merchant connector installation link endpoint ([5daf9a3](https://github.com/rye-com/checkout-intents-python/commit/5daf9a3bb5d7c94401fb630c04f5be94a7495474))
+* **api:** publish product subscriptions api ([6d1b7e3](https://github.com/rye-com/checkout-intents-python/commit/6d1b7e39cdd75eb79f8ca8a572195444ddf2dba6))
+* Catch cvc expiration early ([cb3ca3e](https://github.com/rye-com/checkout-intents-python/commit/cb3ca3e8f4a82f76d936376cc73ecde19103ecf7))
+* Commission GET-by-id + checkoutIntentId filter ([2b53dae](https://github.com/rye-com/checkout-intents-python/commit/2b53dae167e5dbc72ac293d0d1e8c63fc17cc72e))
+* Commission REST endpoints + response enrichment (RYE-6914) ([4a19c94](https://github.com/rye-com/checkout-intents-python/commit/4a19c9432824cdd8050b60b23803e80b8afb9160))
+* **commissions:** types + cursor-paginated repo (1/2) ([e3bf9ab](https://github.com/rye-com/checkout-intents-python/commit/e3bf9ab768c5870eb640cdf6472372e1eaa715a2))
+* Detect expired CVCs ([a8d870f](https://github.com/rye-com/checkout-intents-python/commit/a8d870f7a0bf18df3eeee885991d096f5773cb83))
+* Impl address update endpoint ([a5fdd87](https://github.com/rye-com/checkout-intents-python/commit/a5fdd8749219fd4fcc44ce8a0f348988c844d89e))
+* internal updates ([d659339](https://github.com/rye-com/checkout-intents-python/commit/d659339b507878c54bf1352a6b1fa206957b2276))
+* **internal/types:** support eagerly validating pydantic iterators ([53bb950](https://github.com/rye-com/checkout-intents-python/commit/53bb9505bb41d698e1f491b83c5e2dda52f1f35e))
+* Move order write into PostPurchaseOperations ([a13427a](https://github.com/rye-com/checkout-intents-python/commit/a13427a372c4b715c37f9fe169526efd92dcab2b))
+* Plumbing for updating order addresses ([dafa3f8](https://github.com/rye-com/checkout-intents-python/commit/dafa3f89d45e7b2a656b2824576d449a4c85b563))
+* Remove Nekuda & Prava payment tokens ([023b748](https://github.com/rye-com/checkout-intents-python/commit/023b74815e11570c41793bdbbb7ee68cbf904e5f))
+* Revert "Catch cvc expiration early" ([c9e329c](https://github.com/rye-com/checkout-intents-python/commit/c9e329c99ab02dc1288d0465129dbb1b46674cbb))
+* Show commissions in offer (2/2) ([5d393e3](https://github.com/rye-com/checkout-intents-python/commit/5d393e3754a0b9d991b4fc3eb5fb8dc4dbd3dfc0))
+* Show estimated commission amount in offer API response (RYE-7349) ([2108965](https://github.com/rye-com/checkout-intents-python/commit/2108965fcb366f6787dc42f9f29c555d50713deb))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([43ce401](https://github.com/rye-com/checkout-intents-python/commit/43ce401f285b722b4d2a33f6b93c9e7b787f76ad))
+* support setting headers via env ([875c696](https://github.com/rye-com/checkout-intents-python/commit/875c69684b79c96ba58734db16abbf16e1715dfe))
+* Tidy-up before PRing `/orders/:id/cancel` ([efe146a](https://github.com/rye-com/checkout-intents-python/commit/efe146aef5e39b87a2ee51af79d6a4ec5fd1a70b))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([ff7cac3](https://github.com/rye-com/checkout-intents-python/commit/ff7cac34df9c9f031c7f3a072f022003026ab502))
+* **internal:** resolve build failures ([b741a73](https://github.com/rye-com/checkout-intents-python/commit/b741a73bc7e460066728ecd1fe359ef4b7463913))
+* use correct field name format for multipart file arrays ([217e691](https://github.com/rye-com/checkout-intents-python/commit/217e691d4a4f2e41e1d8f3bc2c2607b2a8880fd2))
+
+
+### Chores
+
+* **docs:** improve test helper summaries and descriptions ([33795fa](https://github.com/rye-com/checkout-intents-python/commit/33795fad52f04e0a5729f6effe064d566b649d9e))
+* **docs:** tidy descriptions ([bc33fc1](https://github.com/rye-com/checkout-intents-python/commit/bc33fc16672e453dd7f312ac540d3a482d79c4f0))
+* **internal:** improvements ([20a70b0](https://github.com/rye-com/checkout-intents-python/commit/20a70b09a5763fbe5e9e824329dd5d7ba5c801fc))
+* **internal:** improvements ([4ee669c](https://github.com/rye-com/checkout-intents-python/commit/4ee669c347433b796ea8c3cc7d14a7245aacfe7a))
+* **internal:** improvements ([6f802e7](https://github.com/rye-com/checkout-intents-python/commit/6f802e745b8baee7f2b8990af08eba5f4a51e46f))
+* **internal:** reformat pyproject.toml ([3c4de86](https://github.com/rye-com/checkout-intents-python/commit/3c4de86e356fc9579614849fbdbce41aabc05ed6))
+
+
+### Documentation
+
+* **api:** improve shipments advance api description ([57276e8](https://github.com/rye-com/checkout-intents-python/commit/57276e849e1031948d1c41e7b6b608da9be8395f))
+
 ## 0.26.0 (2026-04-27)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/rye-com/checkout-intents-python/compare/v0.25.0...v0.26.0)

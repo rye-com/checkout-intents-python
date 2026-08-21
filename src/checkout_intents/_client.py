@@ -19,7 +19,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -31,14 +35,33 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import betas, brands, events, billing, products, shipments, checkout_intents, payment_gateways
+    from .resources import (
+        betas,
+        brands,
+        events,
+        orders,
+        billing,
+        returns,
+        products,
+        shipments,
+        commissions,
+        test_helpers,
+        checkout_intents,
+        payment_gateways,
+        merchant_connectors,
+    )
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.orders import OrdersResource, AsyncOrdersResource
     from .resources.billing import BillingResource, AsyncBillingResource
+    from .resources.returns import ReturnsResource, AsyncReturnsResource
     from .resources.products import ProductsResource, AsyncProductsResource
     from .resources.shipments import ShipmentsResource, AsyncShipmentsResource
     from .resources.betas.betas import BetasResource, AsyncBetasResource
+    from .resources.commissions import CommissionsResource, AsyncCommissionsResource
     from .resources.payment_gateways import PaymentGatewaysResource, AsyncPaymentGatewaysResource
+    from .resources.merchant_connectors import MerchantConnectorsResource, AsyncMerchantConnectorsResource
+    from .resources.test_helpers.test_helpers import TestHelpersResource, AsyncTestHelpersResource
     from .resources.checkout_intents.checkout_intents import CheckoutIntentsResource, AsyncCheckoutIntentsResource
 
 __all__ = [
@@ -161,6 +184,15 @@ class CheckoutIntents(SyncAPIClient):
             except KeyError as exc:
                 raise ValueError(f"Unknown environment: {resolved_environment}") from exc
 
+        custom_headers_env = os.environ.get("CHECKOUT_INTENTS_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -193,6 +225,12 @@ class CheckoutIntents(SyncAPIClient):
         return BrandsResource(self)
 
     @cached_property
+    def orders(self) -> OrdersResource:
+        from .resources.orders import OrdersResource
+
+        return OrdersResource(self)
+
+    @cached_property
     def products(self) -> ProductsResource:
         from .resources.products import ProductsResource
 
@@ -203,6 +241,12 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.shipments import ShipmentsResource
 
         return ShipmentsResource(self)
+
+    @cached_property
+    def commissions(self) -> CommissionsResource:
+        from .resources.commissions import CommissionsResource
+
+        return CommissionsResource(self)
 
     @cached_property
     def payment_gateways(self) -> PaymentGatewaysResource:
@@ -221,6 +265,24 @@ class CheckoutIntents(SyncAPIClient):
         from .resources.events import EventsResource
 
         return EventsResource(self)
+
+    @cached_property
+    def merchant_connectors(self) -> MerchantConnectorsResource:
+        from .resources.merchant_connectors import MerchantConnectorsResource
+
+        return MerchantConnectorsResource(self)
+
+    @cached_property
+    def returns(self) -> ReturnsResource:
+        from .resources.returns import ReturnsResource
+
+        return ReturnsResource(self)
+
+    @cached_property
+    def test_helpers(self) -> TestHelpersResource:
+        from .resources.test_helpers import TestHelpersResource
+
+        return TestHelpersResource(self)
 
     @cached_property
     def with_raw_response(self) -> CheckoutIntentsWithRawResponse:
@@ -422,6 +484,15 @@ class AsyncCheckoutIntents(AsyncAPIClient):
             except KeyError as exc:
                 raise ValueError(f"Unknown environment: {resolved_environment}") from exc
 
+        custom_headers_env = os.environ.get("CHECKOUT_INTENTS_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -454,6 +525,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         return AsyncBrandsResource(self)
 
     @cached_property
+    def orders(self) -> AsyncOrdersResource:
+        from .resources.orders import AsyncOrdersResource
+
+        return AsyncOrdersResource(self)
+
+    @cached_property
     def products(self) -> AsyncProductsResource:
         from .resources.products import AsyncProductsResource
 
@@ -464,6 +541,12 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         from .resources.shipments import AsyncShipmentsResource
 
         return AsyncShipmentsResource(self)
+
+    @cached_property
+    def commissions(self) -> AsyncCommissionsResource:
+        from .resources.commissions import AsyncCommissionsResource
+
+        return AsyncCommissionsResource(self)
 
     @cached_property
     def payment_gateways(self) -> AsyncPaymentGatewaysResource:
@@ -482,6 +565,24 @@ class AsyncCheckoutIntents(AsyncAPIClient):
         from .resources.events import AsyncEventsResource
 
         return AsyncEventsResource(self)
+
+    @cached_property
+    def merchant_connectors(self) -> AsyncMerchantConnectorsResource:
+        from .resources.merchant_connectors import AsyncMerchantConnectorsResource
+
+        return AsyncMerchantConnectorsResource(self)
+
+    @cached_property
+    def returns(self) -> AsyncReturnsResource:
+        from .resources.returns import AsyncReturnsResource
+
+        return AsyncReturnsResource(self)
+
+    @cached_property
+    def test_helpers(self) -> AsyncTestHelpersResource:
+        from .resources.test_helpers import AsyncTestHelpersResource
+
+        return AsyncTestHelpersResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncCheckoutIntentsWithRawResponse:
@@ -623,6 +724,12 @@ class CheckoutIntentsWithRawResponse:
         return BrandsResourceWithRawResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.OrdersResourceWithRawResponse:
+        from .resources.orders import OrdersResourceWithRawResponse
+
+        return OrdersResourceWithRawResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.ProductsResourceWithRawResponse:
         from .resources.products import ProductsResourceWithRawResponse
 
@@ -633,6 +740,12 @@ class CheckoutIntentsWithRawResponse:
         from .resources.shipments import ShipmentsResourceWithRawResponse
 
         return ShipmentsResourceWithRawResponse(self._client.shipments)
+
+    @cached_property
+    def commissions(self) -> commissions.CommissionsResourceWithRawResponse:
+        from .resources.commissions import CommissionsResourceWithRawResponse
+
+        return CommissionsResourceWithRawResponse(self._client.commissions)
 
     @cached_property
     def payment_gateways(self) -> payment_gateways.PaymentGatewaysResourceWithRawResponse:
@@ -651,6 +764,24 @@ class CheckoutIntentsWithRawResponse:
         from .resources.events import EventsResourceWithRawResponse
 
         return EventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def merchant_connectors(self) -> merchant_connectors.MerchantConnectorsResourceWithRawResponse:
+        from .resources.merchant_connectors import MerchantConnectorsResourceWithRawResponse
+
+        return MerchantConnectorsResourceWithRawResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.ReturnsResourceWithRawResponse:
+        from .resources.returns import ReturnsResourceWithRawResponse
+
+        return ReturnsResourceWithRawResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.TestHelpersResourceWithRawResponse:
+        from .resources.test_helpers import TestHelpersResourceWithRawResponse
+
+        return TestHelpersResourceWithRawResponse(self._client.test_helpers)
 
 
 class AsyncCheckoutIntentsWithRawResponse:
@@ -678,6 +809,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         return AsyncBrandsResourceWithRawResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.AsyncOrdersResourceWithRawResponse:
+        from .resources.orders import AsyncOrdersResourceWithRawResponse
+
+        return AsyncOrdersResourceWithRawResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.AsyncProductsResourceWithRawResponse:
         from .resources.products import AsyncProductsResourceWithRawResponse
 
@@ -688,6 +825,12 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.shipments import AsyncShipmentsResourceWithRawResponse
 
         return AsyncShipmentsResourceWithRawResponse(self._client.shipments)
+
+    @cached_property
+    def commissions(self) -> commissions.AsyncCommissionsResourceWithRawResponse:
+        from .resources.commissions import AsyncCommissionsResourceWithRawResponse
+
+        return AsyncCommissionsResourceWithRawResponse(self._client.commissions)
 
     @cached_property
     def payment_gateways(self) -> payment_gateways.AsyncPaymentGatewaysResourceWithRawResponse:
@@ -706,6 +849,24 @@ class AsyncCheckoutIntentsWithRawResponse:
         from .resources.events import AsyncEventsResourceWithRawResponse
 
         return AsyncEventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def merchant_connectors(self) -> merchant_connectors.AsyncMerchantConnectorsResourceWithRawResponse:
+        from .resources.merchant_connectors import AsyncMerchantConnectorsResourceWithRawResponse
+
+        return AsyncMerchantConnectorsResourceWithRawResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.AsyncReturnsResourceWithRawResponse:
+        from .resources.returns import AsyncReturnsResourceWithRawResponse
+
+        return AsyncReturnsResourceWithRawResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.AsyncTestHelpersResourceWithRawResponse:
+        from .resources.test_helpers import AsyncTestHelpersResourceWithRawResponse
+
+        return AsyncTestHelpersResourceWithRawResponse(self._client.test_helpers)
 
 
 class CheckoutIntentsWithStreamedResponse:
@@ -733,6 +894,12 @@ class CheckoutIntentsWithStreamedResponse:
         return BrandsResourceWithStreamingResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.OrdersResourceWithStreamingResponse:
+        from .resources.orders import OrdersResourceWithStreamingResponse
+
+        return OrdersResourceWithStreamingResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.ProductsResourceWithStreamingResponse:
         from .resources.products import ProductsResourceWithStreamingResponse
 
@@ -743,6 +910,12 @@ class CheckoutIntentsWithStreamedResponse:
         from .resources.shipments import ShipmentsResourceWithStreamingResponse
 
         return ShipmentsResourceWithStreamingResponse(self._client.shipments)
+
+    @cached_property
+    def commissions(self) -> commissions.CommissionsResourceWithStreamingResponse:
+        from .resources.commissions import CommissionsResourceWithStreamingResponse
+
+        return CommissionsResourceWithStreamingResponse(self._client.commissions)
 
     @cached_property
     def payment_gateways(self) -> payment_gateways.PaymentGatewaysResourceWithStreamingResponse:
@@ -761,6 +934,24 @@ class CheckoutIntentsWithStreamedResponse:
         from .resources.events import EventsResourceWithStreamingResponse
 
         return EventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def merchant_connectors(self) -> merchant_connectors.MerchantConnectorsResourceWithStreamingResponse:
+        from .resources.merchant_connectors import MerchantConnectorsResourceWithStreamingResponse
+
+        return MerchantConnectorsResourceWithStreamingResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.ReturnsResourceWithStreamingResponse:
+        from .resources.returns import ReturnsResourceWithStreamingResponse
+
+        return ReturnsResourceWithStreamingResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.TestHelpersResourceWithStreamingResponse:
+        from .resources.test_helpers import TestHelpersResourceWithStreamingResponse
+
+        return TestHelpersResourceWithStreamingResponse(self._client.test_helpers)
 
 
 class AsyncCheckoutIntentsWithStreamedResponse:
@@ -788,6 +979,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         return AsyncBrandsResourceWithStreamingResponse(self._client.brands)
 
     @cached_property
+    def orders(self) -> orders.AsyncOrdersResourceWithStreamingResponse:
+        from .resources.orders import AsyncOrdersResourceWithStreamingResponse
+
+        return AsyncOrdersResourceWithStreamingResponse(self._client.orders)
+
+    @cached_property
     def products(self) -> products.AsyncProductsResourceWithStreamingResponse:
         from .resources.products import AsyncProductsResourceWithStreamingResponse
 
@@ -798,6 +995,12 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.shipments import AsyncShipmentsResourceWithStreamingResponse
 
         return AsyncShipmentsResourceWithStreamingResponse(self._client.shipments)
+
+    @cached_property
+    def commissions(self) -> commissions.AsyncCommissionsResourceWithStreamingResponse:
+        from .resources.commissions import AsyncCommissionsResourceWithStreamingResponse
+
+        return AsyncCommissionsResourceWithStreamingResponse(self._client.commissions)
 
     @cached_property
     def payment_gateways(self) -> payment_gateways.AsyncPaymentGatewaysResourceWithStreamingResponse:
@@ -816,6 +1019,24 @@ class AsyncCheckoutIntentsWithStreamedResponse:
         from .resources.events import AsyncEventsResourceWithStreamingResponse
 
         return AsyncEventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def merchant_connectors(self) -> merchant_connectors.AsyncMerchantConnectorsResourceWithStreamingResponse:
+        from .resources.merchant_connectors import AsyncMerchantConnectorsResourceWithStreamingResponse
+
+        return AsyncMerchantConnectorsResourceWithStreamingResponse(self._client.merchant_connectors)
+
+    @cached_property
+    def returns(self) -> returns.AsyncReturnsResourceWithStreamingResponse:
+        from .resources.returns import AsyncReturnsResourceWithStreamingResponse
+
+        return AsyncReturnsResourceWithStreamingResponse(self._client.returns)
+
+    @cached_property
+    def test_helpers(self) -> test_helpers.AsyncTestHelpersResourceWithStreamingResponse:
+        from .resources.test_helpers import AsyncTestHelpersResourceWithStreamingResponse
+
+        return AsyncTestHelpersResourceWithStreamingResponse(self._client.test_helpers)
 
 
 Client = CheckoutIntents

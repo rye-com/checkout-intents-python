@@ -24,6 +24,14 @@ from .events import (
     EventsResourceWithStreamingResponse,
     AsyncEventsResourceWithStreamingResponse,
 )
+from .orders import (
+    OrdersResource,
+    AsyncOrdersResource,
+    OrdersResourceWithRawResponse,
+    AsyncOrdersResourceWithRawResponse,
+    OrdersResourceWithStreamingResponse,
+    AsyncOrdersResourceWithStreamingResponse,
+)
 from .billing import (
     BillingResource,
     AsyncBillingResource,
@@ -31,6 +39,14 @@ from .billing import (
     AsyncBillingResourceWithRawResponse,
     BillingResourceWithStreamingResponse,
     AsyncBillingResourceWithStreamingResponse,
+)
+from .returns import (
+    ReturnsResource,
+    AsyncReturnsResource,
+    ReturnsResourceWithRawResponse,
+    AsyncReturnsResourceWithRawResponse,
+    ReturnsResourceWithStreamingResponse,
+    AsyncReturnsResourceWithStreamingResponse,
 )
 from .products import (
     ProductsResource,
@@ -48,6 +64,22 @@ from .shipments import (
     ShipmentsResourceWithStreamingResponse,
     AsyncShipmentsResourceWithStreamingResponse,
 )
+from .commissions import (
+    CommissionsResource,
+    AsyncCommissionsResource,
+    CommissionsResourceWithRawResponse,
+    AsyncCommissionsResourceWithRawResponse,
+    CommissionsResourceWithStreamingResponse,
+    AsyncCommissionsResourceWithStreamingResponse,
+)
+from .test_helpers import (
+    TestHelpersResource,
+    AsyncTestHelpersResource,
+    TestHelpersResourceWithRawResponse,
+    AsyncTestHelpersResourceWithRawResponse,
+    TestHelpersResourceWithStreamingResponse,
+    AsyncTestHelpersResourceWithStreamingResponse,
+)
 from .checkout_intents import (
     CheckoutIntentsResource,
     AsyncCheckoutIntentsResource,
@@ -63,6 +95,14 @@ from .payment_gateways import (
     AsyncPaymentGatewaysResourceWithRawResponse,
     PaymentGatewaysResourceWithStreamingResponse,
     AsyncPaymentGatewaysResourceWithStreamingResponse,
+)
+from .merchant_connectors import (
+    MerchantConnectorsResource,
+    AsyncMerchantConnectorsResource,
+    MerchantConnectorsResourceWithRawResponse,
+    AsyncMerchantConnectorsResourceWithRawResponse,
+    MerchantConnectorsResourceWithStreamingResponse,
+    AsyncMerchantConnectorsResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -84,6 +124,12 @@ __all__ = [
     "AsyncBrandsResourceWithRawResponse",
     "BrandsResourceWithStreamingResponse",
     "AsyncBrandsResourceWithStreamingResponse",
+    "OrdersResource",
+    "AsyncOrdersResource",
+    "OrdersResourceWithRawResponse",
+    "AsyncOrdersResourceWithRawResponse",
+    "OrdersResourceWithStreamingResponse",
+    "AsyncOrdersResourceWithStreamingResponse",
     "ProductsResource",
     "AsyncProductsResource",
     "ProductsResourceWithRawResponse",
@@ -96,6 +142,12 @@ __all__ = [
     "AsyncShipmentsResourceWithRawResponse",
     "ShipmentsResourceWithStreamingResponse",
     "AsyncShipmentsResourceWithStreamingResponse",
+    "CommissionsResource",
+    "AsyncCommissionsResource",
+    "CommissionsResourceWithRawResponse",
+    "AsyncCommissionsResourceWithRawResponse",
+    "CommissionsResourceWithStreamingResponse",
+    "AsyncCommissionsResourceWithStreamingResponse",
     "PaymentGatewaysResource",
     "AsyncPaymentGatewaysResource",
     "PaymentGatewaysResourceWithRawResponse",
@@ -114,4 +166,22 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
+    "MerchantConnectorsResource",
+    "AsyncMerchantConnectorsResource",
+    "MerchantConnectorsResourceWithRawResponse",
+    "AsyncMerchantConnectorsResourceWithRawResponse",
+    "MerchantConnectorsResourceWithStreamingResponse",
+    "AsyncMerchantConnectorsResourceWithStreamingResponse",
+    "ReturnsResource",
+    "AsyncReturnsResource",
+    "ReturnsResourceWithRawResponse",
+    "AsyncReturnsResourceWithRawResponse",
+    "ReturnsResourceWithStreamingResponse",
+    "AsyncReturnsResourceWithStreamingResponse",
+    "TestHelpersResource",
+    "AsyncTestHelpersResource",
+    "TestHelpersResourceWithRawResponse",
+    "AsyncTestHelpersResourceWithRawResponse",
+    "TestHelpersResourceWithStreamingResponse",
+    "AsyncTestHelpersResourceWithStreamingResponse",
 ]

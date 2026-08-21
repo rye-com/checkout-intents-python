@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Union, Optional
+from typing import Union
 from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
@@ -11,8 +11,6 @@ __all__ = [
     "PaymentMethod",
     "StripeTokenPaymentMethod",
     "BasisTheoryPaymentMethod",
-    "NekudaPaymentMethod",
-    "PravaPaymentMethod",
     "DrawdownPaymentMethod",
     "X402PaymentMethod",
 ]
@@ -30,21 +28,6 @@ class BasisTheoryPaymentMethod(BaseModel):
     type: Literal["basis_theory_token"]
 
 
-class NekudaPaymentMethod(BaseModel):
-    nekuda_user_id: str = FieldInfo(alias="nekudaUserId")
-
-    type: Literal["nekuda_token"]
-
-    nekuda_mandate_data: Optional[Dict[str, Union[str, float]]] = FieldInfo(alias="nekudaMandateData", default=None)
-    """Construct a type with a set of properties K of type T"""
-
-
-class PravaPaymentMethod(BaseModel):
-    prava_token: str = FieldInfo(alias="pravaToken")
-
-    type: Literal["prava_token"]
-
-
 class DrawdownPaymentMethod(BaseModel):
     type: Literal["drawdown"]
 
@@ -56,10 +39,5 @@ class X402PaymentMethod(BaseModel):
 
 
 PaymentMethod: TypeAlias = Union[
-    StripeTokenPaymentMethod,
-    BasisTheoryPaymentMethod,
-    NekudaPaymentMethod,
-    PravaPaymentMethod,
-    DrawdownPaymentMethod,
-    X402PaymentMethod,
+    StripeTokenPaymentMethod, BasisTheoryPaymentMethod, DrawdownPaymentMethod, X402PaymentMethod
 ]

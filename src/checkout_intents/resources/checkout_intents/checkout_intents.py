@@ -12,7 +12,6 @@ from ...types import (
     checkout_intent_create_params,
     checkout_intent_confirm_params,
     checkout_intent_purchase_params,
-    checkout_intent_add_payment_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -39,6 +38,7 @@ from ...lib.polling import (
     async_poll_until as _async_poll_until,
     is_awaiting_confirmation as _is_awaiting_confirmation,
 )
+from ...types.order import Order
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.buyer_param import BuyerParam
 from ...types.checkout_intent import (
@@ -86,6 +86,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -121,6 +122,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
@@ -233,54 +235,6 @@ class CheckoutIntentsResource(SyncAPIResource):
             model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
         )
 
-    def add_payment(
-        self,
-        id: str,
-        *,
-        payment_method: PaymentMethodParam,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> CheckoutIntent:
-        """
-        Add payment details to a checkout intent
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return cast(
-            CheckoutIntent,
-            self._post(
-                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
-                body=maybe_transform(
-                    {"payment_method": payment_method},
-                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    idempotency_key=idempotency_key,
-                ),
-                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
-
     def confirm(
         self,
         id: str,
@@ -341,6 +295,7 @@ class CheckoutIntentsResource(SyncAPIResource):
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -381,6 +336,7 @@ class CheckoutIntentsResource(SyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
@@ -646,6 +602,42 @@ class CheckoutIntentsResource(SyncAPIResource):
             timeout=timeout,
         )
 
+    def retrieve_order(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Order:
+        """
+        Retrieve the order associated with a checkout intent.
+
+        Returns the single order created when the checkout intent reached the
+        `completed` state. 404 if the intent has not produced an order yet.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/api/v1/checkout-intents/{id}/order", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Order,
+        )
+
 
 class AsyncCheckoutIntentsResource(AsyncAPIResource):
     @cached_property
@@ -680,6 +672,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         constraints: checkout_intent_create_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -715,6 +708,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_create_params.CheckoutIntentCreateParams,
@@ -827,54 +821,6 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             model=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
         )
 
-    async def add_payment(
-        self,
-        id: str,
-        *,
-        payment_method: PaymentMethodParam,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-        idempotency_key: str | None = None,
-    ) -> CheckoutIntent:
-        """
-        Add payment details to a checkout intent
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return cast(
-            CheckoutIntent,
-            await self._post(
-                path_template("/api/v1/checkout-intents/{id}/payment", id=id),
-                body=await async_maybe_transform(
-                    {"payment_method": payment_method},
-                    checkout_intent_add_payment_params.CheckoutIntentAddPaymentParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    idempotency_key=idempotency_key,
-                ),
-                cast_to=cast(Any, CheckoutIntent),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
-
     async def confirm(
         self,
         id: str,
@@ -935,6 +881,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
         constraints: checkout_intent_purchase_params.Constraints | Omit = omit,
         discover_promo_codes: bool | Omit = omit,
         promo_codes: SequenceNotStr[str] | Omit = omit,
+        reference_id: str | Omit = omit,
         variant_selections: Iterable[VariantSelectionParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -975,6 +922,7 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
                         "constraints": constraints,
                         "discover_promo_codes": discover_promo_codes,
                         "promo_codes": promo_codes,
+                        "reference_id": reference_id,
                         "variant_selections": variant_selections,
                     },
                     checkout_intent_purchase_params.CheckoutIntentPurchaseParams,
@@ -1240,6 +1188,42 @@ class AsyncCheckoutIntentsResource(AsyncAPIResource):
             timeout=timeout,
         )
 
+    async def retrieve_order(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Order:
+        """
+        Retrieve the order associated with a checkout intent.
+
+        Returns the single order created when the checkout intent reached the
+        `completed` state. 404 if the intent has not produced an order yet.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/api/v1/checkout-intents/{id}/order", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Order,
+        )
+
 
 class CheckoutIntentsResourceWithRawResponse:
     def __init__(self, checkout_intents: CheckoutIntentsResource) -> None:
@@ -1253,9 +1237,6 @@ class CheckoutIntentsResourceWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             checkout_intents.list,
-        )
-        self.add_payment = to_raw_response_wrapper(
-            checkout_intents.add_payment,
         )
         self.confirm = to_raw_response_wrapper(
             checkout_intents.confirm,
@@ -1274,6 +1255,9 @@ class CheckoutIntentsResourceWithRawResponse:
         )
         self.confirm_and_poll = to_raw_response_wrapper(
             checkout_intents.confirm_and_poll,
+        )
+        self.retrieve_order = to_raw_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property
@@ -1294,9 +1278,6 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             checkout_intents.list,
         )
-        self.add_payment = async_to_raw_response_wrapper(
-            checkout_intents.add_payment,
-        )
         self.confirm = async_to_raw_response_wrapper(
             checkout_intents.confirm,
         )
@@ -1314,6 +1295,9 @@ class AsyncCheckoutIntentsResourceWithRawResponse:
         )
         self.confirm_and_poll = async_to_raw_response_wrapper(
             checkout_intents.confirm_and_poll,
+        )
+        self.retrieve_order = async_to_raw_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property
@@ -1334,9 +1318,6 @@ class CheckoutIntentsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             checkout_intents.list,
         )
-        self.add_payment = to_streamed_response_wrapper(
-            checkout_intents.add_payment,
-        )
         self.confirm = to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
@@ -1354,6 +1335,9 @@ class CheckoutIntentsResourceWithStreamingResponse:
         )
         self.confirm_and_poll = to_streamed_response_wrapper(
             checkout_intents.confirm_and_poll,
+        )
+        self.retrieve_order = to_streamed_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property
@@ -1374,9 +1358,6 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             checkout_intents.list,
         )
-        self.add_payment = async_to_streamed_response_wrapper(
-            checkout_intents.add_payment,
-        )
         self.confirm = async_to_streamed_response_wrapper(
             checkout_intents.confirm,
         )
@@ -1394,6 +1375,9 @@ class AsyncCheckoutIntentsResourceWithStreamingResponse:
         )
         self.confirm_and_poll = async_to_streamed_response_wrapper(
             checkout_intents.confirm_and_poll,
+        )
+        self.retrieve_order = async_to_streamed_response_wrapper(
+            checkout_intents.retrieve_order,
         )
 
     @cached_property

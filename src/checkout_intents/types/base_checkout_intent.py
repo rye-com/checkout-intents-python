@@ -46,4 +46,6 @@ class BaseCheckoutIntent(BaseModel):
 
     promo_codes: Optional[List[str]] = FieldInfo(alias="promoCodes", default=None)
 
+    reference_id: Optional[str] = FieldInfo(alias="referenceId", default=None)
+
     variant_selections: Optional[List[VariantSelection]] = FieldInfo(alias="variantSelections", default=None)
