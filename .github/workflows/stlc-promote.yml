@@ -5,7 +5,7 @@ name: Promote SDKs
 # (and manual dispatch) it pushes staging main to a stainless/release branch on
 # production, opens a PR into production main, and enables auto-merge. That PR
 # MUST merge with a MERGE COMMIT — never squash/rebase, or the SHAs get rewritten
-# and the trunks fork. Self-routed to staging; needs PRODUCTION_REPO_TOKEN with Contents + Pull requests: write on production.
+# and the trunks fork. Self-routed to staging; authenticates as the rye-sdk-pipeline GitHub App.
 on:
   push:
     # main only. stlc preview/integrated/codegen branches never push to main.
@@ -25,8 +25,16 @@ jobs:
       cancel-in-progress: true
     env:
       PRODUCTION_REPO: rye-com/checkout-intents-python
-      GH_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
     steps:
+      - name: Mint app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.SDK_APP_ID }}
+          private-key: ${{ secrets.SDK_APP_PRIVATE_KEY }}
+          owner: rye-com
+          repositories: checkout-intents-python
+
       - name: Check out staging
         uses: actions/checkout@v6
         with:
@@ -34,6 +42,8 @@ jobs:
           persist-credentials: false
 
       - name: Fetch production main
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           git remote add production \
             "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCTION_REPO}.git"
@@ -55,12 +65,16 @@ jobs:
 
       - name: Push staging main to the release branch on production
         if: steps.diff.outputs.synced == 'false'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           # Force is safe: this branch only carries the PR; re-pushing updates it in place.
           git push production origin/main:refs/heads/stainless/release --force
 
       - name: Open or update the promote PR (merge commit)
         if: steps.diff.outputs.synced == 'false'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           EXISTING_PR=$(gh pr list \
             --repo "${PRODUCTION_REPO}" \
