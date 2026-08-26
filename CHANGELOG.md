@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.27.1 (2026-08-26)
+
+Full Changelog: [v0.27.0...v0.27.1](https://github.com/rye-com/checkout-intents-python/compare/v0.27.0...v0.27.1)
+
 ## 0.27.0 (2026-08-20)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/rye-com/checkout-intents-python/compare/v0.26.0...v0.27.0)
