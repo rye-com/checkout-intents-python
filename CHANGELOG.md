@@ -5,7 +5,6 @@
 
 ### Features
 
-* point the default environments at the Jolly API hosts ([50a0b7a](https://github.com/rye-com/checkout-intents-python/commit/50a0b7ace0a7ad88921ea03ae8daa7a7d9cee08d))
 * point the default environments at the Jolly API hosts ([01f3aab](https://github.com/rye-com/checkout-intents-python/commit/01f3aabc06c78fc666358288d002e1a09c035fcb))
 
 ## 0.27.0 (2026-08-20)
