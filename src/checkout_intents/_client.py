@@ -77,8 +77,8 @@ __all__ = [
 ]
 
 ENVIRONMENTS: Dict[str, str] = {
-    "staging": "https://staging.api.rye.com",
-    "production": "https://api.rye.com",
+    "staging": "https://api.commerce.staging.jolly.dev",
+    "production": "https://api.commerce.jolly.dev",
 }
 
 

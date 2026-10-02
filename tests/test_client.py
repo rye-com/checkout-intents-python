@@ -765,7 +765,7 @@ class TestCheckoutIntents:
             client = CheckoutIntents(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="staging"
             )
-            assert str(client.base_url).startswith("https://staging.api.rye.com")
+            assert str(client.base_url).startswith("https://api.commerce.staging.jolly.dev")
 
             client.close()
 
@@ -1811,7 +1811,7 @@ class TestAsyncCheckoutIntents:
             client = AsyncCheckoutIntents(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="staging"
             )
-            assert str(client.base_url).startswith("https://staging.api.rye.com")
+            assert str(client.base_url).startswith("https://api.commerce.staging.jolly.dev")
 
             await client.close()
 
