@@ -24,7 +24,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.staging.jolly.dev"
         client.close()
 
     def test_infers_production_from_api_key(self) -> None:
@@ -34,7 +34,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.jolly.dev"
         client.close()
 
     def test_defaults_to_staging_for_non_matching_api_key(self) -> None:
@@ -44,7 +44,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.staging.jolly.dev"
         client.close()
 
     def test_explicit_environment_overrides_inferred(self) -> None:
@@ -55,7 +55,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.staging.jolly.dev"
         client.close()
 
     def test_environment_mismatch_raises_error(self) -> None:
@@ -90,7 +90,7 @@ class TestEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.jolly.dev"
         client.close()
 
     def test_base_url_overrides_inferred_environment(self) -> None:
@@ -114,7 +114,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.staging.jolly.dev"
         await client.close()
 
     async def test_infers_production_from_api_key(self) -> None:
@@ -124,7 +124,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.jolly.dev"
         await client.close()
 
     async def test_defaults_to_staging_for_non_matching_api_key(self) -> None:
@@ -134,7 +134,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "staging"
-        assert _base_origin(str(client.base_url)) == "https://staging.api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.staging.jolly.dev"
         await client.close()
 
     async def test_environment_mismatch_raises_error(self) -> None:
@@ -157,7 +157,7 @@ class TestAsyncEnvironmentInference:
             _strict_response_validation=True,
         )
         assert client._environment == "production"
-        assert _base_origin(str(client.base_url)) == "https://api.rye.com"
+        assert _base_origin(str(client.base_url)) == "https://api.commerce.jolly.dev"
         await client.close()
 
     async def test_base_url_overrides_inferred_environment(self) -> None:
